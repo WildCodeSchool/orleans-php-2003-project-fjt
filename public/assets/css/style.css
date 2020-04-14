@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Roboto&display=swap');
+
+:root{
+    --main-bg-color: #032497;
+    --secondary-bg-color: #FF0053;
+    --light-color: #f6f6f6;
+    --dark-color: #090909;
+
+    --spacing: 16px;
+    --spacing-sm: calc(var(--spacing)/2);
+    --spacing-lg: calc(var(--spacing)*2);
+
+    --main-size: 14pt;
+    --medium-size: 20pt;
+    --large-size: 40pt;
+
+    --title-font : 'Baloo Paaji 2', cursive;
+    --main-font: 'Roboto', sans-serif;
+}
+
+*{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    font-family: var(--main-font);
+    font-size: var(--main-size);
+}
+
+h1,h2,h3{
+    font-family: var(--title-font);
+}
+
+h1{
+    font-size: var(--large-size);
+}
+
+h2{
+    font-size: var(--medium-size);
+}
