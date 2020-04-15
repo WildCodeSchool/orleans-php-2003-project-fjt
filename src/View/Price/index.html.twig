@@ -1,0 +1,35 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+        {% for price in prices %}
+            <ul>
+                <li>{{ price.type }}</li>
+                <li>{{ price.guarantee }} €</li>
+                {% if price.equipment is not empty %}
+                    <li>{{ price.equipment }} €</li>
+                {% endif %}
+                {% if price.restoration is not empty %}
+                    <li>{{ price.restoration }} €</li>
+                {% endif %}
+                <li>{{ price.contribution }} €</li>
+                <li>{{ price.total }} €</li>
+                {% if price.breakfast is not empty %}
+                    <li>{{ price.breakfast }}</li>
+                {% endif %}
+                {% if price.equipment_contribution is not empty %}
+                    <li>{{ price.equipment_contribution }} €</li>
+                {% endif %}
+                {% if price.picture is not empty %}
+                    <li>{{ price.picture }}</li>
+                {% endif %}
+                {% if price.area is not empty %}
+                    <li>{{ price.area }} m²</li>
+                {% endif %}
+                <li>{{ price.address }}</li>
+                <li>{{ price.description }}</li>
+            </ul>
+        {% endfor %}
+
+
+{% endblock %}
