@@ -1,0 +1,41 @@
+/* CARD */
+
+.bloc-price .card {
+    margin: 3% 0;
+    padding: 0;
+    border-radius: 20px;
+    border: 3px solid var(--main-bg-color);
+
+}
+.bloc-price .card-body {
+    display: flex;
+    flex-direction: column;
+}
+.bloc-price .card-body h5 {
+    text-decoration: underline;
+
+}
+
+.bloc-price .card-body h5:first-child {
+    text-align: center;
+}
+.bloc-price .card-body p {
+    text-align: center;
+}
+.card-body p:nth-of-type(2) {
+    align-self: center;
+}
+.bloc-price .card .btn {
+    align-self: flex-end;
+    width: 100px;
+}
+
+.bloc-price .card figcaption {
+    position: absolute;
+    margin: 2%;
+    color: var(--light-color);
+    font-weight: bolder;
+}
+.bloc-price .card figure img {
+    border-radius: 20px 20px 0 0;
+}
