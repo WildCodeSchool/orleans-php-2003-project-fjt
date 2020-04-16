@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Roboto&display=swap');
 
+@import 'service.css';
+
 :root{
     --main-bg-color: #032497;
     --secondary-bg-color: #FF0053;
