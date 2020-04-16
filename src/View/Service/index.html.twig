@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h2>Nos services</h2>
+        <div class="row justify-content-center">
+            {% for service in services %}
+            <div class="col-md-6 col-xs-1 card-deck">
+                <div class="card card-service">
+                    <figure>
+                        <img src="/assets/images/{{ service.image }}" class="card-img-top" alt="{{ service.name }}">
+                        <figcaption></figcaption>
+                    </figure>
+                    <div class="card-body">
+                        <h3 class="card-title">{{ service.name }}</h3>
+                        <p class="card-text">{{ service.description }}</p>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+                Nothing to display
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
