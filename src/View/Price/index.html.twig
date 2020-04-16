@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-
+    <h2>Nos logements:</h2>
         {% for price in prices %}
             <ul>
                 {% if price.picture is not empty %}
@@ -10,10 +10,12 @@
                 <li>{{ price.description }}</li>
             </ul>
         {% endfor %}
-    <table class=" text-center" id="content">
+
+    <h2>Grille tarifaire:</h2>
+    <table class=" table text-center" id="content">
         <thead>
             <tr>
-                <td scope="col" class="col-1">Type</td>
+                <td scope="col">Type</td>
                 <td scope="col">Adresse</td>
                 <td scope="col">Surface</td>
                 <td scope="col">Équipement sanitaire</td>
