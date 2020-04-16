@@ -1,0 +1,47 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="bloc-price">
+        <h2>Grille tarifaire:</h2>
+        <div class="price-tab d-flex justify-content-around">
+            <div class="text-center">
+                <p>Type</p>
+                {% for room in rooms %}
+                    <p>{{ room.type }}</p>
+                {% endfor %}
+            </div>
+            <div class="text-center">
+                <p>Adresse</p>
+                {% for room in rooms %}
+                    <p>{{ room.address }}</p>
+                {% endfor %}
+            </div>
+            <div class="text-center">
+                <p>Surface</p>
+                {% for room in rooms %}
+                    <p>{{ room.area }} m²</p>
+                {% endfor %}
+            </div>
+            <div class="text-center">
+                <p>Nuitée</p>
+                {% for room in rooms %}
+                    <p>{{ (room.total/30)|round(2, 'floor') }} €</p>
+                {% endfor %}
+            </div>
+            <div class="text-center">
+                <p>Semaine</p>
+                {% for room in rooms %}
+                    <p>{{ ((room.total/30)*7)|round(2, 'floor') }} €</p>
+                {% endfor %}
+            </div>
+            <div class="text-center">
+                <p>Mois</p>
+                {% for room in rooms %}
+                    <p>{{ room.total }} €</p>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+.bloc-price h2 {
+    margin: 5%;
+    text-decoration: underline;
+}
+
+.price-tab {
+    border-radius: 50px;
+    font-size: 1.2vw;
+    border: 3px solid var(--main-bg-color);
+    border-collapse: unset;
+    max-width: 90vw;
+    margin: 2vw auto;
+}
+
+.price-tab div p:first-child {
+    margin: 2vh 0;
+    background-color: var(--main-bg-color);
+    color: var(--light-color);
+}
+
+.price-tab p {
+    background-color: var(--secondary-bg-color);
+    padding: var(--spacing);
+    border-radius: 20px ;
+}
