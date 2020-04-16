@@ -5,23 +5,3 @@
     border-spacing: var(--spacing);
     font-size: 1vw;
 }
-/*#content thead td {*/
-/*    font-family:var(--title-font);*/
-/*    background-color: var(--secondary-bg-color);*/
-/*    padding: var(--spacing-sm);*/
-/*    color: var(--dark-color);*/
-
-/*}*/
-
-/*#content tbody td {*/
-/*    font-family:var(--main-font);*/
-/*    background-color: var(--main-bg-color);*/
-/*    padding: var(--spacing);*/
-/*    color: var(--light-color);*/
-/*    border-radius: 20px;*/
-/*    height: 10vh;*/
-/*}*/
-
-/*#content tbody td:empty{*/
-/*    background-color: var(--light-color);*/
-/*}*/
