@@ -18,8 +18,8 @@ class PriceController extends AbstractController
     public function index()
     {
         $roomManager = new RoomManager();
-        $prices = $roomManager->selectPrice();
+        $rooms = $roomManager->selectRoom();
 
-        return $this->twig->render('Price/index.html.twig', ['prices' => $prices]);
+        return $this->twig->render('Price/index.html.twig', ['rooms' => $rooms]);
     }
 }

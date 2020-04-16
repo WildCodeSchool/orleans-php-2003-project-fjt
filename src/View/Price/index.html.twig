@@ -2,52 +2,55 @@
 
 {% block content %}
     <h2>Nos logements:</h2>
-        {% for price in prices %}
+        {% for room in rooms %}
             <ul>
-                {% if price.picture is not empty %}
-                    <li>{{ price.picture }}</li>
+                {% if room.picture is not empty %}
+                    <li>{{ room.picture }}</li>
                 {% endif %}
-                <li>{{ price.description }}</li>
+                <li>{{ room.description }}</li>
             </ul>
         {% endfor %}
 
     <h2>Grille tarifaire:</h2>
-    <table class=" table text-center" id="content">
-        <thead>
-            <tr>
-                <td scope="col">Type</td>
-                <td scope="col">Adresse</td>
-                <td scope="col">Surface</td>
-                <td scope="col">Équipement sanitaire</td>
-                <td scope="col">Dépôt garantie</td>
-                <td scope="col">Cotisation</td>
-                <td scope="col">Équipement</td>
-                <td scope="col">Petit déjeuner</td>
-                <td scope="col">Crédit restauration</td>
-                <td scope="col">Nuitée</td>
-                <td scope="col">Semaine</td>
-                <td scope="col">Mois</td>
-            </tr>
-        </thead>
-        <tbody>
-        {% for price in prices %}
-            <tr>
-                <td scope="row">{{ price.type }}</td>
-                <td>{{ price.address }}</td>
-                <td>{% if price.area is not empty %}{{ price.area }} m²{% endif %}</td>
-                <td>{% if price.equipment is not empty %}{{ price.equipment }}{% endif %}</td>
-                <td>{{ price.guarantee }} €</td>
-                <td>{{ price.contribution }} €</td>
-                <td>{% if price.equipment_contribution is not empty %}{{ price.equipment_contribution }} €{% endif %}</td>
-                <td>{% if price.breakfast is not empty %}{{ price.breakfast }} €{% endif %}</td>
-                <td>{% if price.restoration is not empty %}{{ price.restoration }} €{% endif %}</td>
-                <td>{{ (price.total/30)|round(2, 'floor') }} €</td>
-                <td>{{ ((price.total/30)*7)|round(2, 'floor') }} €</td>
-                <td>{{ price.total }} €</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="d-flex justify-content-around" id="content">
+        <div class="text-center">
+            <p>Type</p>
+            {% for room in rooms %}
+                <p>{{ room.type }}</p>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <p>Adresse</p>
+            {% for room in rooms %}
+                <p>{{ room.address }}</p>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <p>Surface</p>
+            {% for room in rooms %}
+                <p>{{ room.area }} m²</p>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <p>Nuitée</p>
+            {% for room in rooms %}
+                <p>{{ (room.total/30)|round(2, 'floor') }} €</p>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <p>Semaine</p>
+            {% for room in rooms %}
+                <p>{{ ((room.total/30)*7)|round(2, 'floor') }} €</p>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <p>Mois</p>
+            {% for room in rooms %}
+                <p>{{ room.total }} €</p>
+            {% endfor %}
+        </div>
+
+    </div>
 
 
 {% endblock %}
