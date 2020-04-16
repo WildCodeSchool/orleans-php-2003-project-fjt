@@ -12,13 +12,13 @@ namespace App\Controller;
 use App\Model\ContactManager;
 
 /**
- * Class ItemController
+ * Class ContactController
  *
  */
 class ContactController extends AbstractController
 {
-    public function form()
+    public function index()
     {
-        return $this->twig->render('contact/contact.html.twig');
+        return $this->twig->render('contact/index.html.twig');
     }
 }
