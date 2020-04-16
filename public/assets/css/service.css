@@ -1,0 +1,8 @@
+.service-card {
+    margin: var(--spacing);
+}
+
+.service-title {
+    padding-left: 15px;
+    margin: var(--spacing);
+}
