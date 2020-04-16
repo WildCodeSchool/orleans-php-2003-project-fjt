@@ -17,4 +17,8 @@ use App\Model\ContactManager;
  */
 class ContactController extends AbstractController
 {
+    public function add()
+    {
+        return $this->twig->render('contact/contact.html.twig');
+    }
 }
