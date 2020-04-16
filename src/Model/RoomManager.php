@@ -5,12 +5,12 @@ namespace App\Model;
 /**
  *
  */
-class PriceManager extends AbstractManager
+class RoomManager extends AbstractManager
 {
     /**
      *
      */
-    const TABLE = 'price';
+    const TABLE = 'room';
 
     /**
      *  Initializes this class.
@@ -27,6 +27,7 @@ class PriceManager extends AbstractManager
      */
     public function selectPrice(): array
     {
-        return $this->pdo->query('SELECT * FROM room JOIN address ON room.address_id=address.id')->fetchAll();
+        return $this->pdo->query('SELECT * FROM room JOIN address ON room.address_id=address.id ORDER BY 
+        address.id ASC, room.area ASC')->fetchAll();
     }
 }

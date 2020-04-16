@@ -1,0 +1,27 @@
+#content {
+    width:95%;
+    padding: var(--spacing);
+    margin:0 auto;
+    border-collapse: unset;
+    border-spacing: var(--spacing);
+}
+#content thead td {
+    font-family:var(--title-font);
+    background-color: var(--secondary-bg-color);
+    padding: var(--spacing);
+    color: var(--dark-color);
+    border-radius: 30px;
+}
+
+#content tbody td {
+    font-family:var(--main-font);
+    background-color: var(--main-bg-color);
+    padding: var(--spacing);
+    color: var(--light-color);
+    border-radius: 20px;
+    height: 10vh;
+}
+
+#content tbody td:empty{
+    background-color: var(--light-color);
+}

@@ -1,14 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aurelwcs
- * Date: 08/04/19
- * Time: 18:40
- */
 
 namespace App\Controller;
 
-use App\Model\PriceManager;
+use App\Model\RoomManager;
 
 class PriceController extends AbstractController
 {
@@ -23,8 +17,8 @@ class PriceController extends AbstractController
      */
     public function index()
     {
-        $priceManager = new PriceManager();
-        $prices = $priceManager->selectPrice();
+        $roomManager = new RoomManager();
+        $prices = $roomManager->selectPrice();
 
         return $this->twig->render('Price/index.html.twig', ['prices' => $prices]);
     }
