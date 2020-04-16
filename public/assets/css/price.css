@@ -1,4 +1,4 @@
-#content {
+.price-tab {
     border-radius: 50px;
     font-size: 1.2vw;
     border: 3px solid var(--main-bg-color);
@@ -7,13 +7,13 @@
     margin: 2vw auto;
 }
 
-#content div p:first-child {
+.price-tab div p:first-child {
     margin: 2vh 0;
     background-color: var(--main-bg-color);
     color: var(--light-color);
 }
 
-#content p {
+.price-tab p {
     background-color: var(--secondary-bg-color);
     padding: var(--spacing);
     border-radius: 20px ;
