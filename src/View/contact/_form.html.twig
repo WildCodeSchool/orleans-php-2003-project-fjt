@@ -7,34 +7,34 @@
         </div>
 
         <div class="col-5 offset-1">
-            <form action="http://localhost:8000/home/send" method="POST">
+            <form action="" method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="lastname">Nom</label>
-                        <input type="text" class="form-control" id="lastname" placeholder="Holiday">
+                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Holiday">
                     </div>
 
                     <div class="form-group col-md-4 offset-1">
                         <label for="firstname">Prénom</label>
-                        <input type="text" class="form-control" id="firstname" placeholder="Ryan">
+                        <input type="text" class="form-control" id="firstname" name="fistname" placeholder="Ryan">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="phone">Téléphone</label>
-                        <input type="tel" class="form-control" id="phone" placeholder="0601020304">
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="0601020304">
                     </div>
 
                     <div class="form-group col-md-4 offset-1">
                         <label for="email">Adresse mail</label>
-                        <input type="email" class="form-control" id="email" placeholder="ryan.holiday@gmail.com">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="ryan.holiday@gmail.com">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea class="form-control col-9" id="message" rows="4" placeholder="Je souhaiterai vous contacter à propose de..."></textarea>
+                    <textarea class="form-control col-9" id="message" name="message" rows="4" placeholder="Je souhaiterai vous contacter à propose de..."></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Envoyer</button>
