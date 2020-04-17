@@ -12,45 +12,7 @@
     width:30%;
 }
 
-nav button{
-    margin-top:20px;
-}
-
-.navbar-brand img{
-    width: 100px;
-}
-
-.navbar-nav{
-    font-size: var(--medium-size);
-}
-
-.nav-link{
-    color:var(--light-color);
-}
-
-nav{
-    width:75%;
-    margin:auto;
-}
-
-nav.scrolled{
-    background-color: var(--dark-color);
-}
-
-nav div{
-    justify-content: flex-end;
-}
-
-nav ul li{
-    margin:10px;
-    text-align: center;
-}
-
-nav img{
-    top: 20px;
-}
-
-img{
+.bgHome img{
     position: absolute;
 }
 

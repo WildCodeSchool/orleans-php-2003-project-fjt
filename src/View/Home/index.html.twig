@@ -1,5 +1,56 @@
 {% extends 'layout.html.twig' %}
 
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="navbar-brand">
+            <img src="/../assets/images/logoFJT.png"/>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Accueil<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Prestations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tarifs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
+
 {% block content %}
-    <h1>Hello Wilder !</h1>
+    {#    <div class="home">#}
+    <div class="bgHome">
+        <img src="/../assets/images/bgFJT.png" alt="background"/>
+    </div>
+    {#        <div class="leftHome">#}
+    {#            <div class="textHome">#}
+    {#                <h1>Foyer des Jeunes Travailleurs Colombier d'Orléans</h1>#}
+    {#                <p>Decouvrez nos solutions de logements, restaurations, loisirs aux prix attractifs au sein d’Orleans !</p>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#        <div class="rightHome">#}
+    {#            <div>#}
+    {#                <img src="/../assets/images/pictureFJT.png"/>#}
+    {#                <img class="youngPeople" src="/../assets/images/youngPeople.png"/>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(window).scroll(function(){
+            $('nav').toggleClass('scrolled',$(this).scrollTop() > 900);
+        });
+    </script>
 {% endblock %}
