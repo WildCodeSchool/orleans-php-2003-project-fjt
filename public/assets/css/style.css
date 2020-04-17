@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Roboto&display=swap');
 @import url('home.css');
 @import url('navbar.css');
+@import 'form.css';
+@import 'service.css';
 
 :root{
     --main-bg-color: #032497;
