@@ -16,7 +16,10 @@
                     <h5 class="card-title">Description:</h5>
                     <p class="card-text">{{ room.description }}</p>
                     <h5 class="card-title">Tarif:</h5>
-                    <p class="card-text">{{ room.total }}</p>
+                    <p class="card-text">{% if room.breakfast is null or room.breakfast is same as('inclus') %}
+                            {{ room.guarantee+room.restoration+room.contribution+room.equipment_contribution }}
+                        {% else %}{{ room.guarantee+room.restoration+room.contribution+room.equipment_contribution+
+                        room.breakfast }}{% endif %} €</p>
                     <h5 class="card-title">Adresse:</h5>
                     <p class="card-text">{{ room.address }}</p>
                     <a href="#" class="btn btn-primary">+ d'infos</a>
