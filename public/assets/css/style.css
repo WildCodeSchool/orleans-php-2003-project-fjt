@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Roboto&display=swap');
+@import url('home.css');
+@import url('navbar.css');
 @import 'form.css';
 @import 'service.css';
 @import "price.css";
@@ -17,7 +19,8 @@
 
     --main-size: 14pt;
     --medium-size: 20pt;
-    --large-size: 40pt;
+    --large-size: 30pt;
+    --extra-large-size: 40pt;
 
     --title-font : 'Baloo Paaji 2', cursive;
     --main-font: 'Roboto', sans-serif;
@@ -25,6 +28,10 @@
 
 *{
     box-sizing: border-box;
+}
+
+html{
+    overflow-x: hidden;
 }
 
 body{
@@ -39,6 +46,7 @@ h1,h2,h3{
 
 h1{
     font-size: var(--large-size);
+    text-align: center;
 }
 
 h2{

@@ -1,7 +1,22 @@
 {% extends 'layout.html.twig' %}
 
+{% block navbar %}
+    {% include '/Home/navbar.html.twig' %}
+{% endblock %}
+
 {% block content %}
+    <div class="home">
+        <div class="bgHome">
+            <img src="/../assets/images/bgFJT.png" alt="background"/>
+        </div>
+    </div>
     {% include 'contact/_form.html.twig' %}
 {% endblock %}
 
-
+{% block script %}
+    <script>
+        $(window).scroll(function(){
+            $('nav').toggleClass('scrolled',$(this).scrollTop() > 900);
+        });
+    </script>
+{% endblock %}
