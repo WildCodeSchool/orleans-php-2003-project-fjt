@@ -9,6 +9,7 @@
 
 namespace App\Controller;
 
+use App\Model\AnimationManager;
 use App\Model\ServiceManager;
 
 /**
@@ -32,6 +33,9 @@ class ServiceController extends AbstractController
         $serviceManager = new ServiceManager();
         $services = $serviceManager->selectAll();
 
-        return $this->twig->render('Service/index.html.twig', ['services' => $services]);
+        $animationManager = new AnimationManager();
+        $animations = $animationManager->selectAll();
+
+        return $this->twig->render('Service/index.html.twig', ['services' => $services, 'animations' => $animations]);
     }
 }
