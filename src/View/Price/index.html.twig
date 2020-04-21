@@ -1,0 +1,55 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+<div class="rooms">
+    <h2>Grille tarifaire:</h2>
+    <div class="price-tab d-flex justify-content-around">
+        <div class="text-center">
+            <p>Type</p>
+            {% for room in rooms %}
+                <p>{{ room.type }}</p>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <p>Adresse</p>
+            {% for room in rooms %}
+                <p>{{ room.address }}</p>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <p>Surface</p>
+            {% for room in rooms %}
+                <p>{% if room.area is empty %}/{% else %}{{ room.area }} m²{% endif %}</p>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <p>Nuitée</p>
+            {% for room in rooms %}
+                <p>{% if room.breakfast is null or room.breakfast is same as('inclus') %}
+                        {{ ((room.guarantee+room.restoration+room.contribution+room.equipment_contribution)/30)
+                        |round(2, 'floor')}}{% else %}{{ ((room.guarantee+room.restoration+room.contribution+
+                    room.equipment_contribution+room.breakfast)/30)|round(2, 'floor') }}{% endif %} €</p>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <p>Semaine</p>
+            {% for room in rooms %}
+                <p>{% if room.breakfast is null or room.breakfast is same as('inclus') %}
+                        {{ (((room.guarantee+room.restoration+room.contribution+room.equipment_contribution)/30)*7)
+                        |round(2, 'floor')}}{% else %}{{ (((room.guarantee+room.restoration+room.contribution+
+                    room.equipment_contribution+room.breakfast)/30)*7)|round(2, 'floor') }}{% endif %} €</p>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <p>Mois</p>
+            {% for room in rooms %}
+                <p>
+                    {% if room.breakfast is null or room.breakfast is same as('inclus') %}
+                        {{ room.guarantee+room.restoration+room.contribution+room.equipment_contribution }}{% else %}
+                        {{ room.guarantee+room.restoration+room.contribution+room.equipment_contribution+room.breakfast
+                        }}{% endif %} €</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

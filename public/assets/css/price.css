@@ -1,0 +1,36 @@
+/* Grille Tarifaire */
+.price-tab {
+    border-radius: 50px;
+    font-size: 1.2vw;
+    border: 3px solid var(--main-bg-color);
+    border-collapse: unset;
+    max-width: 90vw;
+    margin: 2vw auto;
+    padding: var(--spacing-sm);
+    background-color: var(--card-s-bg-color);
+}
+
+.price-tab div p:first-child {
+    margin: 2vh 0;
+    background-color: var(--card-s-bg-color);
+    color: var(--light-color);
+    border-radius: 20px ;
+}
+
+.price-tab p {
+    background-color: var(--light-color);
+    padding: var(--spacing);
+    border-radius: 10px ;
+}
+.rooms h2:nth-of-type(2) {
+    margin-top: 5%;
+    text-align: center;
+
+}
+
+@media screen and ( max-width: 768px ){
+    .price-tab, .rooms h2:nth-of-type(2) {
+        display: none!important;
+    }
+
+}
