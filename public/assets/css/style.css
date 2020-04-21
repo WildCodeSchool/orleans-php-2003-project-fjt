@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Roboto&display=swap');
 @import 'form.css';
 @import 'service.css';
-
+@import "price.css";
 
 :root{
     --main-bg-color: #032497;
-    --secondary-bg-color: #FF0053;
+    --secondary-bg-color: rgb(255, 0, 83);
+    --card-m-bg-color: rgb(241, 49, 112);
+    --card-s-bg-color: rgb(44, 85, 227);
     --light-color: #f6f6f6;
     --dark-color: #090909;
 
