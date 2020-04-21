@@ -14,7 +14,8 @@
 
     --main-size: 14pt;
     --medium-size: 20pt;
-    --large-size: 40pt;
+    --large-size: 30pt;
+    --extra-large-size: 40pt;
 
     --title-font : 'Baloo Paaji 2', cursive;
     --main-font: 'Roboto', sans-serif;
@@ -22,6 +23,10 @@
 
 *{
     box-sizing: border-box;
+}
+
+html{
+    overflow-x: hidden;
 }
 
 body{
@@ -36,6 +41,7 @@ h1,h2,h3{
 
 h1{
     font-size: var(--large-size);
+    text-align: center;
 }
 
 h2{
