@@ -7,11 +7,8 @@
             {% for service in services %}
             <div class="col-md-6 col-xs-1 card-deck">
                 <div class="card service-card">
-                    <figure>
-                        <img src="/assets/images/{{ service.image }}" class="card-img-top" alt="{{ service.name }}">
-                        <figcaption></figcaption>
-                    </figure>
-                    <div class="card-body">
+                    <img src="/assets/images/{{ service.image }}" class="card-img-top" alt="{{ service.name }}">
+                    <div class="card-body card-description">
                         <h3 class="card-title">{{ service.name }}</h3>
                         <p class="card-text">{{ service.description }}</p>
                     </div>
@@ -22,18 +19,16 @@
     </div>
 
     <div class="container-fluid container-animation">
-        <h2 class="service-title">Nos animations</h2>
+        <h2 class="animation-title">Nos animations</h2>
+        <div class="animation-flex">
     {% set firstAnimation = true %}
     {% for animation in animations %}
         {% if firstAnimation == true %}
-        <div class="row justify-content-center">
-                <div class="col-md-6 col-xs-1 card-deck">
-                    <div class="card service-card">
-                        <figure>
-                            <img src="/assets/images/{{ animation.image }}" class="card-img-top" alt="{{ animation.name }}">
-                            <figcaption></figcaption>
-                        </figure>
-                        <div class="card-body">
+        <div class="row no-gutters justify-content-center col-lg-6 flex-card">
+                <div class="card-deck main-card">
+                    <div class="card">
+                        <img src="/assets/images/{{ animation.image }}" class="card-img-top" alt="{{ animation.name }}">
+                        <div class="card-body card-description">
                             <h3 class="card-title">{{ animation.name }}</h3>
                             <p class="card-text">{{ animation.description }}</p>
                         </div>
@@ -41,23 +36,24 @@
                 </div>
         </div>
             {% set firstAnimation = false %}
+            <div class="d-flex flex-column">
             {% else %}
-                <div class="row">
-                    <div class="col-12 mt-3">
-                        <div class="card">
-                            <div class="card-horizontal">
-                                <div class="img-square-wrapper">
-                                    <img class="" src="/assets/images/{{ animation.image }}" alt="{{ animation.name }}">
-                                </div>
-                                <div class="card-body">
-                                    <h3 class="card-title">{{ animation.name }}</h3>
-                                    <p class="card-text">{{ animation.description }}</p>
-                                </div>
+                <div class="card animation-card">
+                    <div class="row no-gutters">
+                        <div class="col-md-6 col-xs-1">
+                            <img src="/assets/images/{{ animation.image }}" class="card-img-top h-100" alt="{{ animation.name }}">
+                        </div>
+                        <div class="col-md-6 col-xs-1">
+                            <div class="card-body card-description">
+                                <h3 class="card-title">{{ animation.name }}</h3>
+                                <p class="card-text">{{ animation.description }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             {% endif %}
         {% endfor %}
+            </div>
         </div>
+    </div>
 {% endblock %}
