@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <div class="container-fluid">
+    <div class="container-fluid container-service">
         <h2 class="service-title">Nos services</h2>
         <div class="row justify-content-center">
             {% for service in services %}
@@ -20,4 +20,44 @@
             {% endfor %}
         </div>
     </div>
+
+    <div class="container-fluid container-animation">
+        <h2 class="service-title">Nos animations</h2>
+    {% set firstAnimation = true %}
+    {% for animation in animations %}
+        {% if firstAnimation == true %}
+        <div class="row justify-content-center">
+                <div class="col-md-6 col-xs-1 card-deck">
+                    <div class="card service-card">
+                        <figure>
+                            <img src="/assets/images/{{ animation.image }}" class="card-img-top" alt="{{ animation.name }}">
+                            <figcaption></figcaption>
+                        </figure>
+                        <div class="card-body">
+                            <h3 class="card-title">{{ animation.name }}</h3>
+                            <p class="card-text">{{ animation.description }}</p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+            {% set firstAnimation = false %}
+            {% else %}
+                <div class="row">
+                    <div class="col-12 mt-3">
+                        <div class="card">
+                            <div class="card-horizontal">
+                                <div class="img-square-wrapper">
+                                    <img class="" src="/assets/images/{{ animation.image }}" alt="{{ animation.name }}">
+                                </div>
+                                <div class="card-body">
+                                    <h3 class="card-title">{{ animation.name }}</h3>
+                                    <p class="card-text">{{ animation.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        </div>
 {% endblock %}
