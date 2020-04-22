@@ -6,23 +6,33 @@
     align-content: stretch;
 
     margin: auto;
-    margin-top:50px;
-    width: 60vw;
+    margin-top:16vh;
+    width: 60%;
     height: 100vh;
+}
+
+.home h1{
+    font-weight: bold;
+    margin-bottom: 70px;
+}
+
+.textHome p, .textHome input{
+    margin-left: 100px;
 }
 
 .textHome {
     color: var(--light-color);
-
-    margin-top: 20vh;
+    margin-top: 10vh;
+    text-align: left;
 }
 
 .leftHome{
     width: 60%;
+    margin-right: 50px;
 }
 
 .rightHome{
-    width: 40%;
+    width: 30%;
 }
 
 .textHome label{
@@ -31,13 +41,34 @@
 
 .textHome input{
     width:80%;
+    height:60px;
+    margin-top:100px;
+
+    border-radius: 10px;
+    border:0;
+}
+
+.home button{
+    position: relative;
+    width: 100px;
+    height: 40px;
+    left:79%;
+    bottom:49px;
+
+    background-color: var(--main-bg-color);
+    color: var(--light-color);
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.home button:hover{
+    color: var(--light-color);
 }
 
 .pictureFJT{
     position: absolute;
+    width: 300px;
     height: 650px;
-
-    object-fit: cover;
     opacity: 0.9;
     border-radius: 20px;
     z-index: -1;
@@ -45,12 +76,14 @@
 
 .youngPeople{
     width: 300px;
+    position: absolute;
+    top:55vh;
 }
 
 .bgHome img{
     /* Set rules to fill background */
     min-height: 101vh;
-    min-width: 100vw;
+    min-width: 101vw;
     z-index: -1;
 
     /* Set up proportionate scaling */
@@ -67,5 +100,9 @@
     .bgHome {
         left: 100px;
         margin-left: -512px;   /* 50% */
+    }
+
+    .pictureFJT{
+        display: none;
     }
 }
