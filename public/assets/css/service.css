@@ -3,21 +3,12 @@
 }
 
 .service-title {
-    padding-left: 15px;
     margin: var(--spacing);
-}
-
-.animation-flex {
-    display: flex;
 }
 
 .container-service,
 .container-animation {
     width: 75%;
-}
-
-.container-animation {
-    padding: 45px 45px 45px 30px;
 }
 
 .main-card {
@@ -34,63 +25,31 @@
     margin-bottom: var(--spacing-lg);
 }
 
-.flex-card {
-    padding-left: 0;
-}
-
 .service-card,
 .animation-card,
 .main-card .card {
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .service-card img,
 .main-card .card img {
-    border-radius: 15px 15px 0 0 ;
+    border-radius: 10px 10px 0 0 ;
 }
 
 .animation-card img {
-    border-radius: 15px 0 0 15px;
+    border-radius: 10px 0 0 10px;
 }
+
 
 @media screen and (max-width: 1300px) {
     .container-service,
     .container-animation {
         width: auto;
     }
-
-    .card-title-animation {
-        font-size: 1.50rem;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    .container-animation {
-        padding: 30px;
-    }
-    .animation-flex {
-        display: block;
-    }
-    .card-description {
-        text-align: center;
-    }
-    .animation-title,
-    .service-title {
-        text-align: center;
-    }
-    .main-card .card {
-        margin: 0;
-    }
-    .flex-card {
-        padding-right: 0;
-    }
-    .animation-card {
-
-    }
 }
 
 @media screen and (max-width: 767px) {
     .animation-card img {
-        border-radius: 15px 15px 0 0 ;
+        border-radius: 10px 10px 0 0 ;
     }
 }

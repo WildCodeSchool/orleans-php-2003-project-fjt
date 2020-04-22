@@ -1,11 +1,11 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <div class="container-fluid container-service">
-        <h2 class="service-title">Nos services</h2>
+    <div class="container-fluid container-service text-lg-left text-center">
+        <h2 class="service-title pl-lg-3">Nos services</h2>
         <div class="row justify-content-center">
             {% for service in services %}
-            <div class="col-md-6 col-xs-1 card-deck">
+            <div class="col-md-6 card-deck">
                 <div class="card service-card">
                     <img src="/assets/images/{{ service.image }}" class="card-img-top" alt="{{ service.name }}">
                     <div class="card-body card-description">
@@ -18,13 +18,15 @@
         </div>
     </div>
 
-    <div class="container-fluid container-animation">
+    <br/>
+
+    <div class="container-fluid container-animation text-lg-left text-center">
         <h2 class="animation-title">Nos animations</h2>
-        <div class="animation-flex">
+        <div class="justify-content-center d-lg-flex d-sm-block">
     {% set firstAnimation = true %}
     {% for animation in animations %}
         {% if firstAnimation == true %}
-        <div class="row no-gutters justify-content-center col-lg-6 flex-card">
+        <div class="row no-gutters justify-content-center col-lg-6 p-sm-0">
                 <div class="card-deck main-card">
                     <div class="card">
                         <img src="/assets/images/{{ animation.image }}" class="card-img-top" alt="{{ animation.name }}">
@@ -36,11 +38,11 @@
                 </div>
         </div>
             {% set firstAnimation = false %}
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column pl-3 pr-3">
             {% else %}
                 <div class="card animation-card">
                     <div class="row no-gutters">
-                        <div class="col-md-6 col-xs-1">
+                        <div class="col-md-6">
                             <img src="/assets/images/{{ animation.image }}" class="card-img-top h-100" alt="{{ animation.name }}">
                         </div>
                         <div class="col-md-6 col-xs-1">
