@@ -48,6 +48,11 @@
     border:0;
 }
 
+::-webkit-input-placeholder {
+    position: relative;
+    left: 1vw;
+}
+
 .home button{
     position: relative;
     width: 100px;
@@ -55,6 +60,7 @@
     left:79%;
     bottom:49px;
 
+    margin-right: 5px;
     background-color: var(--main-bg-color);
     color: var(--light-color);
     border-radius: 10px;
