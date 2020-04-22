@@ -23,9 +23,8 @@
     <div class="container-fluid container-animation text-lg-left text-center">
         <h2 class="animation-title">Nos animations</h2>
         <div class="justify-content-center d-lg-flex d-sm-block">
-    {% set firstAnimation = true %}
     {% for animation in animations %}
-        {% if firstAnimation == true %}
+        {% if loop.first %}
         <div class="row no-gutters justify-content-center col-lg-6 p-sm-0">
                 <div class="card-deck main-card">
                     <div class="card">
@@ -37,7 +36,6 @@
                     </div>
                 </div>
         </div>
-            {% set firstAnimation = false %}
             <div class="d-flex flex-column pl-3 pr-3">
             {% else %}
                 <div class="card animation-card">
