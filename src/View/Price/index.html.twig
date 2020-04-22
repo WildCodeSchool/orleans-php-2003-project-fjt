@@ -1,0 +1,31 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+<div class="rooms">
+    <h2>Nos logements:</h2>
+    <div class=" row ">
+        {% for room in rooms %}
+            <div class=" col-1 "></div>
+            <div class="card  col-lg-4 col-10" >
+                <figure>
+                    <figcaption class="card-title">{{ room.type }}</figcaption>
+                    <img src="{{ room.picture }}" class="card-img-top" alt="picture_{{ room.type }}_{{ room.address }}">
+                </figure>
+                <div class="card-body justify-content-around">
+                    <h3 class="card-title">Description:</h3>
+                    <p class="card-text">{{ room.description }}</p>
+                    <h3 class="card-title">Tarif:</h3>
+                    <p class="card-text"><strong>{% set breakfast_fee = room.breakfast %}
+                            {% if room.breakfast is null or room.breakfast=='inclus' %}{% set breakfast_fee = 0 %}
+                            {%endif %}{{ room.guarantee+room.restoration+room.contribution+room.equipment_contribution
+                            + breakfast_fee }} €</strong></p>
+                    <h3 class="card-title">Adresse:</h3>
+                    <p class="card-text">{{ room.address }}</p>
+                    <a href="#" class="btn btn-primary">+ d'infos</a>
+                </div>
+            </div>
+            <div class=" col-1"></div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

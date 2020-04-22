@@ -1,0 +1,40 @@
+.textHome{
+    color:var(--light-color);
+}
+
+.home{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.leftHome{
+    width:30%;
+}
+
+.bgHome img{
+    position: absolute;
+}
+
+.bgHome img{
+    /* Set rules to fill background */
+    min-height: 101vh;
+    min-width: 100vw;
+    z-index: -1;
+
+    /* Set up proportionate scaling */
+    width: 100vw;
+    height: 101vh;
+
+    /* Set up positioning */
+    position: absolute;
+    top: -10px;
+    left: -10px;
+}
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+    .bgHome {
+        left: 100px;
+        margin-left: -512px;   /* 50% */
+    }
+}
