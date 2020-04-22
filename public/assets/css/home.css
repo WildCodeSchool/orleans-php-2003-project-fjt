@@ -1,19 +1,50 @@
-.textHome{
-    color:var(--light-color);
-}
-
 .home{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    justify-content: space-around;
+    align-content: stretch;
+
+    margin: auto;
+    margin-top:50px;
+    width: 60vw;
+    height: 100vh;
+}
+
+.textHome {
+    color: var(--light-color);
+
+    margin-top: 20vh;
 }
 
 .leftHome{
-    width:30%;
+    width: 60%;
 }
 
-.bgHome img{
+.rightHome{
+    width: 40%;
+}
+
+.textHome label{
+    display: none;
+}
+
+.textHome input{
+    width:80%;
+}
+
+.pictureFJT{
     position: absolute;
+    height: 650px;
+
+    object-fit: cover;
+    opacity: 0.9;
+    border-radius: 20px;
+    z-index: -1;
+}
+
+.youngPeople{
+    width: 300px;
 }
 
 .bgHome img{

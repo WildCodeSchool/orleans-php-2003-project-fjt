@@ -5,9 +5,25 @@
 {% endblock %}
 
 {% block content %}
+    <div class="bgHome">
+        <img src="/../assets/images/bgFJT.png" alt="background"/>
+    </div>
     <div class="home">
-        <div class="bgHome">
-            <img src="/../assets/images/bgFJT.png" alt="background"/>
+        <div class="leftHome">
+            <div class="textHome">
+                <h1>Foyer des Jeunes Travailleurs Colombier d'Orléans</h1>
+                <p>Decouvrez nos solutions de logements, restaurations, loisirs aux prix attractifs au sein d’Orleans !</p>
+                <form method="post">
+                    <label for="mail">Mail:</label>
+                    <input type="email" id="mail" name="mail">
+                </form>
+            </div>
+        </div>
+        <div class="rightHome">
+            <div>
+                <img class="pictureFJT" src="/../assets/images/pictureFJT.jpg"/>
+                <img class="youngPeople" src="/../assets/images/youngPeople.png"/>
+            </div>
         </div>
     </div>
     {% include 'contact/_form.html.twig' %}
