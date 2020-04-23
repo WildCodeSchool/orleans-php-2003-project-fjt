@@ -4,10 +4,7 @@
     {% include '/Home/navbar.html.twig' %}
 {% endblock %}
 
-{% block content %}
-    <div class="bgHome">
-        <img src="/../assets/images/bgFJT.png" alt="background"/>
-    </div>
+{% block header %}
     <div class="home">
         <div class="leftHome">
             <div class="textHome">
@@ -27,6 +24,9 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block content %}
     {% include 'contact/_form.html.twig' %}
 {% endblock %}
 

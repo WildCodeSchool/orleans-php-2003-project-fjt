@@ -77,37 +77,24 @@
     height: 650px;
     opacity: 0.9;
     border-radius: 20px;
-    z-index: -1;
+    z-index: 1;
 }
 
 .youngPeople{
     width: 300px;
     position: absolute;
     top:55vh;
+    z-index: 2;
 }
 
-.bgHome img{
-    /* Set rules to fill background */
-    min-height: 101vh;
-    min-width: 101vw;
-    z-index: -1;
-
-    /* Set up proportionate scaling */
-    width: 100vw;
-    height: 101vh;
-
-    /* Set up positioning */
+.header {
     position: absolute;
-    top: -10px;
-    left: -10px;
+    background-image: radial-gradient(circle 300vmax at -100vw 180vh , #f35 10%, #f35 60%, #032497 60%);
+    width: 100vw;
+    height:100vh;
 }
 
-@media screen and (max-width: 1024px) { /* Specific to this particular image */
-    .bgHome {
-        left: 100px;
-        margin-left: -512px;   /* 50% */
-    }
-
+@media screen and (max-width: 1024px) {
     .pictureFJT{
         display: none;
     }

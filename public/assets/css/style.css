@@ -49,5 +49,11 @@ h1{
 }
 
 h2{
-    font-size: var(--medium-size);
+    font-size: var(--large-size);
+}
+
+.main{
+    position: absolute;
+    top:100vh;
+    margin-top:var(--extra-large-size)
 }
