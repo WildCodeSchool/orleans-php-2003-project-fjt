@@ -1,3 +1,7 @@
 label {
     margin: 2px;
 }
+
+.btn-primary {
+    background-color: var(--main-bg-color);
+}
