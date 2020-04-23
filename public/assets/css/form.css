@@ -5,3 +5,10 @@ label {
 .btn-primary {
     background-color: var(--main-bg-color);
 }
+
+.form {
+    background-color: rgba(246, 246, 246, 0.25);
+    margin: auto 100pt;
+    padding: 10pt;
+    border-radius: 10pt;
+}
