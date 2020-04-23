@@ -34,6 +34,9 @@
 .service-card img,
 .main-card .card img {
     border-radius: 10px 10px 0 0 ;
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .animation-card img {
