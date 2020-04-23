@@ -2,8 +2,9 @@ footer{
     background-color: var(--secondary-bg-color);
     color: var(--light-color);
 
-    padding-top:50px;
+    padding-top:25px;
     padding-bottom: 50px;
+    text-align: center;
 }
 
 .contentFooter{
@@ -15,9 +16,17 @@ footer{
     align-content: stretch;
 }
 
+.leftContentFooter{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
 footer ul{
     list-style-type: none;
-    padding-inline-start: 20px;
+    padding-inline-start: 0;
 }
 
 footer h3{
@@ -26,4 +35,12 @@ footer h3{
 
 footer li{
     margin:8px;
+}
+
+footer iframe{
+    margin-top: 100px;
+}
+
+footer p{
+    margin-top: 32px;
 }
