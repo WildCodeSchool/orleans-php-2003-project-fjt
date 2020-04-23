@@ -4,6 +4,7 @@
 @import 'form.css';
 @import 'service.css';
 @import "price.css";
+@import "footer.css";
 
 :root{
     --main-bg-color: #032497;
@@ -30,6 +31,23 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
+}
+
 html{
     overflow-x: hidden;
 }
@@ -45,10 +63,14 @@ h1,h2,h3{
 }
 
 h1{
-    font-size: var(--large-size);
+    font-size: var(--extra-large-size);
     text-align: center;
 }
 
 h2{
+    font-size: var(--large-size);
+}
+
+h3{
     font-size: var(--medium-size);
 }

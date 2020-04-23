@@ -13,6 +13,25 @@
     {% include 'contact/_form.html.twig' %}
 {% endblock %}
 
+{% block footer %}
+    <div class="contentFooter row">
+        <div class="leftContentFooter col-4 offset-2">
+            <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=1.8974590301513674%2C47.91294076205423%2C1.9116210937500002%2C47.91959210124432&amp;layer=mapnik&amp;marker=47.91626653852818%2C1.9045400619506836" style="border: 1px solid black"></iframe>
+            <p class="col-6">FJT Espace Colombier/ Résidences Illiers / Riobé 29 rue du Colombier 45000 ORLEANS</p>
+        </div>
+        <div class="rightContentFooter col-4">
+            <h3>Liens Utiles</h3>
+            <ul>
+                <li>Ville d'Orléans</li>
+                <li>Pôle Emploi</li>
+                <li>Mission locale</li>
+                <li>Université d'Orléans</li>
+                <li>Conseil régional</li>
+                <li>UJT Union Foyer des Jeunes Travailleurs</li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
 {% block script %}
     <script>
         $(window).scroll(function(){
