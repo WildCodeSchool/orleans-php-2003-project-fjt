@@ -4,12 +4,13 @@
 @import 'form.css';
 @import 'service.css';
 @import "price.css";
+@import "footer.css";
 
 :root{
     --main-bg-color: #032497;
     --secondary-bg-color: rgb(255, 0, 83);
     --card-m-bg-color: rgb(241, 49, 112);
-    --card-s-bg-color: rgb(44, 85, 227);
+    --card-s-bg-color: rgba(33, 202, 246, 0.22);
     --light-color: #f6f6f6;
     --dark-color: #090909;
 
@@ -28,6 +29,23 @@
 
 *{
     box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
 }
 
 html{
@@ -56,4 +74,16 @@ h2{
     position: absolute;
     top:100vh;
     margin-top:var(--extra-large-size)
+}
+
+h3{
+    font-size: var(--medium-size);
+}
+
+a {
+    color:var(--light-color);
+}
+
+a:hover {
+    color:var(--light-color);
 }

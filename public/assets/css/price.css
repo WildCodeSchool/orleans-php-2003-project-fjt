@@ -1,3 +1,18 @@
+/* Grille Tarifaire */
+.table {
+    width: 80%;
+    margin: 2% auto;
+    text-align: center;
+}
+
+.table thead {
+    background-color: var(--main-bg-color);
+    color: var(--light-color);
+}
+.rooms section:nth-of-type(2) h2 {
+    text-align: center;
+}
+
 /* CARD */
 
 .rooms .card {
@@ -48,4 +63,10 @@
 }
 .rooms .card figure img {
     border-radius: 17px 17px 0 0;
+}
+@media screen and ( max-width: 768px ){
+    .table, .rooms section:nth-of-type(2) h2 {
+        display: none;
+    }
+
 }
