@@ -48,7 +48,7 @@
     border:0;
 }
 
-input::placeholder {
+.home input::placeholder {
     position: relative;
     left: 1vw;
 }
@@ -61,14 +61,7 @@ input::placeholder {
     bottom:49px;
 
     margin-right: 5px;
-    background-color: var(--main-bg-color);
-    color: var(--light-color);
-    border-radius: 10px;
     font-weight: bold;
-}
-
-.home button:hover{
-    color: var(--light-color);
 }
 
 .pictureFJT{

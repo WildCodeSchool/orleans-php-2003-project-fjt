@@ -1,12 +1,3 @@
-nav{
-    width:75%;
-    margin:auto;
-}
-
-nav.scrolled{
-    background-color: var(--dark-color);
-}
-
 nav div{
     justify-content: flex-end;
 }
