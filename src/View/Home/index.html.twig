@@ -13,7 +13,7 @@
                 <form method="post">
                     <label for="mail">Mail:</label>
                     <input class="form-control" type="email" id="mail" name="mail" placeholder="Email">
-                    <button type="submit" class="btn btn-primary">Contact</button>
+                    <button class="btn btn-primary">Contact</button>
                 </form>
             </div>
         </div>
@@ -32,12 +32,4 @@
 
 {% block footer %}
     {% include '/Home/footer.html.twig' %}
-{% endblock %}
-
-{% block script %}
-    <script type="javascript">
-        $(window).scroll(function(){
-            $('nav').toggleClass('scrolled',$(this).scrollTop() > 200)
-        });
-    </script>
 {% endblock %}

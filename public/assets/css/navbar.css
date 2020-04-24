@@ -14,10 +14,6 @@ nav div{
     color:var(--light-color);
 }
 
-.bg-dark{
-    background: rgba(0,0,0,0.3)!important;
-}
-
 nav ul li{
     margin:10px;
     text-align: center;
