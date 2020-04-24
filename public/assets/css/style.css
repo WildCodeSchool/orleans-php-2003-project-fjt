@@ -58,6 +58,15 @@ body{
     font-size: var(--main-size);
 }
 
+.main{
+    margin-top:100vh;
+}
+
+section{
+    margin-top: 75px;
+    margin-bottom: 75px;
+}
+
 h1,h2,h3{
     font-family: var(--title-font);
 }
@@ -68,22 +77,27 @@ h1{
 
 h2{
     font-size: var(--large-size);
-}
-
-.main{
-    position: absolute;
-    top:100vh;
-    margin-top:var(--extra-large-size)
+    margin-bottom: 50px;
 }
 
 h3{
     font-size: var(--medium-size);
 }
 
-a {
-    color:var(--light-color);
+a{
+    color: var(--light-color);
 }
 
 a:hover {
     color:var(--light-color);
+}
+
+.btn-primary {
+    background-color: var(--main-bg-color);
+    border-radius: 10px;
+}
+
+.btn-primary:hover {
+    background-color: var(--main-bg-color);
+    color: var(--light-color);
 }
