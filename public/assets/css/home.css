@@ -48,7 +48,7 @@
     border:0;
 }
 
-::-webkit-input-placeholder {
+input::placeholder {
     position: relative;
     left: 1vw;
 }
@@ -92,10 +92,4 @@
     background-image: radial-gradient(circle 300vmax at -100vw 180vh , #f35 10%, #f35 60%, #032497 60%);
     width: 100vw;
     height:100vh;
-}
-
-@media screen and (max-width: 1024px) {
-    .pictureFJT{
-        display: none;
-    }
 }
