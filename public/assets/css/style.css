@@ -64,11 +64,16 @@ h1,h2,h3{
 
 h1{
     font-size: var(--extra-large-size);
-    text-align: center;
 }
 
 h2{
     font-size: var(--large-size);
+}
+
+.main{
+    position: absolute;
+    top:100vh;
+    margin-top:var(--extra-large-size)
 }
 
 h3{
