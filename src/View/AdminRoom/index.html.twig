@@ -1,26 +1,52 @@
 {% extends 'layout.html.twig' %}
-
+{% block navbar %}
+    {% include '/Home/navbar.html.twig' %}
+{% endblock %}
 {% block content %}
-    <h2>Gestion des logements</h2>
-    <form action="">
-        <button>Ajouter un logment</button>
-    </form>
-    {% for address in addresses %}
-        <p>{{ address.name }}</p>
-        {% for room in rooms %}
-            {% if address.id == room.address_id  %}
-            <p>{{ room.type }}</p>
-                <div class="read-btn">
-                    <form action="" method="post">
-                        <input type="hidden" value="{{ room.id }}" name="id">
-                        <button>Mettre à jour</button>
-                    </form>
-                    <form action="" method="post">
-                        <input type="hidden" value="{{ room.id }}" name="id">
-                        <button>Supprimer ce logement</button>
-                    </form>
-                </div>
-            {% endif %}
-        {% endfor %}
-    {% endfor %}
+    <section>
+        <div class="adminroom-index">
+            <h2 class="m-5">Gestion des logements</h2>
+            <div class="d-flex justify-content-around ">
+                <form action="" method="post">
+                    <button class="btn btn-outline-primary btn-lg">Ajouter un logment</button>
+                </form>
+                <form action="" method="post">
+                    <button class="btn btn-outline-primary btn-lg">Ajouter une adresse</button>
+                </form>
+            </div>
+
+            {% for address in addresses %}
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col"colspan="3">{{ address.name }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for room in rooms %}
+                    {% if address.id == room.address_id  %}
+                        <tr>
+                            <td>{{ room.type }}</td>
+                            <td><form action="" method="post">
+                                    <input type="hidden" value="{{ room.id }}" name="id">
+                                    <button class="btn btn-outline-primary">Mettre à jour</button>
+                                </form>
+                            </td>
+                            <td><form action="" method="post">
+                                    <input type="hidden" value="{{ room.id }}" name="id">
+                                    <button class="btn btn-outline-primary">Supprimer ce logement</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+
+{% endblock %}
+{% block footer %}
+    {% include '/Home/footer.html.twig' %}
 {% endblock %}
