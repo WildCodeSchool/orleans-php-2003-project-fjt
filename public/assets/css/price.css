@@ -1,22 +1,31 @@
+/* Grille Tarifaire */
+.table {
+    width: 80%;
+    margin: 2% auto;
+    text-align: center;
+}
+
+.table thead {
+    background-color: var(--main-bg-color);
+    color: var(--light-color);
+}
+.rooms section:nth-of-type(2) h2 {
+    text-align: center;
+}
+
 /* CARD */
 
 .rooms .card {
     margin: 3% 0;
     padding: 0;
-    border-radius: 20px;
-    border: 3px solid var(--main-bg-color);
+    border-radius: 10px;
     width: 18rem;
 
 }
 .rooms .card-body {
     display: flex;
     flex-direction: column;
-    background-color: var(--card-s-bg-color);
-    color: var(--light-color);
     border-radius: 0 0 15px 15px ;
-}
-.rooms .card-body h3 {
-    text-decoration: underline;
 }
 
 .rooms .card-body h3:first-child {
@@ -33,9 +42,7 @@
 }
 .rooms .card .btn {
     align-self: flex-end;
-    width: 100px;
     color: var(--light-color);
-    background-color: var(--card-m-bg-color);
 }
 .rooms .card figure {
     margin: 0;
@@ -45,7 +52,18 @@
     margin: 2%;
     color: var(--light-color);
     font-weight: bolder;
+    background-color: darkgray;
+    padding: var(--spacing-sm);
+    border-radius: 10px;
+    min-width: 5%;
+    text-align: center;
 }
-.rooms .card figure img {
-    border-radius: 17px 17px 0 0;
+rooms .card figure img {
+    border-radius: 10px 10px 0 0;
+}
+@media screen and ( max-width: 768px ){
+    .table, .rooms section:nth-of-type(2) h2 {
+        display: none;
+    }
+
 }

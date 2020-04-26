@@ -4,12 +4,13 @@
 @import 'form.css';
 @import 'service.css';
 @import "price.css";
+@import "footer.css";
 
 :root{
     --main-bg-color: #032497;
     --secondary-bg-color: rgb(255, 0, 83);
     --card-m-bg-color: rgb(241, 49, 112);
-    --card-s-bg-color: rgb(44, 85, 227);
+    --card-s-bg-color: rgba(33, 202, 246, 0.22);
     --light-color: #f6f6f6;
     --dark-color: #090909;
 
@@ -30,6 +31,23 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
+}
+
 html{
     overflow-x: hidden;
 }
@@ -40,15 +58,46 @@ body{
     font-size: var(--main-size);
 }
 
+.main{
+    margin-top:100vh;
+}
+
+section{
+    margin-top: 75px;
+    margin-bottom: 75px;
+}
+
 h1,h2,h3{
     font-family: var(--title-font);
 }
 
 h1{
-    font-size: var(--large-size);
-    text-align: center;
+    font-size: var(--extra-large-size);
 }
 
 h2{
+    font-size: var(--large-size);
+    margin-bottom: 50px;
+}
+
+h3{
     font-size: var(--medium-size);
+}
+
+a{
+    color: var(--light-color);
+}
+
+a:hover {
+    color:var(--light-color);
+}
+
+.btn-primary {
+    background-color: var(--main-bg-color);
+    border-radius: 10px;
+}
+
+.btn-primary:hover {
+    background-color: var(--main-bg-color);
+    color: var(--light-color);
 }
