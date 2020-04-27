@@ -3,8 +3,6 @@
 
 namespace App\Model;
 
-use PDO;
-
 class AdminRoomManager extends AbstractManager
 {
     /**
@@ -44,9 +42,9 @@ class AdminRoomManager extends AbstractManager
     {
         foreach ($adminPrice as $key => $value) {
             if (is_int($value) || is_float($value)) {
-                $statement->bindValue(':' . $key, $value, PDO::PARAM_INT);
+                $statement->bindValue(':' . $key, $value, \PDO::PARAM_INT);
             } else {
-                $statement->bindValue(':' . $key, $value, PDO::PARAM_STR);
+                $statement->bindValue(':' . $key, $value, \PDO::PARAM_STR);
             }
         }
     }
