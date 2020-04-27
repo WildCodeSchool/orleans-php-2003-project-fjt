@@ -1,8 +1,0 @@
-[26-Apr-2020 22:27:44 UTC] PHP Fatal error:  Cannot use empty array entries in keyed array assignment in /home/wilder/quetes/orleans-php-2003-project-fjt/src/Controller/AdminRoomController.php on line 16
-[26-Apr-2020 22:27:44 UTC] PHP Stack trace:
-[26-Apr-2020 22:27:44 UTC] PHP   1. {main}() /home/wilder/quetes/orleans-php-2003-project-fjt/public/index.php:0
-[26-Apr-2020 22:27:44 UTC] PHP   2. require_once() /home/wilder/quetes/orleans-php-2003-project-fjt/public/index.php:16
-[26-Apr-2020 22:27:44 UTC] PHP   3. class_exists() /home/wilder/quetes/orleans-php-2003-project-fjt/src/routing.php:17
-[26-Apr-2020 22:27:44 UTC] PHP   4. spl_autoload_call() /home/wilder/quetes/orleans-php-2003-project-fjt/src/routing.php:17
-[26-Apr-2020 22:27:44 UTC] PHP   5. Composer\Autoload\ClassLoader->loadClass() /home/wilder/quetes/orleans-php-2003-project-fjt/src/routing.php:17
-[26-Apr-2020 22:27:44 UTC] PHP   6. Composer\Autoload\includeFile() /home/wilder/quetes/orleans-php-2003-project-fjt/vendor/composer/ClassLoader.php:322
