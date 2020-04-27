@@ -5,6 +5,7 @@
 @import 'service.css';
 @import "price.css";
 @import "footer.css";
+@import "adminRoom.css";
 
 :root{
     --main-bg-color: #032497;
