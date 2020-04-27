@@ -15,16 +15,15 @@
                 </form>
             </div>
 
-            {% for address in addresses %}
+            {% for addressName,rooms in roomByAddresses %}
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th scope="col" colspan="3">{{ address.name }}</th>
+                    <th scope="col" colspan="3">{{ addressName }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for room in rooms %}
-                    {% if address.id == room.address_id  %}
                         <tr>
                             <td>{{ room.type }}</td>
                             <td><form action="" method="post">
@@ -37,8 +36,6 @@
                                     <button class="btn btn-outline-primary">Supprimer ce logement</button>
                                 </form>
                             </td>
-                        </tr>
-                    {% endif %}
                 {% endfor %}
                 </tbody>
                 {% endfor %}

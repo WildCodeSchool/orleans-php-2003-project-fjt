@@ -18,14 +18,10 @@ class AdminRoomManager extends AbstractManager
     {
         parent::__construct(self::TABLE);
     }
-    public function selectAddress(): array
+
+    public function selectRoomByAddress(): array
     {
-        return $this->pdo->query('SELECT * FROM address ORDER BY 
-        address.id ASC')->fetchAll();
-    }
-    public function selectRoom(): array
-    {
-        return $this->pdo->query('SELECT *, r.id FROM room r JOIN address ON r.address_id = address.id ORDER BY 
+        return $this->pdo->query('SELECT * FROM room r JOIN address ON r.address_id = address.id ORDER BY 
         address.id ASC, r.area ASC')->fetchAll();
     }
 }
