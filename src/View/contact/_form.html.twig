@@ -6,11 +6,11 @@
             <p>Vous pouvez également nous joindre par téléphone au 02.38.42.23.30</p>
         </div>
 
-        <div class="col-5 offset-1">
+        <div class="col-5 col-md-6 offset-1">
             <form action="" method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="lastname">Nom</label>
+                        <label for="lastname">Nom*</label>
                         <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Alderson" value="{{ post.lastname }}">
                         <div class="errors">
                             {% if nameErrors.lastname %}
@@ -20,7 +20,7 @@
                     </div>
 
                     <div class="form-group col-md-4 offset-1">
-                        <label for="firstname">Prénom</label>
+                        <label for="firstname">Prénom*</label>
                         <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Elliot" value="{{ post.firstname }}">
                         <div class="errors">
                         {% if nameErrors.firstname %}
@@ -44,7 +44,7 @@
 
 
                     <div class="form-group col-md-4 offset-1">
-                        <label for="email">Adresse mail</label>
+                        <label for="email">Adresse mail*</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="alderson.elliot@gmail.com" value="{{ post.email }}">
                         <div class="errors">
                         {% if infoErrors.email %}
@@ -55,11 +55,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="message">Message</label>
+                    <label for="message">Message*</label>
                     <textarea class="form-control col-9" id="message" name="message" rows="4" placeholder="Je souhaiterai vous contacter à propos de..." value="{{ post.message }}"></textarea>
+                    <div class="message">
                     {% if messageErrors.message %}
                         <div class="alert alert-danger" role="alert">{{ messageErrors.message }}</div>
                     {% endif %}
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Envoyer</button>
                 <div class="alert-light" role="alert">
