@@ -58,11 +58,11 @@
     min-width: 5%;
     text-align: center;
 }
-rooms .card figure img {
+.rooms .card figure img {
     border-radius: 10px 10px 0 0;
 }
 @media screen and ( max-width: 768px ){
-    .table, .rooms section:nth-of-type(2) h2 {
+    .rooms .table, .rooms section:nth-of-type(2) h2 {
         display: none;
     }
 

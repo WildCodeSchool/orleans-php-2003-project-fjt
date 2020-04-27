@@ -1,0 +1,50 @@
+{% extends 'layout.html.twig' %}
+{% block navbar %}
+    {% include '/Home/navbar.html.twig' %}
+{% endblock %}
+{% block content %}
+    <section>
+        <div class="adminroom-index">
+            <h2 class="m-5">Gestion des logements</h2>
+            <div class="d-flex justify-content-around ">
+                <form action="" method="post">
+                    <button class="btn btn-outline-primary btn-lg">Ajouter un logement</button>
+                </form>
+                <form action="" method="post">
+                    <button class="btn btn-outline-primary btn-lg">Ajouter une adresse</button>
+                </form>
+            </div>
+
+            {% for addressName,rooms in roomByAddresses %}
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col" colspan="3">{{ addressName }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for room in rooms %}
+                        <tr>
+                            <td>{{ room.type }}</td>
+                            <td><form action="" method="post">
+                                    <input type="hidden" value="{{ room.id }}" name="id">
+                                    <button class="btn btn-outline-primary">Mettre à jour</button>
+                                </form>
+                            </td>
+                            <td><form action="" method="post">
+                                    <input type="hidden" value="{{ room.id }}" name="id">
+                                    <button class="btn btn-outline-primary">Supprimer ce logement</button>
+                                </form>
+                            </td>
+                        </tr>
+                {% endfor %}
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+
+{% endblock %}
+{% block footer %}
+    {% include '/Home/footer.html.twig' %}
+{% endblock %}
