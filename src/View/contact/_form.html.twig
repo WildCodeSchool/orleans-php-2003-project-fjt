@@ -11,33 +11,60 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="lastname">Nom</label>
-                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Holiday">
+                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Alderson" value="{{ post.lastname }}">
+                        <div class="errors">
+                            {% if nameErrors.lastname %}
+                                <div class="alert alert-danger" role="alert">{{ nameErrors.lastname }}</div>
+                            {% endif %}
+                        </div>
                     </div>
 
                     <div class="form-group col-md-4 offset-1">
                         <label for="firstname">Prénom</label>
-                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Ryan">
+                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Elliot" value="{{ post.firstname }}">
+                        <div class="errors">
+                        {% if nameErrors.firstname %}
+                            <div class="alert alert-danger" role="alert">{{ nameErrors.firstname }}</div>
+                        {% endif %}
+                        </div>
                     </div>
+
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="phone">Téléphone</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="0601020304">
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="0601020304" value="{{ post.phone }}">
+                        <div class="errors">
+                        {% if infoErrors.phone %}
+                            <div class="alert alert-danger" role="alert">{{ infoErrors.phone }}</div>
+                        {% endif %}
+                        </div>
                     </div>
+
 
                     <div class="form-group col-md-4 offset-1">
                         <label for="email">Adresse mail</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="ryan.holiday@gmail.com">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="alderson.elliot@gmail.com" value="{{ post.email }}">
+                        <div class="errors">
+                        {% if infoErrors.email %}
+                            <div class="alert alert-danger" role="alert">{{ infoErrors.email }}</div>
+                        {% endif %}
+                        </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea class="form-control col-9" id="message" name="message" rows="4" placeholder="Je souhaiterai vous contacter à propos de..."></textarea>
+                    <textarea class="form-control col-9" id="message" name="message" rows="4" placeholder="Je souhaiterai vous contacter à propos de..." value="{{ post.message }}"></textarea>
+                    {% if messageErrors.message %}
+                        <div class="alert alert-danger" role="alert">{{ messageErrors.message }}</div>
+                    {% endif %}
                 </div>
-
                 <button type="submit" class="btn btn-primary">Envoyer</button>
+                <div class="alert-light" role="alert">
+                    <p>Les champs marqués d'un * sont obligatoires</p>
+                </div>
             </form>
         </div>
     </div>
