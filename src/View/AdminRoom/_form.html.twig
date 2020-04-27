@@ -43,10 +43,10 @@
     </div>
 
     <div class="form-group col-5 my-3">
-        <label for="restoration">Crédit restauration : </label>
-        <input class="form-control" id="restoration" name="restoration" type="number" step="0.01" value="{% if not empty %}{{ room.restoration }}{% endif %}">
-        {% if errors.restoration %}
-            <div class="text-danger">{{ errors.restoration }}</div>
+        <label for="catering">Crédit restauration : </label>
+        <input class="form-control" id="catering" name="catering" type="number" step="0.01" value="{% if not empty %}{{ room.catering }}{% endif %}">
+        {% if errors.catering %}
+            <div class="text-danger">{{ errors.catering }}</div>
         {% endif %}
     </div>
 

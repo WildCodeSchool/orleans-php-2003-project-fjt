@@ -32,7 +32,7 @@ class AdminRoomManager extends AbstractManager
     {
         $statement = $this->pdo->prepare('INSERT INTO ' . self::TABLE . ' (`type`,`guarantee`,`equipment`,
         `restoration`,`contribution`,`breakfast`,`equipment_contribution`,`picture`,`area`,`address_id`) VALUES
-         (:type,:guarantee,:equipment,:restoration,:contribution,:breakfast,:equipment_contribution,:picture,
+         (:type,:guarantee,:equipment,:catering,:contribution,:breakfast,:equipment_contribution,:picture,
          :area,:address_id)');
         self ::bound($infosToAdd, $statement);
 

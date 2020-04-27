@@ -73,8 +73,8 @@ class AdminRoomController extends AbstractController
         if (!filter_var($data['guarantee'], FILTER_VALIDATE_FLOAT)) {
             $dataTmp['guarantee'] = 'La valeur du dépôt de garantie n\'est pas autorisé';
         }
-        if (!filter_var($data['restoration'], FILTER_VALIDATE_FLOAT)) {
-            $dataTmp['restoration'] = 'La valeur du crédit restauration n\'est pas autorisé';
+        if (!filter_var($data['catering'], FILTER_VALIDATE_FLOAT)) {
+            $dataTmp['catering'] = 'La valeur du crédit restauration n\'est pas autorisé';
         }
         if (!filter_var($data['contribution'], FILTER_VALIDATE_FLOAT)) {
             $dataTmp['contribution'] = 'La valeur de la cotisation n\'est pas autorisée';
