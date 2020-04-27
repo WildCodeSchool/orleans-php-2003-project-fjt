@@ -12,11 +12,16 @@ namespace App\Controller;
 use App\Model\AnimationManager;
 
 /**
- * Class ItemController
+ * Class AdminAnimationController
  *
  */
 class AdminAnimationController extends AbstractController
 {
+    const MAX_FILE_SIZE = 1000000;
+    const ALLOWED_EXT = ['jpg', 'jpeg', 'png', 'gif'];
+    const MAX_NAME_LENGTH = 100;
+    const MAX_DESCRIPTION_LENGTH = 500;
+
     public function index()
     {
         $animationManager = new AnimationManager();
@@ -44,18 +49,16 @@ class AdminAnimationController extends AbstractController
 
             $fileNameNew = '';
             if (!empty($_FILES['image']['name'])) {
-                $allowedFile = ['jpg', 'jpeg', 'png', 'gif'];
                 $fileTmp = $file['image']['tmp_name'];
                 $fileSize = filesize($fileTmp);
-                $fileLength = 1000000;
                 $fileError = $_FILES['image']['error'];
 
                 $fileExt = explode('.', $_FILES['image']['name']);
                 $fileExt = strtolower(end($fileExt));
 
-                if (in_array($fileExt, $allowedFile)) {
+                if (in_array($fileExt, self::ALLOWED_EXT)) {
                     if ($fileError === 0) {
-                        if ($fileSize <= $fileLength) {
+                        if ($fileSize <= self::MAX_FILE_SIZE) {
                             $fileNameNew = uniqid('', true) . '.' . $fileExt;
                             $fileDestination = '../public/assets/images/' . $fileNameNew;
                             move_uploaded_file($fileNameNew, $fileDestination);
@@ -65,7 +68,7 @@ class AdminAnimationController extends AbstractController
                             }
                         } else {
                             $errors['image'] = "{$file['image']['name']} est trop lourd.
-                        Le fichier ne doit pas dépasser 1Mo";
+                        Le fichier ne doit pas dépasser " . self::MAX_FILE_SIZE / 1000000 . "Mo";
                         }
                     } else {
                         $errors['image'] = "{$file['image']['name']} errored with code {$fileError}";
@@ -81,25 +84,23 @@ class AdminAnimationController extends AbstractController
             if (empty($errors)) {
                 $data['image'] = $fileNameNew;
                 $animationManager->insert($data);
-//                header('Location:/AdminAnimation/index');
+                header('Location:/AdminAnimation/index');
             }
         }
-        return $this->twig->render('AdminAnimation/add.html.twig', ['data' => $data ?? [], 'errors' => $errors,
-            'files' => $_FILES]);
+        return $this->twig->render('AdminAnimation/add.html.twig', ['data' => $data ?? [], 'errors' => $errors]);
     }
 
     private function controlData($data)
     {
-        $nameLength = 100;
         if (empty($data['name'])) {
             $errors['name'] = "Veuillez renseigner le nom de l'animation";
-        } elseif (strlen($data['name']) > $nameLength) {
-            $errors['name'] = "Le nom ne doit pas excéder " . $nameLength . " caractères";
+        } elseif (strlen($data['name']) > self::MAX_NAME_LENGTH) {
+            $errors['name'] = "Le nom ne doit pas excéder " . self::MAX_NAME_LENGTH . " caractères";
         }
 
-        $descriptionLength = 500;
-        if (strlen($data['description']) > $descriptionLength) {
-            $errors['description'] = "La description ne doit pas dépasser " . $descriptionLength . " caractères";
+        if (strlen($data['description']) > self::MAX_DESCRIPTION_LENGTH) {
+            $errors['description'] = "La description ne doit pas dépasser " .
+                self::MAX_DESCRIPTION_LENGTH . " caractères";
         }
         return $errors ?? [];
     }
