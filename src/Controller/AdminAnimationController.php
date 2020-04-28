@@ -48,35 +48,25 @@ class AdminAnimationController extends AbstractController
             $file = $_FILES;
             $errors = $this->controlData($data);
 
-            $fileNameNew = '';
+            $fileExt = pathinfo($file['image']['name'], PATHINFO_EXTENSION);
+            $fileNameNew = uniqid('', true) . '.' . $fileExt;
+
             if (!empty($_FILES['image']['name'])) {
                 $fileTmp = $file['image']['tmp_name'];
                 $fileSize = filesize($fileTmp);
                 $fileError = $_FILES['image']['error'];
+                $fileDestination = self::UPLOAD_DIR . $fileNameNew;
 
-                $fileExt = explode('.', $_FILES['image']['name']);
-                $fileExt = strtolower(end($fileExt));
-
-                if (in_array($fileExt, self::ALLOWED_MIME)) {
-                    if ($fileError === 0) {
-                        if ($fileSize <= self::MAX_FILE_SIZE) {
-                            $fileNameNew = uniqid('', true) . '.' . $fileExt;
-                            $fileDestination = self::UPLOAD_DIR . $fileNameNew;
-                            move_uploaded_file($fileNameNew, $fileDestination);
-
-                            if (move_uploaded_file($fileTmp, $fileDestination) == false) {
-                                $errors['image'] = 'Le téléchargement de ' . $file['image']['name'] . ' a échoué';
-                            }
-                        } else {
-                            $errors['image'] = $file['image']['name'] . ' est trop lourd.
+                if ($fileError !== 0) {
+                    $errors['image'] = $file['image']['name'] . 'errored with code' . $fileError;
+                } elseif ($fileSize > self::MAX_FILE_SIZE) {
+                    $errors['image'] = $file['image']['name'] . ' est trop lourd.
                         Le fichier ne doit pas dépasser ' . self::MAX_FILE_SIZE / 1000000 . 'Mo';
-                        }
-                    } else {
-                        $errors['image'] = $file['image']['name'] . 'errored with code' . $fileError;
-                    }
-                } else {
+                } elseif (!in_array($file['image']['type'], self::ALLOWED_MIME)) {
                     $errors['image'] = $file['image']['name'] . ' L\'extension ' . $fileExt . ' n\'est pas autorisée.
-                Merci de choisir un fichier ' . implode(', ', self::ALLOWED_MIME);
+                        Merci de choisir un fichier ' . implode(', ', self::ALLOWED_MIME);
+                } elseif (!move_uploaded_file($fileTmp, $fileDestination)) {
+                    $errors['image'] = 'Le téléchargement de ' . $file['image']['name'] . ' a échoué';
                 }
             } else {
                 $errors['image'] = 'Merci d\'ajouter une image';
