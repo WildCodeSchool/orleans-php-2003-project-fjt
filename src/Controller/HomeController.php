@@ -21,19 +21,17 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-        $nameErrors = [];
-        $infoErrors = [];
-        $messageErrors = [];
+        $errors = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = array_map('trim', $_POST);
 
-            $nameErrors = $this->secureName($data);
-            $infoErrors = $this->secureInfo($data);
-            $messageErrors = $this->secureMessage($data);
+            $errors = $this->secureName($data, $errors);
+            $errors = $this->secureInfo($data, $errors);
+            $errors = $this->secureMessage($data, $errors);
 
 
-            if (empty($nameErrors) || (empty($infoErrors)) || (empty($messageErrors))) {
+            if (empty($errors)) {
                 header('Location:/home/index');
             }
         }
@@ -41,66 +39,61 @@ class HomeController extends AbstractController
             'Home/index.html.twig',
             [
             'post'=> $_POST,
-            'nameErrors' => $nameErrors,
-            'infoErrors' => $infoErrors,
-            'messageErrors' => $messageErrors
+            'errors'=> $errors,
             ]
         );
     }
 
   
-    private function secureName($data) : array
+    private function secureName($data, $errors)
     {
-        $nameErrors = [];
         //nom
         if (empty($data["lastname"])) {
-            $nameErrors['lastname'] = "Votre nom est requis";
+            $errors['lastname'] = "Votre nom est requis";
         } elseif (strlen($data['lastname']) > 55) {
-            $nameErrors['lastname'] = "Ce nom est trop long";
+            $errors['lastname'] = "Ce nom est trop long";
         } elseif (!preg_match('#[^0-9]#', $data['lastname'])) {
-            $nameErrors['lastname'] = "Votre nom ne peut contenir que des lettres";
+            $errors['lastname'] = "Votre nom ne peut contenir que des lettres";
         }
 
         //prénom
         if (empty($data["firstname"])) {
-            $nameErrors['firstname'] = "Votre prénom est requis";
+            $errors['firstname'] = "Votre prénom est requis";
         } elseif (strlen($data['firstname']) > 55) {
-            $nameErrors['firstname'] = "Ce prénom est trop long";
+            $errors['firstname'] = "Ce prénom est trop long";
         } elseif (!preg_match('#[^0-9]#', $data['firstname'])) {
-            $nameErrors['firstname'] = "Votre prénom ne peut contenir que des lettres";
+            $errors['firstname'] = "Votre prénom ne peut contenir que des lettres";
         }
-        return $nameErrors;
+        return $errors;
     }
 
-    private function secureInfo($data)
+    private function secureInfo($data, $errors)
     {
-        $infoErrors = [];
         //email
         if (empty($data['email'])) {
-            $infoErrors['email'] = 'Votre adresse mail est requise';
+            $errors['email'] = 'Votre adresse mail est requise';
         } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-            $infoErrors['email'] = "Format de mail invalide";
+            $errors['email'] = "Format de mail invalide";
         }
 
         //téléphone, non requis mais si il est rentré doit correspondre au regex pour les numéros de téléphone français
         if (!empty($data['phone'])) {
             if (!preg_match('/^0\d(?:[ .-]?\d{2}){4}$/', $data['phone'])) {
-                $infoErrors['phone'] = 'Format de numéro invalide';
+                $errors['phone'] = 'Format de numéro invalide';
             }
         }
-        return $infoErrors;
+        return $errors;
     }
 
 
-    private function secureMessage($data)
+    private function secureMessage($data, $errors)
     {
-        $messageErrors = [];
         // message
         if (empty($data['message'])) {
-            $messageErrors['message'] = 'Un message est requis';
+            $errors['message'] = 'Un message est requis';
         } elseif (strlen($data['message']) > 300) {
-            $messageErrors['message'] = "Ce message est trop long";
+            $errors['message'] = "Ce message est trop long";
         }
-        return $messageErrors;
+        return $errors;
     }
 }

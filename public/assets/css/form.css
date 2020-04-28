@@ -3,8 +3,6 @@ label {
 }
 
 .alert {
-    width: 100%;
-    margin-top: 5pt;
     font-size: 1.5vh;
     text-align: center;
     padding: 0;
@@ -13,8 +11,4 @@ label {
 
 .alert-light {
     font-size: 8pt;
-}
-
-.message {
-    width: 75%;
 }
