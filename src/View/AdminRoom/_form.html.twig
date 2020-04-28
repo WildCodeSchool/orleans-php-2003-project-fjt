@@ -1,7 +1,7 @@
 <form class="d-flex row col-10 mx-auto flex-column align-items-center border border-primary rounded p-4" action="" method="post" enctype="multipart/form-data">
     <div class="form-group col-5 my-3">
         <label for="address_id">Adresse: </label>
-        <select class="form-control" id="address_id" name="address_id" value="{% if not empty %}{{ room.address_id }}{% endif %}" required>
+        <select class="form-control" id="address_id" name="address_id" value="{% if not empty %}{{ room.address_id }}{% endif %}" >
             {% for address in addresses %}
                 <option value="{{ address.id }}">{{ address.name }}</option>
             {% endfor %}
@@ -12,7 +12,7 @@
     </div>
     <div class="form-group col-5 my-3">
         <label for="type">Type: </label>
-        <input class="form-control" id="type" name="type" type="text" value="{% if not empty %}{{ room.type }}{% endif %}" required >
+        <input class="form-control" id="type" name="type" type="text" value="{% if not empty %}{{ room.type }}{% endif %}"  >
         {% if errors.type %}
             <div class="text-danger">{{ errors.type }}</div>
         {% endif %}
@@ -28,7 +28,7 @@
 
     <div class="form-group col-5 my-3">
         <label for="guarantee">Dépot de garantie: </label>
-        <input class="form-control" id="guarantee" name="guarantee" type="number" step="0.01" value="{% if not empty %}{{ room.guarantee }}{% endif %}" required >
+        <input class="form-control" id="guarantee" name="guarantee" type="number" step="0.01" value="{% if not empty %}{{ room.guarantee }}{% endif %}"  >
         {% if errors.guarantee %}
             <div class="text-danger">{{ errors.guarantee }}</div>
         {% endif %}
