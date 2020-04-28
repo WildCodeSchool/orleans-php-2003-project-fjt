@@ -17,8 +17,9 @@ use App\Model\AnimationManager;
  */
 class AdminAnimationController extends AbstractController
 {
+    const UPLOAD_DIR = '../public/uploads/images/';
     const MAX_FILE_SIZE = 1000000;
-    const ALLOWED_EXT = ['jpg', 'jpeg', 'png', 'gif'];
+    const ALLOWED_MIME = ['image/gif', 'image/jpeg', 'image/png'];
     const MAX_NAME_LENGTH = 100;
     const MAX_DESCRIPTION_LENGTH = 500;
 
@@ -56,29 +57,29 @@ class AdminAnimationController extends AbstractController
                 $fileExt = explode('.', $_FILES['image']['name']);
                 $fileExt = strtolower(end($fileExt));
 
-                if (in_array($fileExt, self::ALLOWED_EXT)) {
+                if (in_array($fileExt, self::ALLOWED_MIME)) {
                     if ($fileError === 0) {
                         if ($fileSize <= self::MAX_FILE_SIZE) {
                             $fileNameNew = uniqid('', true) . '.' . $fileExt;
-                            $fileDestination = '../public/assets/images/' . $fileNameNew;
+                            $fileDestination = self::UPLOAD_DIR . $fileNameNew;
                             move_uploaded_file($fileNameNew, $fileDestination);
 
                             if (move_uploaded_file($fileTmp, $fileDestination) == false) {
-                                $errors['image'] = "Le téléchargement de {$file['image']['name']} a échoué";
+                                $errors['image'] = 'Le téléchargement de ' . $file['image']['name'] . ' a échoué';
                             }
                         } else {
-                            $errors['image'] = "{$file['image']['name']} est trop lourd.
-                        Le fichier ne doit pas dépasser " . self::MAX_FILE_SIZE / 1000000 . "Mo";
+                            $errors['image'] = $file['image']['name'] . ' est trop lourd.
+                        Le fichier ne doit pas dépasser ' . self::MAX_FILE_SIZE / 1000000 . 'Mo';
                         }
                     } else {
-                        $errors['image'] = "{$file['image']['name']} errored with code {$fileError}";
+                        $errors['image'] = $file['image']['name'] . 'errored with code' . $fileError;
                     }
                 } else {
-                    $errors['image'] = "'{$file['image']['name']}' L'extension '{$fileExt}' n'est pas autorisée.
-                Merci de choisir un fichier JPG, JPEG, PNG ou GIF";
+                    $errors['image'] = $file['image']['name'] . ' L\'extension ' . $fileExt . ' n\'est pas autorisée.
+                Merci de choisir un fichier ' . implode(', ', self::ALLOWED_MIME);
                 }
             } else {
-                $errors['image'] = "Merci d'ajouter une image";
+                $errors['image'] = 'Merci d\'ajouter une image';
             }
 
             if (empty($errors)) {
@@ -93,14 +94,14 @@ class AdminAnimationController extends AbstractController
     private function controlData($data)
     {
         if (empty($data['name'])) {
-            $errors['name'] = "Veuillez renseigner le nom de l'animation";
+            $errors['name'] = 'Veuillez renseigner le nom de l\'animation';
         } elseif (strlen($data['name']) > self::MAX_NAME_LENGTH) {
-            $errors['name'] = "Le nom ne doit pas excéder " . self::MAX_NAME_LENGTH . " caractères";
+            $errors['name'] = 'Le nom ne doit pas excéder ' . self::MAX_NAME_LENGTH . ' caractères';
         }
 
         if (strlen($data['description']) > self::MAX_DESCRIPTION_LENGTH) {
-            $errors['description'] = "La description ne doit pas dépasser " .
-                self::MAX_DESCRIPTION_LENGTH . " caractères";
+            $errors['description'] = 'La description ne doit pas dépasser ' .
+                self::MAX_DESCRIPTION_LENGTH . ' caractères';
         }
         return $errors ?? [];
     }
