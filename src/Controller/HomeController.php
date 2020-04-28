@@ -48,10 +48,11 @@ class HomeController extends AbstractController
     private function secureName($data, $errors)
     {
         //nom
+        $maxNameLenght = 55;
         if (empty($data["lastname"])) {
             $errors['lastname'] = "Votre nom est requis";
-        } elseif (strlen($data['lastname']) > 55) {
-            $errors['lastname'] = "Ce nom est trop long";
+        } elseif (strlen($data['lastname']) > $maxNameLenght) {
+            $errors['lastname'] = "La taille de votre nom ne peut pas dépasser ".$maxNameLenght.' lettres.';
         } elseif (!preg_match('#[^0-9]#', $data['lastname'])) {
             $errors['lastname'] = "Votre nom ne peut contenir que des lettres";
         }
@@ -59,8 +60,8 @@ class HomeController extends AbstractController
         //prénom
         if (empty($data["firstname"])) {
             $errors['firstname'] = "Votre prénom est requis";
-        } elseif (strlen($data['firstname']) > 55) {
-            $errors['firstname'] = "Ce prénom est trop long";
+        } elseif (strlen($data['firstname']) > $maxNameLenght) {
+            $errors['firstname'] = "La taille de votre prénom ne peut pas dépasser ".$maxNameLenght.' lettres.';
         } elseif (!preg_match('#[^0-9]#', $data['firstname'])) {
             $errors['firstname'] = "Votre prénom ne peut contenir que des lettres";
         }
@@ -88,11 +89,12 @@ class HomeController extends AbstractController
 
     private function secureMessage($data, $errors)
     {
+        $maxMessageLenght = 300;
         // message
         if (empty($data['message'])) {
             $errors['message'] = 'Un message est requis';
-        } elseif (strlen($data['message']) > 300) {
-            $errors['message'] = "Ce message est trop long";
+        } elseif (strlen($data['message']) > $maxMessageLenght) {
+            $errors['message'] = 'La taille de votre message ne peut pas dépasser '.$maxMessageLenght.' lettres.';
         }
         return $errors;
     }
