@@ -24,19 +24,15 @@ class AdminRoomController extends AbstractController
     {
         $adminRoomManager = new RoomManager();
         $addresses = $adminRoomManager->selectAddress();
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = array_map('trim', $_POST);
             $file = $_FILES;
             $errorsData = $this->controlData($data);
             $errorsFilter = $this->controlDataFilter($data);
-            if (empty($errorsData) && empty($errorsFilter)) {
-                $errorsUpload = $this -> controlDataFile($file);
-                $errors = array_merge($errorsData, $errorsFilter, $errorsUpload);
-            } else {
-                $errors = array_merge($errorsData, $errorsFilter);
-            }
-            if (!empty($errors['filename'])) {
+            [$fileNameNew,$errorsUpload] = $this -> controlDataFile($file);
+            list($fileNameNew, $errorsUpload) = [$fileNameNew,$errorsUpload];
+            $errors = array_merge($errorsData, $errorsFilter, $errorsUpload);
+            if (!empty($fileNameNew)) {
                 $data['picture'] = $errors['filename'];
                 $adminRoomManager->insert($data);
                 header('Location:/AdminRoom/index');
@@ -129,9 +125,7 @@ class AdminRoomController extends AbstractController
             $fileNameNew = $uploadDir . $fileNameNew;
             unlink($fileNameNew);
         }
-        if (empty($errorsUpload)) {
-            $errorsUpload['filename'] = $fileNameNew;
-        }
-        return $errorsUpload;
+
+        return [$fileNameNew,$errorsUpload] ?? [];
     }
 }
