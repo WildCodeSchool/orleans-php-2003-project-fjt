@@ -46,7 +46,8 @@ class AdminRoomController extends AbstractController
                 $errors = array_merge($errorsData, $errorsFilter);
             }
         }
-        return $this->twig->render('AdminRoom/add.html.twig', ['addresses' => $addresses , 'errors' => $errors ?? []]);
+        return $this->twig->render('AdminRoom/addRoom.html.twig', ['addresses' => $addresses ,
+            'errors' => $errors ?? []]);
     }
     private function controlData($data)
     {
