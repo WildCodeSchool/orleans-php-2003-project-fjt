@@ -20,7 +20,7 @@ class AdminRoomController extends AbstractController
         }
         return $this->twig->render('AdminRoom/index.html.twig', ['roomByAddresses' => $roomByAddresses]);
     }
-    public function add()
+    public function addRoom()
     {
         $adminRoomManager = new RoomManager();
         $addresses = $adminRoomManager->selectAddress();
