@@ -30,4 +30,14 @@ class RoomManager extends AbstractManager
         return $this->pdo->query('SELECT * FROM room JOIN address ON room.address_id=address.id ORDER BY 
         address.id ASC, room.area ASC')->fetchAll();
     }
+    public function selectRoomByAddress(): array
+    {
+        return $this->pdo->query('SELECT *, r.id FROM room r JOIN address ON r.address_id = address.id ORDER BY 
+        address.id ASC, r.area ASC')->fetchAll();
+    }
+    public function selectAddress(): array
+    {
+        return $this->pdo->query('SELECT * FROM address ORDER BY 
+        address.id ASC')->fetchAll();
+    }
 }

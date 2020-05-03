@@ -41,9 +41,32 @@
                 </tbody>
                 {% endfor %}
             </table>
+            <table class="table table-bordered mt-5">
+                <thead>
+                <tr>
+                    <th scope="col" colspan="3">Adresses disponibles</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for address in addresses %}
+                    <tr>
+                        <td>{{ address.address }}</td>
+                        <td><form action="" method="post">
+                                <input type="hidden" value="{{ address.id }}" name="id">
+                                <button class="btn btn-outline-primary">Mettre à jour</button>
+                            </form>
+                        </td>
+                        <td><form action="" method="post">
+                                <input type="hidden" value="{{ address.id }}" name="id">
+                                <button class="btn btn-outline-primary">Supprimer ce logement</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </section>
-
 {% endblock %}
 {% block footer %}
     {% include '/Home/footer.html.twig' %}
