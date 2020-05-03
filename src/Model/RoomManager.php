@@ -55,6 +55,8 @@ class RoomManager extends AbstractManager
         foreach ($adminPrice as $key => $value) {
             if (is_int($value) || is_float($value)) {
                 $statement->bindValue(':' . $key, $value, \PDO::PARAM_INT);
+            } elseif ($value === null) {
+                $statement->bindValue(':' . $key, $value, \PDO::PARAM_NULL);
             } else {
                 $statement->bindValue(':' . $key, $value, \PDO::PARAM_STR);
             }

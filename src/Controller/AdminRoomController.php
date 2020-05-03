@@ -24,18 +24,26 @@ class AdminRoomController extends AbstractController
     {
         $adminRoomManager = new RoomManager();
         $addresses = $adminRoomManager->selectAddress();
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $addressesId = [];
+        foreach ($addresses as $address) {
+            $addressesId[] = $address['id'];
+        }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             $data = array_map('trim', $_POST);
             $file = $_FILES;
             $errorsData = $this->controlData($data);
             $errorsFilter = $this->controlDataFilter($data);
-            [$fileNameNew,$errorsUpload] = $this -> controlDataFile($file);
-            list($fileNameNew, $errorsUpload) = [$fileNameNew,$errorsUpload];
-            $errors = array_merge($errorsData, $errorsFilter, $errorsUpload);
-            if (!empty($fileNameNew)) {
-                $data['picture'] = $errors['filename'];
-                $adminRoomManager->insert($data);
-                header('Location:/AdminRoom/index');
+            if (empty($errorsData) && (empty($errorsFilter))) {
+                [$fileNameNew,$errorsUpload] = $this -> controlDataFile($file);
+                list($fileNameNew,$errorsUpload) = [$fileNameNew,$errorsUpload];
+                $errors = array_merge($errorsData, $errorsFilter, $errorsUpload);
+                if (!empty($fileNameNew)) {
+                    $data['picture'] = $fileNameNew;
+                    $adminRoomManager->insert($data);
+                    header('Location:/AdminRoom/index');
+                }
+            } else {
+                $errors = array_merge($errorsData, $errorsFilter);
             }
         }
         return $this->twig->render('AdminRoom/add.html.twig', ['addresses' => $addresses , 'errors' => $errors ?? []]);
@@ -95,37 +103,36 @@ class AdminRoomController extends AbstractController
 
     private function controlDataFile($file)
     {
+
         $errorsUpload = [];
-        $uploadDir = '../public/assets/uploads/images/';
+        $uploadDir = '../public/assets/images/';
         $fileNameNew = [];
         if (!empty($file['picture'])) {
             $fileTmp = $file['picture']['tmp_name'];
             $fileSize = filesize($fileTmp);
             $fileError = $file['picture']['error'];
+            $ext = mime_content_type($file['picture']['tmp_name']);
             $fileExt = explode('.', $file['picture']['name']);
             $fileExt = strtolower(end($fileExt));
-            if (!in_array($file['picture']['type'], self::ALLOWED_EXT, true)) {
-                $errorsUpload['picture'] = "[{$file['picture']['name']}] l'extension '{$fileExt}' n'est pas autorisée,
+            if (!in_array($ext, self::ALLOWED_EXT, true)) {
+                $errorsUpload['picture'] = "[{$file['picture']['name']}] l'extension '{$ext}' n'est pas autorisée,
                  les types de fichiers autorisés sont " . implode(', ', self::ALLOWED_EXT) . '.';
             }
             if ($fileError !== 0) {
-                $errorsUpload['picture'] = "[{$file['picture']['name']}] errored with code {$fileError}";
+                $errorsUpload['picture'] = "[{$file['picture']['name']}] erreur avec le code {$fileError}";
             }
             if ($fileSize > self::MAX_SIZE) {
                 $errorsUpload['picture'] = "{$file['picture']['name']} doit faire moins de " . (self::MAX_SIZE/1000) .
                     ' Mo';
             }
-            $fileNameNew = uniqid('', true) . '.' . $fileExt;
-            $fileDestination = $uploadDir . $fileNameNew;
-            if (!move_uploaded_file($fileTmp, $fileDestination)) {
-                $errorsUpload['picture'] = "[{$file['picture']['name']}] n'a pu être téléchargée.";
+            if (empty($errorsUpload)) {
+                $fileNameNew = uniqid('', true) . '.' . $fileExt;
+                $fileDestination = $uploadDir . $fileNameNew;
+                if (!move_uploaded_file($fileTmp, $fileDestination)) {
+                    $errorsUpload['picture'] = "[{$file['picture']['name']}] n'a pu être téléchargée.";
+                }
             }
         }
-        if (!empty($errorsUpload)) {
-            $fileNameNew = $uploadDir . $fileNameNew;
-            unlink($fileNameNew);
-        }
-
         return [$fileNameNew,$errorsUpload] ?? [];
     }
 }
