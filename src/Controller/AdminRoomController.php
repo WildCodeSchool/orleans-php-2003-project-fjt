@@ -7,8 +7,10 @@ use App\Model\RoomManager;
 
 class AdminRoomController extends AbstractController
 {
-    private const ALLOWED_EXT = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg'];
-    private const MAX_SIZE = 1000000;
+    const ALLOWED_MIME = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg'];
+    const MAX_SIZE = 1000000;
+    const UPLOAD_DIR = '../public/assets/images/uploads/';
+
     public function index()
     {
         $roomManager = new RoomManager();
@@ -20,6 +22,7 @@ class AdminRoomController extends AbstractController
         }
         return $this->twig->render('AdminRoom/index.html.twig', ['roomByAddresses' => $roomByAddresses]);
     }
+
     public function addRoom()
     {
         $roomManager = new RoomManager();
@@ -28,30 +31,31 @@ class AdminRoomController extends AbstractController
         foreach ($addresses as $address) {
             $addressesId[] = $address['id'];
         }
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = array_map('trim', $_POST);
-            $file = $_FILES;
+            $file = $_FILES['picture'] ?? [];
+
             $errorsData = $this->controlData($data);
             $errorsFilter = $this->controlDataFilter($data);
-            if (empty($errorsData) && (empty($errorsFilter))) {
-                [$fileNameNew,$errorsUpload] = $this -> controlDataFile($file);
-                list($fileNameNew,$errorsUpload) = [$fileNameNew,$errorsUpload];
-                $errors = array_merge($errorsData, $errorsFilter, $errorsUpload);
-                if (!empty($fileNameNew)) {
-                    $data['picture'] = $fileNameNew;
-                    $roomManager->insert($data);
-                    header('Location:/AdminRoom/index');
-                }
-            } else {
-                $errors = array_merge($errorsData, $errorsFilter);
+            [$fileNameNew,$errorsUpload] = $this->controlDataFile($file);
+            $errors = array_merge($errorsData, $errorsFilter, $errorsUpload);
+
+            if (empty($errors)) {
+                $data['picture'] = $fileNameNew;
+                $roomManager->insert($data);
+                header('Location: /AdminRoom/index');
             }
         }
-        return $this->twig->render('AdminRoom/addRoom.html.twig', ['addresses' => $addresses ,
-            'errors' => $errors ?? []]);
+
+        return $this->twig->render('AdminRoom/addRoom.html.twig', [
+            'addresses' => $addresses,
+            'errors' => $errors ?? [],
+            'room' => $data ?? [],
+        ]);
     }
-    private function controlData($data)
+
+    private function controlData(array $data) :array
     {
-        $errorsData = [];
         if (empty($data['type'])) {
             $errorsData['type'] = 'Le type de logement ne doit pas être vide';
         }
@@ -72,11 +76,12 @@ class AdminRoomController extends AbstractController
         if (strlen($data['breakfast']) > 45) {
             $errorsData['breakfast'] = 'L\'information sur le tarif du petit déjeuner est trop longue';
         }
+
         return $errorsData ?? [];
     }
-    private function controlDataFilter($data)
+
+    private function controlDataFilter(array $data) :array
     {
-        $errorsFilter = [];
         if (!filter_var($data['guarantee'], FILTER_VALIDATE_FLOAT)) {
             $errorsFilter['guarantee'] = 'La valeur du dépôt de garantie n\'est pas autorisé';
         }
@@ -99,41 +104,39 @@ class AdminRoomController extends AbstractController
             $errorsFilter['breakfast'] = 'L\'information sur le tarif du petit déjeuner doit être 
             un nombre ou \'inclus\'';
         }
+
         return $errorsFilter ?? [];
     }
 
-    private function controlDataFile($file)
+    private function controlDataFile(array $file) :array
     {
-
         $errorsUpload = [];
-        $uploadDir = '../public/assets/images/';
         $fileNameNew = '';
-        if (!empty($file['picture'])) {
-            $fileTmp = $file['picture']['tmp_name'];
+        if (!empty($file) && $file['error'] == 0) {
+            $fileTmp = $file['tmp_name'];
             $fileSize = filesize($fileTmp);
-            $fileError = $file['picture']['error'];
-            $mymeType = mime_content_type($file['picture']['tmp_name']);
-            $fileExt = explode('.', $file['picture']['name']);
-            $fileExt = strtolower(end($fileExt));
-            if (!in_array($mymeType, self::ALLOWED_EXT, true)) {
+            $mymeType = mime_content_type($fileTmp);
+            $fileExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
+
+            if (!in_array($mymeType, self::ALLOWED_MIME, true)) {
                 $errorsUpload['picture'] = "Le fichier n'est pas autorisée,
-                 les types de fichiers autorisés sont " . implode(', ', self::ALLOWED_EXT) . '.';
-            }
-            if ($fileError !== 0) {
-                $errorsUpload['picture'] = "Le fichier a une erreur avec le code {$fileError}";
+                 les types de fichiers autorisés sont " . implode(', ', self::ALLOWED_MIME) . '.';
             }
             if ($fileSize > self::MAX_SIZE) {
-                $errorsUpload['picture'] = "Le fichier doit faire moins de " . (self::MAX_SIZE/1000) .
-                    ' Mo';
+                $errorsUpload['picture'] = "Le fichier doit faire moins de " . (self::MAX_SIZE/1000000) . ' Mo';
             }
+
             if (empty($errorsUpload)) {
-                $fileNameNew = uniqid('', true) . '.' . $fileExt;
-                $fileDestination = $uploadDir . $fileNameNew;
+                $fileNameNew = uniqid() . '.' . $fileExtension;
+                $fileDestination = self::UPLOAD_DIR . $fileNameNew;
                 if (!move_uploaded_file($fileTmp, $fileDestination)) {
                     $errorsUpload['picture'] = "Le fichier n'a pu être téléchargée.";
                 }
             }
+        } else {
+            $errorsUpload['picture'] = "Problème lors de l'import du fichier";
         }
+
         return [$fileNameNew,$errorsUpload] ?? [];
     }
 }
