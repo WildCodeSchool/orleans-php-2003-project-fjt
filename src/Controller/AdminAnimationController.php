@@ -53,6 +53,7 @@ class AdminAnimationController extends AbstractController
 
             if (!empty($_FILES['image']['name'])) {
                 $fileTmp = $file['image']['tmp_name'];
+                $mimeType = mime_content_type($fileTmp);
                 $fileSize = filesize($fileTmp);
                 $fileError = $_FILES['image']['error'];
                 $fileDestination = self::UPLOAD_DIR . $fileNameNew;
@@ -62,7 +63,7 @@ class AdminAnimationController extends AbstractController
                 } elseif ($fileSize > self::MAX_FILE_SIZE) {
                     $errors['image'] = $file['image']['name'] . ' est trop lourd.
                         Le fichier ne doit pas dépasser ' . self::MAX_FILE_SIZE / 1000000 . 'Mo';
-                } elseif (!in_array($file['image']['type'], self::ALLOWED_MIME)) {
+                } elseif (!in_array($mimeType, self::ALLOWED_MIME, true)) {
                     $errors['image'] = $file['image']['name'] . ' L\'extension ' . $fileExt . ' n\'est pas autorisée.
                         Merci de choisir un fichier ' . implode(', ', self::ALLOWED_MIME);
                 } elseif (!move_uploaded_file($fileTmp, $fileDestination)) {
