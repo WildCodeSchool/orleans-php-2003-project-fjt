@@ -2,10 +2,11 @@ label {
     margin: 2px;
 }
 
-.alert {
-    font-size: 1.5vh;
+.alert-danger {
+    font-size: 10pt;
     text-align: center;
     padding: 0;
+    margin: 0;
     justify-content: center;
 }
 
