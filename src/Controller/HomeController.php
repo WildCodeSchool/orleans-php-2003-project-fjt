@@ -8,6 +8,8 @@
 
 namespace App\Controller;
 
+use App\Model\ContactManager;
+
 class HomeController extends AbstractController
 {
 
@@ -32,6 +34,13 @@ class HomeController extends AbstractController
 
 
             if (empty($errors)) {
+                $data = [
+                    'lastname' => $_POST['lastname'],
+                    'firstname' => $_POST['firstname'],
+                    'email' => $_POST['email'],
+                    'phone' => $_POST['phone'],
+                    'message' => $_POST['message'],
+                ];
                 header('Location:/home/index');
             }
         }
@@ -44,57 +53,38 @@ class HomeController extends AbstractController
         );
     }
 
-  
+
     private function secureName($data, $errors)
     {
         //nom
-        $maxNameLenght = 55;
-        if (empty($data["lastname"])) {
-            $errors['lastname'] = "Votre nom est requis";
-        } elseif (strlen($data['lastname']) > $maxNameLenght) {
-            $errors['lastname'] = "La taille de votre nom ne peut pas dépasser ".$maxNameLenght.' lettres.';
-        } elseif (!preg_match('#[^0-9]#', $data['lastname'])) {
-            $errors['lastname'] = "Votre nom ne peut contenir que des lettres";
+        $maxNameLength = 55;
+        if (strlen($data['lastname']) > $maxNameLength) {
+            $errors['lastname'] = "La taille de votre nom ne peut pas excéder ".$maxNameLength.' caractères.';
         }
 
         //prénom
-        if (empty($data["firstname"])) {
-            $errors['firstname'] = "Votre prénom est requis";
-        } elseif (strlen($data['firstname']) > $maxNameLenght) {
-            $errors['firstname'] = "La taille de votre prénom ne peut pas dépasser ".$maxNameLenght.' lettres.';
-        } elseif (!preg_match('#[^0-9]#', $data['firstname'])) {
-            $errors['firstname'] = "Votre prénom ne peut contenir que des lettres";
+        if (strlen($data['firstname']) > $maxNameLength) {
+            $errors['firstname'] = "La taille de votre prénom ne peut pas dépasser ".$maxNameLength.' lettres.';
         }
+
         return $errors;
     }
 
     private function secureInfo($data, $errors)
     {
-        //email
-        if (empty($data['email'])) {
-            $errors['email'] = 'Votre adresse mail est requise';
-        } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = "Format de mail invalide";
         }
 
-        //téléphone, non requis mais si il est rentré doit correspondre au regex pour les numéros de téléphone français
-        if (!empty($data['phone'])) {
-            if (!preg_match('/^0\d(?:[ .-]?\d{2}){4}$/', $data['phone'])) {
-                $errors['phone'] = 'Format de numéro invalide';
-            }
-        }
         return $errors;
     }
 
 
     private function secureMessage($data, $errors)
     {
-        $maxMessageLenght = 300;
         // message
         if (empty($data['message'])) {
             $errors['message'] = 'Un message est requis';
-        } elseif (strlen($data['message']) > $maxMessageLenght) {
-            $errors['message'] = 'La taille de votre message ne peut pas dépasser '.$maxMessageLenght.' lettres.';
         }
         return $errors;
     }
