@@ -32,7 +32,7 @@ class RoomManager extends AbstractManager
     }
     public function selectRoomByAddress(): array
     {
-        return $this->pdo->query('SELECT * FROM room r JOIN address ON r.address_id = address.id ORDER BY 
+        return $this->pdo->query('SELECT *, r.id FROM room r JOIN address ON r.address_id = address.id ORDER BY 
         address.id ASC, r.area ASC')->fetchAll();
     }
     public function insertAddress(array $data): void
@@ -44,5 +44,10 @@ class RoomManager extends AbstractManager
         $statement->bindValue(':address', $data['address'], \PDO::PARAM_STR);
         $statement->bindValue(':description', $data['description'], \PDO::PARAM_STR);
         $statement->execute();
+    }
+    public function selectAddress(): array
+    {
+        return $this->pdo->query('SELECT * FROM address ORDER BY 
+        address.id ASC')->fetchAll();
     }
 }
