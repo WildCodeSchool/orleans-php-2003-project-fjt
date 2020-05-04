@@ -19,7 +19,7 @@
                         <h3 class="card-title">Description:</h3>
                         <p class="card-text">{{ room.description }}</p>
                         <h3 class="card-title">Tarif:</h3>
-                        <p class="card-text"><strong>{% set room_price = room.guarantee+room.restoration+
+                        <p class="card-text"><strong>{% set room_price = room.guarantee+room.catering+
                                     room.contribution+room.equipment_contribution %}
                                 {% if room.breakfast is not null and room.breakfast != 'inclus' %}
                                     {% set room_price = room_price + room.breakfast %}
@@ -53,19 +53,19 @@
                 <td >{{ room.address }}</td>
                 <td >{{ room.type }}</td>
                 <td>{% if room.area is empty %}/{% else %}{{ room.area }} m²{% endif %}</td>
-                <td>{% set room_price =  ((room.guarantee+room.restoration+
+                <td>{% set room_price =  ((room.guarantee+room.catering+
                         room.contribution+room.equipment_contribution)/30) %}
                     {% if room.breakfast is not null and room.breakfast != 'inclus' %}
                         {% set room_price = room_price + room.breakfast %}
                     {% endif %}
                     {{  room_price |round(2, 'floor') }} €</td>
-                <td>{% set room_price =  (((room.guarantee+room.restoration+
+                <td>{% set room_price =  (((room.guarantee+room.catering+
                         room.contribution+room.equipment_contribution)/30)*7) %}
                     {% if room.breakfast is not null and room.breakfast != 'inclus' %}
                         {% set room_price = room_price + room.breakfast %}
                     {% endif %}
                     {{  room_price |round(2, 'floor') }} €</td>
-                <td>{% set room_price = room.guarantee+room.restoration+
+                <td>{% set room_price = room.guarantee+room.catering+
                         room.contribution+room.equipment_contribution %}
                     {% if room.breakfast is not null and room.breakfast != 'inclus' %}
                         {% set room_price = room_price + room.breakfast %}

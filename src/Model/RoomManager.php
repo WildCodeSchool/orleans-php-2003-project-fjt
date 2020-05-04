@@ -40,6 +40,7 @@ class RoomManager extends AbstractManager
         return $this->pdo->query('SELECT * FROM address ORDER BY 
         address.id ASC')->fetchAll();
     }
+
     public function insert(array $infosToAdd): void
     {
         $statement = $this->pdo->prepare('INSERT INTO ' . self::TABLE . ' (`type`,`guarantee`,`equipment`,
@@ -62,4 +63,5 @@ class RoomManager extends AbstractManager
             }
         }
     }
+
 }

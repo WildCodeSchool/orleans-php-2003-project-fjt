@@ -16,11 +16,13 @@ class AdminRoomController extends AbstractController
         $roomManager = new RoomManager();
         $rooms = $roomManager->selectRoomByAddress();
         $roomByAddresses = [];
+        $addresses = $roomManager->selectAddress();
         foreach ($rooms as $room) {
             $roomName = $room['name'];
             $roomByAddresses[$roomName][] = $room;
         }
-        return $this->twig->render('AdminRoom/index.html.twig', ['roomByAddresses' => $roomByAddresses]);
+        return $this->twig->render('AdminRoom/index.html.twig', ['roomByAddresses' => $roomByAddresses,
+            'addresses'=> $addresses]);
     }
 
     public function addRoom()
