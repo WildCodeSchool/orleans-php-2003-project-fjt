@@ -22,8 +22,8 @@ class AdminRoomController extends AbstractController
     }
     public function addRoom()
     {
-        $adminRoomManager = new RoomManager();
-        $addresses = $adminRoomManager->selectAddress();
+        $roomManager = new RoomManager();
+        $addresses = $roomManager->selectAddress();
         $addressesId = [];
         foreach ($addresses as $address) {
             $addressesId[] = $address['id'];
@@ -39,7 +39,7 @@ class AdminRoomController extends AbstractController
                 $errors = array_merge($errorsData, $errorsFilter, $errorsUpload);
                 if (!empty($fileNameNew)) {
                     $data['picture'] = $fileNameNew;
-                    $adminRoomManager->insert($data);
+                    $roomManager->insert($data);
                     header('Location:/AdminRoom/index');
                 }
             } else {
@@ -107,30 +107,30 @@ class AdminRoomController extends AbstractController
 
         $errorsUpload = [];
         $uploadDir = '../public/assets/images/';
-        $fileNameNew = [];
+        $fileNameNew = '';
         if (!empty($file['picture'])) {
             $fileTmp = $file['picture']['tmp_name'];
             $fileSize = filesize($fileTmp);
             $fileError = $file['picture']['error'];
-            $ext = mime_content_type($file['picture']['tmp_name']);
+            $mymeType = mime_content_type($file['picture']['tmp_name']);
             $fileExt = explode('.', $file['picture']['name']);
             $fileExt = strtolower(end($fileExt));
-            if (!in_array($ext, self::ALLOWED_EXT, true)) {
-                $errorsUpload['picture'] = "[{$file['picture']['name']}] l'extension '{$ext}' n'est pas autorisée,
+            if (!in_array($mymeType, self::ALLOWED_EXT, true)) {
+                $errorsUpload['picture'] = "Le fichier n'est pas autorisée,
                  les types de fichiers autorisés sont " . implode(', ', self::ALLOWED_EXT) . '.';
             }
             if ($fileError !== 0) {
-                $errorsUpload['picture'] = "[{$file['picture']['name']}] erreur avec le code {$fileError}";
+                $errorsUpload['picture'] = "Le fichier a une erreur avec le code {$fileError}";
             }
             if ($fileSize > self::MAX_SIZE) {
-                $errorsUpload['picture'] = "{$file['picture']['name']} doit faire moins de " . (self::MAX_SIZE/1000) .
+                $errorsUpload['picture'] = "Le fichier doit faire moins de " . (self::MAX_SIZE/1000) .
                     ' Mo';
             }
             if (empty($errorsUpload)) {
                 $fileNameNew = uniqid('', true) . '.' . $fileExt;
                 $fileDestination = $uploadDir . $fileNameNew;
                 if (!move_uploaded_file($fileTmp, $fileDestination)) {
-                    $errorsUpload['picture'] = "[{$file['picture']['name']}] n'a pu être téléchargée.";
+                    $errorsUpload['picture'] = "Le fichier n'a pu être téléchargée.";
                 }
             }
         }
