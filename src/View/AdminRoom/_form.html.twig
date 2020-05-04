@@ -76,7 +76,7 @@
 
     <div class="form-group col-5 my-3">
         <label for="picture">Photo du logement: </label>
-        <input class="form-control" id="picture" name="picture" type="file" value="{% if not empty %}{{ room.picture }}{% endif %}">
+        <input class="form-control" id="picture" name="picture" type="file" >
         {% if errors.picture %}
             <div class="text-danger">{{ errors.picture }}</div>
         {% endif %}

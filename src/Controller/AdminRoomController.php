@@ -7,8 +7,10 @@ use App\Model\RoomManager;
 
 class AdminRoomController extends AbstractController
 {
-    private const ALLOWED_EXT = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg'];
-    private const MAX_SIZE = 1000000;
+    public const ALLOWED_MIME = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg'];
+    public const MAX_SIZE = 1000000;
+    public const UPLOAD_DIR = '../public/assets/images/uploads/';
+
     public function index()
     {
         $roomManager = new RoomManager();
@@ -20,6 +22,7 @@ class AdminRoomController extends AbstractController
         }
         return $this->twig->render('AdminRoom/index.html.twig', ['roomByAddresses' => $roomByAddresses]);
     }
+
     public function addRoom()
     {
         $roomManager = new RoomManager();
@@ -28,53 +31,64 @@ class AdminRoomController extends AbstractController
         foreach ($addresses as $address) {
             $addressesId[] = $address['id'];
         }
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = array_map('trim', $_POST);
-            $file = $_FILES;
-            $errorsData = $this->controlData($data);
+            $file = $_FILES['picture'] ?? [];
+            $errorsDataOne = $this->controlDataOne($data, $addressesId);
+            $errorsDataTwo = $this->controlDataTwo($data);
             $errorsFilter = $this->controlDataFilter($data);
-            if (empty($errorsData) && (empty($errorsFilter))) {
-                [$fileNameNew,$errorsUpload] = $this -> controlDataFile($file);
-                list($fileNameNew,$errorsUpload) = [$fileNameNew,$errorsUpload];
-                $errors = array_merge($errorsData, $errorsFilter, $errorsUpload);
-                if (!empty($fileNameNew)) {
-                    $data['picture'] = $fileNameNew;
-                    $roomManager->insert($data);
-                    header('Location:/AdminRoom/index');
-                }
-            } else {
-                $errors = array_merge($errorsData, $errorsFilter);
+            [$fileNameNew,$errorsUpload] = $this -> controlDataFile($file);
+            $errors = array_merge($errorsDataOne, $errorsDataTwo, $errorsFilter, $errorsUpload);
+
+            if (empty($errors)) {
+                $data['picture'] = $fileNameNew;
+                $fileDestination = self::UPLOAD_DIR . $fileNameNew;
+                move_uploaded_file($fileNameNew, $fileDestination);
+                $roomManager->insert($data);
+                header('Location:/AdminRoom/index');
             }
         }
-        return $this->twig->render('AdminRoom/addRoom.html.twig', ['addresses' => $addresses ,
-            'errors' => $errors ?? []]);
+        return $this->twig->render('AdminRoom/addRoom.html.twig', [
+            'addresses' => $addresses ,
+            'errors' => $errors ?? [] ,
+            'room' => $data ?? []
+        ]);
     }
-    private function controlData($data)
+    private function controlDataOne($data, $addressesId)
     {
-        $errorsData = [];
+        $errorsDataOne = [];
         if (empty($data['type'])) {
-            $errorsData['type'] = 'Le type de logement ne doit pas être vide';
+            $errorsDataOne['type'] = 'Le type de logement ne doit pas être vide';
         }
         if (empty($data['guarantee'])) {
-            $errorsData['guarantee'] = 'La caution du logement ne doit pas être vide';
+            $errorsDataOne['guarantee'] = 'La caution du logement ne doit pas être vide';
         } elseif ($data['guarantee'] <= 0) {
-            $errorsData['guarantee'] = 'La caution du logement doit être supérieur à 0 €';
+            $errorsDataOne['guarantee'] = 'La caution du logement doit être supérieur à 0 €';
         }
         if (empty($data['address_id'])) {
-            $errorsData['address_id'] = 'L\'adresse du logement ne doit pas être vide';
+            $errorsDataOne['address_id'] = 'L\'adresse du logement ne doit pas être vide';
+        } elseif (in_array($data['address_id'], $addressesId, false)) {
+             $errorsDataOne['address_id'] = 'L\'adresse du logement n\'est pas une adresse éxistante';
         }
-        if (strlen($data['type']) > 255) {
+        return $errorsDataOne ?? [];
+    }
+
+    private function controlDataTwo($data)
+    {
+        $errorsDataTwo = [];
+        if (!empty($data['type']) && strlen($data['type']) > 255) {
             $errorsData['type'] = 'Le type du logement est trop long';
         }
-        if (strlen($data['equipment']) > 100) {
+        if (!empty($data['equipment']) && strlen($data['equipment']) > 100) {
             $errorsData['equipment'] = 'L\'équipement du logement est trop long';
         }
-        if (strlen($data['breakfast']) > 45) {
+        if (!empty($data['breakfast']) && strlen($data['breakfast']) > 45) {
             $errorsData['breakfast'] = 'L\'information sur le tarif du petit déjeuner est trop longue';
         }
-        return $errorsData ?? [];
+        return $errorsDataTwo ?? [];
     }
-    private function controlDataFilter($data)
+
+    private function controlDataFilter(array $data) :array
     {
         $errorsFilter = [];
         if (!filter_var($data['guarantee'], FILTER_VALIDATE_FLOAT)) {
@@ -102,37 +116,28 @@ class AdminRoomController extends AbstractController
         return $errorsFilter ?? [];
     }
 
-    private function controlDataFile($file)
+    private function controlDataFile(array $file):array
     {
-
         $errorsUpload = [];
-        $uploadDir = '../public/assets/images/';
         $fileNameNew = '';
-        if (!empty($file['picture'])) {
-            $fileTmp = $file['picture']['tmp_name'];
+        if (!empty($file) && $file['error'] === 0) {
+            $fileTmp = $file['tmp_name'];
             $fileSize = filesize($fileTmp);
-            $fileError = $file['picture']['error'];
-            $mymeType = mime_content_type($file['picture']['tmp_name']);
-            $fileExt = explode('.', $file['picture']['name']);
-            $fileExt = strtolower(end($fileExt));
-            if (!in_array($mymeType, self::ALLOWED_EXT, true)) {
+            $mimeType = mime_content_type($fileTmp);
+            $fileExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
+            if (!in_array($mimeType, self::ALLOWED_MIME, true)) {
                 $errorsUpload['picture'] = "Le fichier n'est pas autorisée,
-                 les types de fichiers autorisés sont " . implode(', ', self::ALLOWED_EXT) . '.';
-            }
-            if ($fileError !== 0) {
-                $errorsUpload['picture'] = "Le fichier a une erreur avec le code {$fileError}";
+                 les types de fichiers autorisés sont " . implode(', ', self::ALLOWED_MIME) . '.';
             }
             if ($fileSize > self::MAX_SIZE) {
-                $errorsUpload['picture'] = "Le fichier doit faire moins de " . (self::MAX_SIZE/1000) .
+                $errorsUpload['picture'] = 'Le fichier doit faire moins de ' . (self::MAX_SIZE/1000000) .
                     ' Mo';
             }
             if (empty($errorsUpload)) {
-                $fileNameNew = uniqid('', true) . '.' . $fileExt;
-                $fileDestination = $uploadDir . $fileNameNew;
-                if (!move_uploaded_file($fileTmp, $fileDestination)) {
-                    $errorsUpload['picture'] = "Le fichier n'a pu être téléchargée.";
-                }
+                $fileNameNew = uniqid('', true) . '.' . $fileExtension;
             }
+        } else {
+            $errorsUpload['picture'] = "Problème lors de l'import du fichier";
         }
         return [$fileNameNew,$errorsUpload] ?? [];
     }
