@@ -59,16 +59,16 @@ class HomeController extends AbstractController
     {
         //nom
         $maxNameLength = 55;
-        if (empty($data['lastname'])){
+        if (empty($data['lastname'])) {
             $errors['lastname'] = 'Votre nom est requis';
-        }elseif (strlen($data['lastname']) > $maxNameLength) {
+        } elseif (strlen($data['lastname']) > $maxNameLength) {
             $errors['lastname'] = "La taille de votre nom ne peut pas excéder ".$maxNameLength.' caractères.';
         }
 
         //prénom
-        if (empty($data['firstname'])){
+        if (empty($data['firstname'])) {
             $errors['firstname'] = 'Votre prénom est requis';
-        }elseif (strlen($data['firstname']) > $maxNameLength) {
+        } elseif (strlen($data['firstname']) > $maxNameLength) {
             $errors['firstname'] = "La taille de votre prénom ne peut pas dépasser ".$maxNameLength.' lettres.';
         }
 
@@ -79,7 +79,7 @@ class HomeController extends AbstractController
     {
         if (!empty($data['email'])) {
             if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-            $errors['email'] = "Format de mail invalide";
+                $errors['email'] = "Format de mail invalide";
             }
         }
         return $errors;
