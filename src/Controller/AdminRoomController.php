@@ -36,7 +36,7 @@ class AdminRoomController extends AbstractController
     {
         $errors = [];
         if (empty($data['name'])) {
-            $errors['name'] = 'Le nom de l\'adresse ne doit pas être vide';
+            $errors['name'] = 'Le nom du logement ne doit pas être vide';
         } elseif (strlen($data['name']) > 255) {
             $errors['name'] = 'Le nom du logement est trop long';
         }
