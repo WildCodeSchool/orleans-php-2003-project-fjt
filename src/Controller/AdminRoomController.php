@@ -56,6 +56,7 @@ class AdminRoomController extends AbstractController
             'room' => $data ?? []
         ]);
     }
+
     private function controlDataOne($data, $addressesId)
     {
         $errorsDataOne = [];
