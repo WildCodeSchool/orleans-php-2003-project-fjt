@@ -23,6 +23,7 @@ class HomeController extends AbstractController
      */
     public function index()
     {
+
         $errors = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -58,12 +59,16 @@ class HomeController extends AbstractController
     {
         //nom
         $maxNameLength = 55;
-        if (strlen($data['lastname']) > $maxNameLength) {
+        if (empty($data['lastname'])){
+            $errors['lastname'] = 'Votre nom est requis';
+        }elseif (strlen($data['lastname']) > $maxNameLength) {
             $errors['lastname'] = "La taille de votre nom ne peut pas excéder ".$maxNameLength.' caractères.';
         }
 
         //prénom
-        if (strlen($data['firstname']) > $maxNameLength) {
+        if (empty($data['firstname'])){
+            $errors['firstname'] = 'Votre prénom est requis';
+        }elseif (strlen($data['firstname']) > $maxNameLength) {
             $errors['firstname'] = "La taille de votre prénom ne peut pas dépasser ".$maxNameLength.' lettres.';
         }
 
@@ -72,10 +77,11 @@ class HomeController extends AbstractController
 
     private function secureInfo($data, $errors)
     {
-        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+        if (!empty($data['email'])) {
+            if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = "Format de mail invalide";
+            }
         }
-
         return $errors;
     }
 
