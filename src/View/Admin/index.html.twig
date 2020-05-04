@@ -7,27 +7,14 @@
     <section>
         <div class="admin container-fluid">
             <div class="d-flex align-items-center flex-column mb-3">
-                <form action="../AdminContact/index" method="post">
-                    <button class="btn btn-outline-primary btn-lg my-3">Contact</button>
-                </form>
-                <form action="../AdminRoom/index" method="post">
-                    <button class="btn btn-outline-primary btn-lg my-3">Gestion des logements</button>
-                </form>
-                <form action="../AdminAnimation/index" method="post">
-                    <button class="btn btn-outline-primary btn-lg my-3">Gestion des Animations</button>
-                </form>
-                <form action="../AdminAdmission/index" method="post">
-                    <button class="btn btn-outline-primary btn-lg my-3">Gestion des pré-admissions</button>
-                </form>
+                <a class="btn btn-outline-primary btn-lg my-3" href="../AdminContact/index">Contact</a>
+                <a class="btn btn-outline-primary btn-lg my-3" href="../AdminRoom/index">Gestion des logements</a>
+                <a class="btn btn-outline-primary btn-lg my-3" href="../AdminAnimation/index">Gestion des Animations</a>
+                <a class="btn btn-outline-primary btn-lg my-3" href="../AdminAdmission/index">Gestion des pré-admissions</a>
             </div>
-            <div class="container-fluid">
-                <form class="mt-5 d-flex justify-content-center" action="../home/index" method="post">
-                    <button class="btn btn-outline-primary btn-lg">Retour à l'accueil</button>
-                </form>
+            <div class="container-fluid mt-5 d-flex justify-content-center">
+                <a class="btn btn-outline-primary btn-lg" href="../home/index">Retour à l'accueil</a>
             </div>
         </div>
-
-
     </section>
-
 {% endblock %}
