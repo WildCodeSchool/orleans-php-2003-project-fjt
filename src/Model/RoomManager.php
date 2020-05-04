@@ -63,5 +63,4 @@ class RoomManager extends AbstractManager
             }
         }
     }
-
 }
