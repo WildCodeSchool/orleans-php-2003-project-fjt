@@ -26,10 +26,8 @@
                 {% for room in rooms %}
                         <tr>
                             <td>{{ room.type }}</td>
-                            <td><form action="" method="post">
-                                    <input type="hidden" value="{{ room.id }}" name="id">
-                                    <button class="btn btn-outline-primary">Mettre à jour</button>
-                                </form>
+                            <td>
+                                <a class="btn btn-outline-primary" href="">Mettre à jour</a>
                             </td>
                             <td><form action="" method="post">
                                     <input type="hidden" value="{{ room.id }}" name="id">
