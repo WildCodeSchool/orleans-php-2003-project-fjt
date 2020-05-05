@@ -61,6 +61,9 @@
                 <div class="alert-light" role="alert">
                     <p>Les champs marqués d'un * obligatoire</p>
                 </div>
+                {% if success.success %}
+                    <div class="alert alert-success" role="alert"> {{ success.success }}</div>
+                {% endif %}
             </form>
         </div>
     </div>

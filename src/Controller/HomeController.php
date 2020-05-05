@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Model\ContactManager;
+date_default_timezone_set('Europe/Paris');
 
 class HomeController extends AbstractController
 {
@@ -35,16 +36,12 @@ class HomeController extends AbstractController
 
 
             if (empty($errors)) {
-                $data = [
-                    'lastname' => $_POST['lastname'],
-                    'firstname' => $_POST['firstname'],
-                    'email' => $_POST['email'],
-                    'phone' => $_POST['phone'],
-                    'message' => $_POST['message'],
-                ];
+                $contactManager = new ContactManager();
+                $contactManager->insert($data);
                 header('Location:/home/index');
             }
         }
+
         return $this->twig->render(
             'Home/index.html.twig',
             [
