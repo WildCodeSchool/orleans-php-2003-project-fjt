@@ -96,4 +96,52 @@ class AdminAnimationController extends AbstractController
         }
         return $errors ?? [];
     }
+
+    public function edit(int $id)
+    {
+        $errors = [];
+        $animationManager = new AnimationManager();
+        $animation = $animationManager->selectOneById($id);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = array_map('trim', $_POST);
+            $file = $_FILES;
+            $errors = $this->controlData($data);
+
+            $fileExt = pathinfo($file['image']['name'], PATHINFO_EXTENSION);
+            $fileNameNew = uniqid('', true) . '.' . $fileExt;
+
+            if (!empty($_FILES['image']['name'])) {
+                $fileTmp = $file['image']['tmp_name'];
+                $mimeType = mime_content_type($fileTmp);
+                $fileSize = filesize($fileTmp);
+                $fileError = $_FILES['image']['error'];
+                $fileDestination = self::UPLOAD_DIR . $fileNameNew;
+
+                if ($fileError !== 0) {
+                    $errors['image'] = $file['image']['name'] . 'errored with code' . $fileError;
+                } elseif ($fileSize > self::MAX_FILE_SIZE) {
+                    $errors['image'] = $file['image']['name'] . ' est trop lourd.
+                        Le fichier ne doit pas dépasser ' . self::MAX_FILE_SIZE / 1000000 . 'Mo';
+                } elseif (!in_array($mimeType, self::ALLOWED_MIME, true)) {
+                    $errors['image'] = $file['image']['name'] . ' L\'extension ' . $fileExt . ' n\'est pas autorisée.
+                        Merci de choisir un fichier ' . implode(', ', self::ALLOWED_MIME);
+                } elseif (!move_uploaded_file($fileTmp, $fileDestination)) {
+                    $errors['image'] = 'Le téléchargement de ' . $file['image']['name'] . ' a échoué';
+                }
+            } else {
+                $errors['image'] = 'Merci d\'ajouter une image';
+            }
+
+            if (empty($errors)) {
+                $data['image'] = $fileNameNew;
+                $animationManager->update($data);
+                header('Location:/AdminAnimation/index');
+            }
+        }
+        return $this->twig->render('AdminAnimation/edit.html.twig', [
+            'animation' => $animation,
+            'data' => $data ?? [],
+            'errors' => $errors
+        ]);
+    }
 }
