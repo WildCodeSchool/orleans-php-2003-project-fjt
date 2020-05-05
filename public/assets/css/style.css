@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Roboto&display=swap');
 @import url('navbar.css');
 @import 'form.css';
-@import 'service.css';
 @import "price.css";
 @import "footer.css";
 @import "adminRoom.css";
@@ -101,8 +100,4 @@ a:hover {
 .btn-primary:hover {
     background-color: var(--main-bg-color);
     color: var(--light-color);
-}
-
-.container{
-    width: 80%;
 }
