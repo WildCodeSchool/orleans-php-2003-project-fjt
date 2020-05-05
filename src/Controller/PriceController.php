@@ -136,6 +136,7 @@ class PriceController extends AbstractController
     {
         $errorsUpload = [];
         $filesNameNew = [];
+
         foreach ($files['name'] as $position => $value) {
             $fileTmp = $files['tmp_name'][$position];
             $fileSize = filesize($fileTmp);
