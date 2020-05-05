@@ -1,5 +1,9 @@
 {% extends 'layout.html.twig' %}
 
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/home.css">
+{% endblock %}
+
 {% block navbar %}
     {% include '/Home/navbar.html.twig' %}
 {% endblock %}
@@ -32,4 +36,8 @@
 
 {% block footer %}
     {% include '/Home/footer.html.twig' %}
+{% endblock %}
+
+{% block javascript %}
+    <script src="/assets/scripts/navBgOnScroll.js"></script>
 {% endblock %}
