@@ -3,39 +3,63 @@
 {% block content %}
     <div class="adminContact">
         <div class="container-fluid">
-            <div class="col-6 offset-3"><h1>Boîte de réception</h1></div>
-            <div class="col-6 offset-3"><h3>Messages reçu</h3></div>
+            <div class="col-12 d-flex justify-content-center"><h1>Boîte de réception</h1></div>
+            <div class="col-12 d-flex justify-content-center"><h3>Prises de contact reçues</h3></div>
         </div>
 
 
         <div class="container">
-            <div class="row">
-                <div class="col-3">Nom</div>
-                <div class="col-3">Prénom</div>
-                <div class="col-3">Date</div>
+            <div class="row py-4">
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                <div class="col-3"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row">
-            <div class="col-3">
-                {% for contact in contacts %}
-                <li> {{ contact.lastname }}</li>
-                {% endfor %}
-            </div>
+                <div class="col-2 offset-2">
+                    <h3>Nom</h3>
+                    {% for contact in contacts %}
+                    <p> {{ contact.lastname }}</p>
+                    {% endfor %}
+                </div>
 
-            <div class="col-3">
-                {% for contact in contacts %}
-                <li> {{ contact.firstname }}</li>
-                {% endfor %}
-            </div>
+                <div class="col">
+                    <h3>Prénom</h3>
+                    {% for contact in contacts %}
+                    <p> {{ contact.firstname }}</p>
+                    {% endfor %}
+                </div>
 
-            <div class="col-3">
-                {% for contact in contacts %}
-                <li> Le {{ contact.sendDate | date("d.m.Y à h:i") }}</li>
-                {% endfor %}
+                <div class="col-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <h3>Date</h3>
+                        </div>
+                    </div>
+                    {% for contact in contacts %}
+                        <div class="row">
+                            <div class="col-10 d-flex justify-content-start">
+                                <p> Le {{ contact.sendDate | date("d.m.Y à h:i") }}</p>
+                            </div>
+                            <div class="col-2">
+                                <a href="/home/show"><button class="btn btn-light" type="button" value="button" >Consulter</button></a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                </div>
+
+                </div>
             </div>
-            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="col-12 d-flex justify-content-center">
+            <a href="/home/index">
+                <button class="btn btn-outline-secondary " type="button" value="button">Retour à l'accueil</button>
+            </a>
         </div>
     </div>
 {% endblock %}
