@@ -77,18 +77,17 @@
             </table>
             <div class="mt-5">
                 <h2>Formulaire de pré-insciption</h2>
-
-                <form class="d-flex flex-column justify-content-around border border-primary rounded-lg" action="" method="post" enctype="multipart/form-data">
+                <form class="d-flex flex-column justify-content-around border border-primary rounded-lg" action="" method="post" enctype="multipart/form-data" >
                     <p>Vous pouvez nous joindre par téléphone au 02.38.42.23.30 ou par email en utilisant la partie <a
                                 href="../home/index">Contact</a> de notre site. Si vous le désirez vous pouvez remplir un dossier
                         de pré-admission en ligne ci-dessous:</p>
                     <div class="d-flex justify-content-center">
                         <div class="col-3 form-group">
-                            <input name="maritalstatus" id="maritalstatus" type="radio" value="Célibataire">
+                            <input name="maritalstatus" id="maritalstatus" type="radio" value="Célibataire" required>
                             <label for="maritalstatus">Célibataire</label>
                         </div>
                         <div class="col-3 form-group">
-                            <input name="maritalstatus" id="maritalstatus" type="radio" value="En couple">
+                            <input name="maritalstatus" id="maritalstatus" type="radio" value="En couple" required>
                             <label for="maritalstatus">En couple</label>
                         </div>
                         {% if errors.maritalstatus %}
@@ -130,14 +129,14 @@
                     <div class="d-flex justify-content-around my-3">
                         <div class="d-flex flex-column col-5 form-group">
                             <label for="phone">Téléphone</label>
-                            <input class="form-control" type="tel" id="phone" name="phone" value="{{ data.phone }}" required>
+                            <input class="form-control" type="tel" id="phone" name="phone" value="{{ data.phone }}" required >
                             {% if errors.phone %}
                                 <div class="text-danger">{{ errors.phone }}</div>
                             {% endif %}
                         </div>
                         <div class="d-flex flex-column col-5 form-group">
                             <label for="postalcode">Code postal</label>
-                            <input class="form-control" type="number" id="postalcode" name="postalcode" value="{{ data.postalcode }}" required>
+                            <input class="form-control" type="number" id="postalcode" name="postalcode" value="{{ data.postalcode }}" required >
                             {% if errors.postalcode %}
                                 <div class="text-danger">{{ errors.postalcode }}</div>
                             {% endif %}
@@ -146,14 +145,14 @@
                     <div class="d-flex justify-content-around my-3">
                         <div class="d-flex flex-column col-5 form-group">
                             <label for="dateofbirth">Date de naissance</label>
-                            <input class="form-control" type="date" id="dateofbirth" name="dateofbirth" value="{{ data.dateofbirth }}" required>
+                            <input class="form-control" type="date" id="dateofbirth" name="dateofbirth" value="{{ data.dateofbirth }}" required >
                             {% if errors.dateofbirth %}
                                 <div class="text-danger">{{ errors.dateofbirth }}</div>
                             {% endif %}
                         </div>
                         <div class="d-flex flex-column col-5 form-group">
                             <label for="mail">Adresse mail</label>
-                            <input class="form-control" type="email" id="mail" name="mail" value="{{ data.mail }}" required>
+                            <input class="form-control" type="email" id="mail" name="mail" value="{{ data.mail }}" required >
                             {% if errors.mail %}
                                 <div class="text-danger">{{ errors.mail }}</div>
                             {% endif %}

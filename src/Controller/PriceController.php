@@ -28,13 +28,21 @@ class PriceController extends AbstractController
         $admissionManager = new AdmissionManager();
         $rooms = $roomManager -> selectRoom();
         $errors = [];
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = array_map('trim', $_POST);
             $files = $_FILES['file'];
             $errorsFormEmpty = $this -> controlFormEmpty($data);
             $errorsFormFilter = $this -> controlFormFilter($data);
+            $errorsFormLengthOne = $this -> controlFormLengthOne($data);
+            $errorsFormLengthTwo = $this -> controlFormLengthTwo($data);
             list($filesNameNew, $errorsUpload) = $this -> controlFiles($files);
-            $errors = array_merge($errorsFormEmpty, $errorsFormFilter, $errorsUpload);
+            $errors = array_merge(
+                $errorsFormEmpty,
+                $errorsFormFilter,
+                $errorsUpload,
+                $errorsFormLengthOne,
+                $errorsFormLengthTwo
+            );
             if (empty($errors)) {
                 $zipper = new Zipper;
                 $zipName = $data['firstname'] . $data['lastname'] . '(' . uniqid('', true) . ')'. ".zip";
@@ -63,13 +71,13 @@ class PriceController extends AbstractController
 
     private function controlFormEmpty($datas)
     {
-        $errorsFormOne = [];
+        $errorsFormEmpty = [];
         foreach ($datas as $data => $value) {
             if (empty($value)) {
-                $errorsFormOne[$data] = 'Ce champ ne doit pas être vide';
+                $errorsFormEmpty[$data] = 'Ce champ ne doit pas être vide';
             }
         }
-        return $errorsFormOne ?? [];
+        return $errorsFormEmpty ?? [];
     }
 
     private function controlFormFilter($data)
@@ -82,6 +90,47 @@ class PriceController extends AbstractController
             $errorsFormTwo['postalcode'] = 'Ce champ doit contenir un code postal';
         }
         return $errorsFormTwo ?? [];
+    }
+    private function controlFormLengthOne($data)
+    {
+        $errorsFormLengthOne = [];
+
+        if (strlen($data['city']) > 100) {
+            $errorsFormLengthOne['city'] = 'Ce champ est trop long';
+        }
+        if (strlen($data['phone']) > 10) {
+            $errorsFormLengthOne['phone'] = 'Ce champ est trop long';
+        }
+        if (strlen($data['postalcode']) > 7) {
+            $errorsFormLengthOne['postalcode'] = 'Ce champ est trop long';
+        }
+        if (strlen($data['dateofbirth']) > 10) {
+            $errorsFormLengthOne['dateofbirth'] = 'Ce champ est trop long';
+        }
+        if (strlen($data['zip_path']) > 255) {
+            $errorsFormLengthOne['zip_path'] = 'Ce champ est trop long';
+        }
+        if (strlen($data['mail']) > 255) {
+            $errorsFormLengthOne['mail'] = 'Ce champ est trop long';
+        }
+        return $errorsFormLengthOne ?? [];
+    }
+    private function controlFormLengthTwo($data)
+    {
+        $errorsFormLengthTwo = [];
+        if (strlen($data['maritalstatus']) > 11) {
+            $errorsFormLengthTwo['maritalstatus'] = 'Ce champ est trop long';
+        }
+        if (strlen($data['firstname']) > 45) {
+            $errorsFormLengthTwo['firstname'] = 'Ce champ est trop long';
+        }
+        if (strlen($data['lastname']) > 45) {
+            $errorsFormLengthTwo['lastname'] = 'Ce champ est trop long';
+        }
+        if (strlen($data['street']) > 255) {
+            $errorsFormLengthTwo['street'] = 'Ce champ est trop long';
+        }
+        return $errorsFormLengthTwo ?? [];
     }
     private function controlFiles($files)
     {
