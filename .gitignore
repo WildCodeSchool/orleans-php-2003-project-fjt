@@ -4,5 +4,6 @@
 *.cache
 db.php
 .idea
-/uploads/images/
 error_log
+/uploads/
+
