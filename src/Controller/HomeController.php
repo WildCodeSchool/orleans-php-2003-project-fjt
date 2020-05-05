@@ -9,7 +9,7 @@
 namespace App\Controller;
 
 use App\Model\ContactManager;
-date_default_timezone_set('Europe/Paris');
+use App\Model\ItemManager;
 
 class HomeController extends AbstractController
 {
@@ -90,5 +90,13 @@ class HomeController extends AbstractController
             $errors['message'] = 'Un message est requis';
         }
         return $errors;
+    }
+
+    public function show()
+    {
+        $contactManager = new ContactManager();
+        $contact = $contactManager->selectAllContact();
+
+        return $this->twig->render('Admincontact/reception.html.twig', ['contacts' => $contact]);
     }
 }

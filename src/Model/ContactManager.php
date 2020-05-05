@@ -22,13 +22,15 @@ class ContactManager extends AbstractManager
 
     /**
      * @param array $data
-     * @return int
+     * @return void
      */
     public function insert(array $data): void
     {
 
         // prepared request
-        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " (`lastname`, `firstname`, `email`, `phone`, `message`, `sendDate`) VALUES (:lastname, :firstname, :email, :phone, :message, NOW())");
+        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
+            " (`lastname`, `firstname`, `email`, `phone`, `message`, `sendDate`) 
+            VALUES (:lastname, :firstname, :email, :phone, :message, NOW())");
         $statement->bindValue('lastname', $data['lastname'], \PDO::PARAM_STR);
         $statement->bindValue('firstname', $data['firstname'], \PDO::PARAM_STR);
         $statement->bindValue('email', $data['email'], \PDO::PARAM_STR);

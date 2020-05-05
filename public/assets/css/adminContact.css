@@ -1,0 +1,10 @@
+.adminContact h1, h3 {
+    text-align: center;
+}
+
+.adminContact * {
+    color: black;
+    list-style: none;
+    text-align: center;
+
+}
