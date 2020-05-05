@@ -24,6 +24,16 @@ footer{
     align-items: center;
 }
 
+.leftContentFooter p{
+    margin: 10px;
+    text-align: center;
+}
+
+.leftContentFooter iframe{
+    margin-bottom: 20px;
+    margin-top: 100px;
+}
+
 footer ul{
     list-style-type: none;
     padding-inline-start: 0;
@@ -35,10 +45,6 @@ footer h3{
 
 footer li{
     margin:8px;
-}
-
-footer iframe{
-    margin-top: 100px;
 }
 
 footer p{
