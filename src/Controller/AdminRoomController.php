@@ -33,7 +33,7 @@ class AdminRoomController extends AbstractController
         foreach ($addresses as $address) {
             $addressesId[] = $address['id'];
         }
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             $data = array_map('trim', $_POST);
             $file = $_FILES['picture'] ?? [];
             $errorsDataOne = $this->controlDataOne($data, $addressesId);
