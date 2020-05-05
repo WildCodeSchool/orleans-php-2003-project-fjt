@@ -1,11 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Roboto&display=swap');
-@import url('home.css');
 @import url('navbar.css');
 @import 'form.css';
-@import 'service.css';
 @import "price.css";
 @import "footer.css";
 @import "adminRoom.css";
+@import "admin.css";
 
 :root{
     --main-bg-color: #032497;
@@ -41,6 +40,10 @@ body {
     flex-direction: column;
 }
 
+.main{
+    margin-top:100px;
+}
+
 .content {
     flex: 1 0 auto;
 }
@@ -57,10 +60,6 @@ body{
     margin: 0;
     font-family: var(--main-font);
     font-size: var(--main-size);
-}
-
-.main{
-    margin-top:100vh;
 }
 
 section{

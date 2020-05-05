@@ -1,3 +1,7 @@
+.main{
+    margin-top:100vh;
+}
+
 .home{
     display: flex;
     flex-direction: row;
@@ -82,7 +86,7 @@
 
 .header {
     position: absolute;
-    background-image: radial-gradient(circle 300vmax at -100vw 180vh , #f35 10%, #f35 60%, #032497 60%);
+    background-image: radial-gradient(circle 300vmax at -100vw 180vh , var(--secondary-bg-color) 10%, var(--secondary-bg-color) 60%, var(--main-bg-color) 60%);
     width: 100vw;
     height:100vh;
 }
