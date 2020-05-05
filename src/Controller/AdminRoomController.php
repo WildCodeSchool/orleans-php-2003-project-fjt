@@ -24,7 +24,7 @@ class AdminRoomController extends AbstractController
     {
         $adminRoomManager = new RoomManager();
         $errors = [];
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = array_map('trim', $_POST);
             $errors = $this->controlAddress($data);
             if (empty($errors)) {
@@ -32,7 +32,9 @@ class AdminRoomController extends AbstractController
                 header('Location:/AdminRoom/index');
             }
         }
-        return $this->twig->render('AdminRoom/addAddress.html.twig', ['post'=> $_POST ?? [], 'errors'=> $errors ?? []]);
+        return $this->twig->render('AdminRoom/addAddress.html.twig', [
+            'data'=> $data ?? [],
+            'errors'=> $errors ?? []]);
     }
     private function controlAddress($data)
     {

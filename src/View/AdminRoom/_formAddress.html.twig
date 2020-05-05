@@ -1,21 +1,21 @@
 <form class="d-flex row col-10 mx-auto flex-column align-items-center border border-primary rounded p-4" action="" method="post" enctype="multipart/form-data">
     <div class="form-group col-5 my-3">
         <label for="name">Nom: </label>
-        <input class="form-control" id="name" name="name" type="text" value="{% if not empty %}{{ post.name }}{% endif %}" required >
+        <input class="form-control" id="name" name="name" type="text" value="{% if not empty %}{{ data.name }}{% endif %}" required >
         {% if errors.name %}
             <div class="text-danger">{{ errors.name }}</div>
         {% endif %}
     </div>
     <div class="form-group col-5 my-3">
         <label for="address">Adresse: </label>
-        <input class="form-control" id="address" name="address" type="text" value="{% if not empty %}{{ post.address }}{% endif %}" required >
+        <input class="form-control" id="address" name="address" type="text" value="{% if not empty %}{{ data.address }}{% endif %}" required >
         {% if errors.address %}
             <div class="text-danger">{{ errors.address }}</div>
         {% endif %}
     </div>
     <div class="form-group col-5 my-3">
         <label for="description">Description: </label>
-        <textarea class="form-control" id="description" name="description" cols="30" rows="10" value="{% if not empty %}{{ post.description }}{% endif %}"></textarea>
+        <textarea class="form-control" id="description" name="description" cols="30" rows="10" value="{% if not empty %}{{ data.description }}{% endif %}"></textarea>
         {% if errors.description %}
             <div class="text-danger">{{ errors.description }}</div>
         {% endif %}
