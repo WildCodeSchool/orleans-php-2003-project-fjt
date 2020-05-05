@@ -1,0 +1,3 @@
+.adminroom-index tbody td {
+    width: calc(100%/3);
+}

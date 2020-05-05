@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+{%  block navbar %}{%  endblock %}
+
+{% block content %}
+    <div class="container-fluid container-service text-lg-left text-center">
+        <h2 class="service-title pl-lg-3">Gestion des animations</h2>
+        <a role="button" class="btn btn-outline-primary btn-lg m-4" href="../AdminAnimation/add">Ajouter une animation</a>
+        <div class="row justify-content-center">
+            {% for animation in animations %}
+                <div class="col-md-6 card-deck">
+                    <div class="card service-card">
+                        <img src="/uploads/images/{{ animation.image }}" class="card-img-top" alt="{{ animation.name }}">
+                        <div class="card-body card-description">
+                            <h3 class="card-title">{{ animation.name }}</h3>
+                            <p class="card-text">{{ animation.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
