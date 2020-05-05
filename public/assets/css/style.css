@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Roboto&display=swap');
-@import url('navbar.css');
+@import 'navbar.css';
 @import 'form.css';
 @import "price.css";
 @import "footer.css";
@@ -25,6 +25,8 @@
 
     --title-font : 'Baloo Paaji 2', cursive;
     --main-font: 'Roboto', sans-serif;
+
+    scroll-behavior: smooth;
 }
 
 *{
