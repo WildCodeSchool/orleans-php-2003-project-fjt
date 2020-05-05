@@ -39,7 +39,8 @@ class AdminRoomController extends AbstractController
             $errorsDataOne = $this->controlDataOne($data, $addressesId);
             $errorsDataTwo = $this->controlDataTwo($data);
             $errorsFilter = $this->controlDataFilter($data);
-            [$fileNameNew,$errorsUpload] = $this -> controlDataFile($file);
+            $controlFileData = $this -> controlDataFile($file);
+            list($fileNameNew, $errorsUpload) = $controlFileData;
             $errors = array_merge($errorsDataOne, $errorsDataTwo, $errorsFilter, $errorsUpload);
 
             if (empty($errors)) {
@@ -80,13 +81,13 @@ class AdminRoomController extends AbstractController
     {
         $errorsDataTwo = [];
         if (!empty($data['type']) && strlen($data['type']) > 255) {
-            $errorsData['type'] = 'Le type du logement est trop long';
+            $errorsDataTwo['type'] = 'Le type du logement est trop long';
         }
         if (!empty($data['equipment']) && strlen($data['equipment']) > 100) {
-            $errorsData['equipment'] = 'L\'équipement du logement est trop long';
+            $errorsDataTwo['equipment'] = 'L\'équipement du logement est trop long';
         }
         if (!empty($data['breakfast']) && strlen($data['breakfast']) > 45) {
-            $errorsData['breakfast'] = 'L\'information sur le tarif du petit déjeuner est trop longue';
+            $errorsDataTwo['breakfast'] = 'L\'information sur le tarif du petit déjeuner est trop longue';
         }
         return $errorsDataTwo ?? [];
     }
