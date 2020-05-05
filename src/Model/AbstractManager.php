@@ -54,11 +54,10 @@ abstract class AbstractManager
     /**
      * Get one row from database by ID.
      *
-     * @param  int $id
      *
      * @return array
      */
-    public function selectOneById(int $id)
+    public function selectOneById($id)
     {
         // prepared request
         $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE id=:id");

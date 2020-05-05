@@ -61,9 +61,18 @@ class RoomManager extends AbstractManager
 
         $statement->execute();
     }
-    private static function bound($adminPrice, $statement)
+    public function update($data)
     {
-        foreach ($adminPrice as $key => $value) {
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `type` = :type,
+         `guarantee` = :guarantee, `equipment` = :equipment, `catering` = :catering, `contribution` = :contribution,
+          `breakfast` = :breakfast, `equipment_contribution` = :equipment_contribution,
+          `picture` = :picture, `area` = :area, `address_id` = :address_id WHERE id=:id");
+        self ::bound($data, $statement);
+        return $statement->execute();
+    }
+    private static function bound($data, $statement)
+    {
+        foreach ($data as $key => $value) {
             if (is_int($value) || is_float($value)) {
                 $statement->bindValue(':' . $key, $value, \PDO::PARAM_INT);
             } elseif ($value === null) {

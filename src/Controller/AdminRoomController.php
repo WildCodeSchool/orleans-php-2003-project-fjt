@@ -90,7 +90,41 @@ class AdminRoomController extends AbstractController
             'room' => $data ?? []
         ]);
     }
-
+    public function editRoom()
+    {
+        $id = trim($_GET['id']);
+        $roomManager = new RoomManager();
+        $room = $roomManager->selectOneById($id);
+        $addresses = $roomManager->selectAddress();
+        $addressesId = [];
+        foreach ($addresses as $address) {
+            $addressesId[] = $address['id'];
+        }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = array_map('trim', $_POST);
+            $data['id'] = $id;
+            $file = $_FILES['picture'] ?? [];
+            $errorsDataOne = $this->controlDataOne($data, $addressesId);
+            $errorsDataTwo = $this->controlDataTwo($data);
+            $errorsFilter = $this->controlDataFilter($data);
+            $controlFileData = $this -> controlDataFile($file);
+            list($fileNameNew, $errorsUpload) = $controlFileData;
+            $errors = array_merge($errorsDataOne, $errorsDataTwo, $errorsFilter, $errorsUpload);
+            if (empty($errors)) {
+                $data['picture'] = $fileNameNew;
+                $fileDestination = self::UPLOAD_DIR . $fileNameNew;
+                move_uploaded_file($fileNameNew, $fileDestination);
+                $roomManager->update($data);
+                header('Location:/AdminRoom/index');
+            }
+        }
+        return $this->twig->render('AdminRoom/editRoom.html.twig', [
+            'addresses' => $addresses ,
+            'errors' => $errors ?? [] ,
+            'room' => $room ?? [],
+            'data' => $data ?? []
+        ]);
+    }
     private function controlDataOne($data, $addressesId)
     {
         $errorsDataOne = [];
