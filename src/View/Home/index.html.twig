@@ -32,14 +32,16 @@
 
 {% block content %}
     <section class="pres container">
-        <div class="leftContent col-7">
-            <h2>Présentation du foyer</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="row">
+            <div class="leftContent col-12 col-lg-6">
+                <h2>Présentation du foyer</h2>
+                <p>L’Association RJAC propose un ensemble de logements conventionnés APL et services à destination des jeunes de 16 à 30 ans, célibataires ou couples. Nous vous proposons également un service de restauration et des salles de réunion ainsi que des lieux et des temps de rencontres, une possibilité d'accompagnement individualisé et des facilités de fonctionnement.</p>
+            </div>
+            <img class="col-12 col-lg-5 offset-lg-1" src="/assets/images/presFJT.jpg" alt="imgFJT"/>
         </div>
-        <img src="" alt="imgFJT"/>
     </section>
     <div class="slogan">
-        <p>Notre plus précieux capital, c'est vous, notre première réussite, c'est la votre...</p>
+        <p>Notre plus précieux capital, c'est vous, notre première réussite, c'est la vôtre...</p>
     </div>
     {% include 'contact/_form.html.twig' %}
 {% endblock %}

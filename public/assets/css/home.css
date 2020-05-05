@@ -91,15 +91,29 @@
     height:100vh;
 }
 
+.pres img{
+    border-radius: 7%;
+}
+
 .slogan {
     text-align: center;
-    background-color: var(--secondary-bg-color);
-    padding-top: 20px;
-    padding-bottom: 20px;
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
 }
 
 .slogan p{
+    font-size: var(--medium-size);
     margin:0;
-    color: var(--light-color);
+    color: var(--secondary-bg-color);
     font-style:italic;
+}
+
+@media screen and (max-width: 991px) {
+    .pres img{
+        margin-top: var(--spacing-sm);
+    }
+
+    .pres p{
+        text-align: center;
+    }
 }
