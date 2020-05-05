@@ -90,3 +90,15 @@
     width: 100vw;
     height:100vh;
 }
+
+.slogan {
+    text-align: center;
+    background-color: var(--secondary-bg-color);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.slogan p{
+    margin:0;
+    color: var(--light-color);
+}

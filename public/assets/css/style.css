@@ -102,3 +102,7 @@ a:hover {
     background-color: var(--main-bg-color);
     color: var(--light-color);
 }
+
+.container{
+    width: 80%;
+}
