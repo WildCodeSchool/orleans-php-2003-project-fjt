@@ -12,10 +12,12 @@
         "php" : ">=7.2",
         "ext-pdo" : "*",
         "twig/twig": "^2.4",
-        "alchemy/zippy": "^0.4.9",
-        "ext-fileinfo": "*"
+        "ext-fileinfo": "*",
+        "chumper/zipper": "^1.0"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-master"
+        ,
         "phpmd/phpmd": "^2.7",
         "phpro/grumphp": "^0.15.0",
         "phpstan/phpstan": "^0.11.2",

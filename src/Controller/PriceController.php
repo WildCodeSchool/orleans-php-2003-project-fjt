@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
+use App\Model\AdmissionManager;
 use App\Model\RoomManager;
 
-use Alchemy\Zippy\Zippy;
+use Chumper\Zipper\Zipper;
 
 class PriceController extends AbstractController
 {
@@ -19,42 +20,43 @@ class PriceController extends AbstractController
      */
     public const ALLOWED_MIME = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg', 'application/pdf'];
     public const MAX_SIZE = 1000000;
-    public const UPLOAD_DIR = '../public/assets/images/uploads/';
+    public const UPLOAD_DIR = '../public/assets/images/';
 
     public function index()
     {
         $roomManager = new RoomManager();
+        $admissionManager = new AdmissionManager();
         $rooms = $roomManager -> selectRoom();
         $errors = [];
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             $data = array_map('trim', $_POST);
-            $files = $_FILES;
+            $files = $_FILES['file'];
             $errorsFormEmpty = $this -> controlFormEmpty($data);
             $errorsFormFilter = $this -> controlFormFilter($data);
             list($filesNameNew, $errorsUpload) = $this -> controlFiles($files);
             $errors = array_merge($errorsFormEmpty, $errorsFormFilter, $errorsUpload);
             if (empty($errors)) {
-                $zippy = Zippy::load();
-                $zipName = $data['firstname'] . '/' . $data['lastname'] . ".zip";
-                $archive = $zippy->create($zipName);
-                $archive->addMembers(
-                    array(
-                        '/path/to/file',
-                        '/path/to/file2',
-                        '/path/to/dir'
-                    )
-                );
-                foreach ($filesNameNew as $fileNameNew) {
-                    $fileDestination = self::UPLOAD_DIR . $fileNameNew;
-                    move_uploaded_file($fileNameNew, $fileDestination);
+                $zipper = new Zipper;
+                $zipName = $data['firstname'] . $data['lastname'] . '(' . uniqid('', true) . ')'. ".zip";
+                $zipper->make('../public/assets/images/uploads/' . $zipName)->folder($zipName);
+                foreach ($files['name'] as $position => $value) {
+                    $fileDestination = self::UPLOAD_DIR . $filesNameNew[$position];
+                    move_uploaded_file($files['tmp_name'][$position], $fileDestination);
+                    $zipper->add('../public/assets/images/' . $filesNameNew[$position]);
                 }
-
-                header('Location:/Price/index');
+                $zipper->make('../public/assets/uploads/' . $zipName . "/")->close();
+                foreach ($filesNameNew as $fileName) {
+                    $filesDel = '../public/assets/images/' . $fileName;
+                    unlink($filesDel);
+                }
+                $data['zip_path'] = '../public/assets/uploads/' . $zipName;
+                $admissionManager->insert($data);
+                header('Location:/Home/index');
             }
         }
         return $this -> twig -> render('Price/index.html.twig', [
             'rooms' => $rooms,
-            'info' => $data ?? [],
+            'data' => $data ?? [],
             'errors' => $errors ?? []
         ]);
     }
@@ -62,8 +64,8 @@ class PriceController extends AbstractController
     private function controlFormEmpty($datas)
     {
         $errorsFormOne = [];
-        foreach ($datas as $data) {
-            if (empty($data)) {
+        foreach ($datas as $data => $value) {
+            if (empty($value)) {
                 $errorsFormOne[$data] = 'Ce champ ne doit pas être vide';
             }
         }
@@ -81,32 +83,31 @@ class PriceController extends AbstractController
         }
         return $errorsFormTwo ?? [];
     }
-
     private function controlFiles($files)
     {
         $errorsUpload = [];
         $filesNameNew = [];
-        if (!empty($files) && $files['error'] === 0) {
-            foreach ($files as $file) {
-                $fileTmp = $file['tmp_name'];
-                $fileSize = filesize($fileTmp);
-                $mimeType = mime_content_type($fileTmp);
-                $fileExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
+        foreach ($files['name'] as $position => $value) {
+            $fileTmp = $files['tmp_name'][$position];
+            $fileSize = filesize($fileTmp);
+            $mimeType = mime_content_type($fileTmp);
+            $fileError = $files['error'][$position];
+            $fileExtension = pathinfo($files['tmp_name'][$position], PATHINFO_EXTENSION);
+            if ($fileError === 0) {
                 if (!in_array($mimeType, self::ALLOWED_MIME, true)) {
-                    $errorsUpload['picture'] = "Le fichier n'est pas autorisée,
+                    $errorsUpload['file'] = "Le fichier n'est pas autorisée,
                  les types de fichiers autorisés sont " . implode(', ', self::ALLOWED_MIME) . '.';
                 }
                 if ($fileSize > self::MAX_SIZE) {
-                    $errorsUpload['picture'] = 'Le fichier doit faire moins de ' . (self::MAX_SIZE / 1000000) .
+                    $errorsUpload['file'] = 'Le fichier doit faire moins de ' . (self::MAX_SIZE / 1000000) .
                         ' Mo';
                 }
+
                 if (empty($errorsUpload)) {
-                    $filesNameNew[] = uniqid('', true) . '.' . $fileExtension;
-                } else {
-                    $errorsUpload['picture'] = "Problème lors de l'import des fichiers";
+                    $filesNameNew[$position] = uniqid('', true) . '.' . $fileExtension;
                 }
             }
-            return [$filesNameNew, $errorsUpload] ?? [];
         }
+        return [$filesNameNew, $errorsUpload] ?? [];
     }
 }

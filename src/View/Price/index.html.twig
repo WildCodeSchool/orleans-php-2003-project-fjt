@@ -91,45 +91,72 @@
                             <input name="maritalstatus" id="maritalstatus" type="radio" value="En couple">
                             <label for="maritalstatus">En couple</label>
                         </div>
+                        {% if errors.maritalstatus %}
+                            <div class="text-danger">{{ errors.maritalstatus }}</div>
+                        {% endif %}
                     </div>
                     <div class="d-flex justify-content-around my-3">
                         <div class="d-flex flex-column col-5 form-group">
                             <label for="firstname">Nom</label>
-                            <input class="form-control" name="firstname" id="firstname" type="text">
+                            <input class="form-control" name="firstname" id="firstname" type="text" value="{{ data.firstname }}" required>
+                            {% if errors.firstname %}
+                                <div class="text-danger">{{ errors.firstname }}</div>
+                            {% endif %}
                         </div>
                         <div class="d-flex flex-column col-5 form-group">
                             <label for="lastname">Prénom</label>
-                            <input class="form-control" type="text" name="lastname" id="lastname">
+                            <input class="form-control" type="text" name="lastname" id="lastname" value="{{ data.lastname }}" required>
+                            {% if errors.lastname %}
+                                <div class="text-danger">{{ errors.lastname }}</div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="d-flex justify-content-around my-3">
                         <div class="d-flex flex-column col-5 form-group">
                             <label for="street">Rue</label>
-                            <input class="form-control" type="text" name="street" id="street">
+                            <input class="form-control" type="text" name="street" id="street" value="{{ data.street }}" required>
+                            {% if errors.street %}
+                                <div class="text-danger">{{ errors.street }}</div>
+                            {% endif %}
                         </div>
                         <div class="d-flex flex-column col-5 form-group">
                             <label for="city">Ville</label>
-                            <input class="form-control" type="text" id="city" name="city">
+                            <input class="form-control" type="text" id="city" name="city" value="{{ data.city }}" required>
+                            {% if errors.city %}
+                                <div class="text-danger">{{ errors.city }}</div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="d-flex justify-content-around my-3">
                         <div class="d-flex flex-column col-5 form-group">
                             <label for="phone">Téléphone</label>
-                            <input class="form-control" type="tel" id="phone" name="phone">
+                            <input class="form-control" type="tel" id="phone" name="phone" value="{{ data.phone }}" required>
+                            {% if errors.phone %}
+                                <div class="text-danger">{{ errors.phone }}</div>
+                            {% endif %}
                         </div>
                         <div class="d-flex flex-column col-5 form-group">
                             <label for="postalcode">Code postal</label>
-                            <input class="form-control" type="number" id="postalcode" name="postalcode">
+                            <input class="form-control" type="number" id="postalcode" name="postalcode" value="{{ data.postalcode }}" required>
+                            {% if errors.postalcode %}
+                                <div class="text-danger">{{ errors.postalcode }}</div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="d-flex justify-content-around my-3">
                         <div class="d-flex flex-column col-5 form-group">
                             <label for="dateofbirth">Date de naissance</label>
-                            <input class="form-control" type="date" id="dateofbirth" name="dateofbirth">
+                            <input class="form-control" type="date" id="dateofbirth" name="dateofbirth" value="{{ data.dateofbirth }}" required>
+                            {% if errors.dateofbirth %}
+                                <div class="text-danger">{{ errors.dateofbirth }}</div>
+                            {% endif %}
                         </div>
                         <div class="d-flex flex-column col-5 form-group">
                             <label for="mail">Adresse mail</label>
-                            <input class="form-control" type="email" id="mail" name="mail">
+                            <input class="form-control" type="email" id="mail" name="mail" value="{{ data.mail }}" required>
+                            {% if errors.mail %}
+                                <div class="text-danger">{{ errors.mail }}</div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="d-flex justify-content-around my-3">
@@ -143,7 +170,12 @@
                         </ol>
                         <div class="d-flex flex-column col-5 form-group">
                             <label for="file">Vos Documents</label>
-                            <input class="form-control" type="file" name='file' multiple>
+                            <input class="form-control" type="file" name='file[]' multiple>
+                            {% if errors.file %}
+
+                                <div class="text-danger">{{ errors.file }}</div>
+
+                            {% endif %}
                         </div>
                     </div>
 
