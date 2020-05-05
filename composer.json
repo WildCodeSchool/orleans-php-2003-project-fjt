@@ -11,7 +11,9 @@
     "require": {
         "php" : ">=7.2",
         "ext-pdo" : "*",
-        "twig/twig": "^2.4"
+        "twig/twig": "^2.4",
+        "alchemy/zippy": "^0.4.9",
+        "ext-fileinfo": "*"
     },
     "require-dev": {
         "phpmd/phpmd": "^2.7",
