@@ -101,4 +101,5 @@
 .slogan p{
     margin:0;
     color: var(--light-color);
+    font-style:italic;
 }
