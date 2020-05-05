@@ -71,7 +71,7 @@ class AdminRoomController extends AbstractController
         }
         if (empty($data['address_id'])) {
             $errorsDataOne['address_id'] = 'L\'adresse du logement ne doit pas être vide';
-        } elseif (in_array($data['address_id'], $addressesId, false)) {
+        } elseif (!in_array($data['address_id'], $addressesId, true)) {
              $errorsDataOne['address_id'] = 'L\'adresse du logement n\'est pas une adresse éxistante';
         }
         return $errorsDataOne ?? [];
