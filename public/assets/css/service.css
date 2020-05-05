@@ -1,14 +1,33 @@
-.service-card {
-    margin: var(--spacing);
+.card {
+    margin: var(--spacing-lg);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
 }
 
 .service-title {
-    margin: var(--spacing);
+    margin: var(--spacing-lg);
 }
 
 .container-service,
 .container-animation {
     width: 75%;
+}
+
+.card h3{
+    margin-top:10px;
+    margin-bottom: 20px;
+}
+
+.card p{
+    width: 90%;
+    margin:auto;
+    padding-bottom: 20px;
+}
+
+.card-body{
+    border-right: 2px solid var(--secondary-bg-color);
+    border-left: 2px solid var(--secondary-bg-color);
+    border-bottom: 2px solid var(--secondary-bg-color);
+    border-radius: 0 0 10px 10px;
 }
 
 .main-card {
@@ -18,6 +37,14 @@
 
 .animation-card {
     margin-bottom: var(--spacing);
+}
+
+.animation-card .card-body{
+    border-left: 0;
+    border-right: 2px solid var(--secondary-bg-color);
+    border-top: 2px solid var(--secondary-bg-color);
+    border-bottom: 2px solid var(--secondary-bg-color);
+    border-radius: 0 10px 10px 0;
 }
 
 .animation-title {
@@ -34,7 +61,7 @@
 .service-card img,
 .main-card .card img {
     border-radius: 10px 10px 0 0 ;
-    height: 400px;
+    height: 350px;
     object-fit: cover;
     object-position: center;
 }
@@ -42,7 +69,6 @@
 .animation-card img {
     border-radius: 10px 0 0 10px;
 }
-
 
 @media screen and (max-width: 1300px) {
     .container-service,
