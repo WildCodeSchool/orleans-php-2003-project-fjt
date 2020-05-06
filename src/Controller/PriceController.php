@@ -47,9 +47,11 @@ class PriceController extends AbstractController
                 $zipper = new Zipper;
                 $zipName = $data['firstname'] . $data['lastname'] . '(' . uniqid('', true) . ')'. ".zip";
                 $zipper->make('../public/assets/images/uploads/' . $zipName)->folder($zipName);
-                foreach ($files['name'] as $position => $value) {
+                foreach ($files['name'] as $position => $name) {
                     $fileDestination = self::UPLOAD_DIR . $filesNameNew[$position];
-                    move_uploaded_file($files['tmp_name'][$position], $fileDestination);
+                    if (!move_uploaded_file($files['tmp_name'][$position], $fileDestination)) {
+                        $errors['uploads'][$name] = 'Les fichiers n\'a pas pu être téléchargé';
+                    }
                     $zipper->add('../public/assets/images/' . $filesNameNew[$position]);
                 }
                 $zipper->make('../public/assets/uploads/' . $zipName . "/")->close();
@@ -107,9 +109,6 @@ class PriceController extends AbstractController
         if (strlen($data['dateofbirth']) > 10) {
             $errorsFormLengthOne['dateofbirth'] = 'Ce champ est trop long';
         }
-        if (strlen($data['zip_path']) > 255) {
-            $errorsFormLengthOne['zip_path'] = 'Ce champ est trop long';
-        }
         if (strlen($data['mail']) > 255) {
             $errorsFormLengthOne['mail'] = 'Ce champ est trop long';
         }
@@ -137,7 +136,7 @@ class PriceController extends AbstractController
         $errorsUpload = [];
         $filesNameNew = [];
 
-        foreach ($files['name'] as $position => $value) {
+        foreach ($files['name'] as $position => $name) {
             $fileTmp = $files['tmp_name'][$position];
             $fileSize = filesize($fileTmp);
             $mimeType = mime_content_type($fileTmp);
@@ -145,12 +144,12 @@ class PriceController extends AbstractController
             $fileExtension = pathinfo($files['tmp_name'][$position], PATHINFO_EXTENSION);
             if ($fileError === 0) {
                 if (!in_array($mimeType, self::ALLOWED_MIME, true)) {
-                    $errorsUpload['file'] = "Le fichier n'est pas autorisée,
+                    $errorsUpload['file'] = "Le fichier" . $name ." n'est pas autorisée,
                  les types de fichiers autorisés sont " . implode(', ', self::ALLOWED_MIME) . '.';
                 }
                 if ($fileSize > self::MAX_SIZE) {
-                    $errorsUpload['file'] = 'Le fichier doit faire moins de ' . (self::MAX_SIZE / 1000000) .
-                        ' Mo';
+                    $errorsUpload['file'] = 'Le fichier' . $name . ' doit faire moins de ' . (self::MAX_SIZE / 1000000)
+                        . ' Mo';
                 }
 
                 if (empty($errorsUpload)) {
