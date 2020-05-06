@@ -1,0 +1,57 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <section>
+        <h2 class="m-5">Dossier N°{{ folder.zip_path }}</h2>
+        <h3>Statut: {{ folder.status }}</h3>
+        <div>
+            <div>
+                <div>
+                    <p>Nom</p>
+                    <p>{{ folder.lastname }}</p>
+                </div>
+                <div>
+                    <p>Prénom</p>
+                    <p>{{ folder.firstname }}</p>
+                </div>
+                <div>
+                    <p>Coordonnées</p>
+                    <p>{{ folder.street ~ ' ' ~ folder.postal_code ~ ' ' ~ folder.city }}</p>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <p>- Situation :</p>
+                        <p>{{ folder.marital_status }}</p>
+                    </div>
+                    <div>
+                        <p>- date de naissance :</p>
+                        <p>{{ folder.dateofbirth }}</p>
+                    </div>
+                    <div>
+                        <p>- Téléphone :</p>
+                        <p>{{ folder.phone }}</p>
+                    </div>
+                    <div>
+                        <p>- Email :</p>
+                        <p>{{ folder.mail }}</p>
+                    </div>
+                </div>
+                <div>
+                    <ul>
+                        {% for file in files %}
+                            <li>{{ file }}</li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <div>
+            <a class="btn btn-outline-primary" href="">Valider le dossier</a>
+            <a class="btn btn-outline-primary" href="">Télécharger le dossier</a>
+            <a class="btn btn-outline-primary" href="">Retour</a>
+        </div>
+    </section>
+{% endblock %}
