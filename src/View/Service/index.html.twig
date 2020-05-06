@@ -1,5 +1,9 @@
 {% extends 'layout.html.twig' %}
 
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/service.css">
+{% endblock %}
+
 {% block navbar %}
     {% include '/Home/navbar.html.twig' %}
 {% endblock %}
@@ -32,7 +36,7 @@
         <div class="row no-gutters justify-content-center col-lg-6 p-sm-0">
                 <div class="card-deck main-card">
                     <div class="card">
-                        <img src="/assets/images/{{ animation.image }}" class="card-img-top" alt="{{ animation.name }}">
+                        <img src="/uploads/images/{{ animation.image }}" class="card-img-top" alt="{{ animation.name }}">
                         <div class="card-body card-description">
                             <h3 class="card-title">{{ animation.name }}</h3>
                             <p class="card-text">{{ animation.description }}</p>
@@ -45,7 +49,7 @@
                 <div class="card animation-card">
                     <div class="row no-gutters">
                         <div class="col-md-6">
-                            <img src="/assets/images/{{ animation.image }}" class="card-img-top h-100" alt="{{ animation.name }}">
+                            <img src="/uploads/images/{{ animation.image }}" class="card-img-top h-100" alt="{{ animation.name }}">
                         </div>
                         <div class="col-md-6 col-xs-1">
                             <div class="card-body card-description">

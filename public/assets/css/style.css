@@ -1,11 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Roboto&display=swap');
-@import url('home.css');
-@import url('navbar.css');
+@import 'navbar.css';
 @import 'form.css';
-@import 'service.css';
 @import "price.css";
 @import "footer.css";
 @import "adminRoom.css";
+@import "admin.css";
 
 :root{
     --main-bg-color: #032497;
@@ -15,7 +14,7 @@
     --light-color: #f6f6f6;
     --dark-color: #090909;
 
-    --spacing: 16px;
+    --spacing: 64px;
     --spacing-sm: calc(var(--spacing)/2);
     --spacing-lg: calc(var(--spacing)*2);
 
@@ -26,6 +25,8 @@
 
     --title-font : 'Baloo Paaji 2', cursive;
     --main-font: 'Roboto', sans-serif;
+
+    scroll-behavior: smooth;
 }
 
 *{
@@ -39,6 +40,10 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+}
+
+.main{
+    margin-top:100px;
 }
 
 .content {
@@ -59,13 +64,9 @@ body{
     font-size: var(--main-size);
 }
 
-.main{
-    margin-top:100vh;
-}
-
 section{
-    margin-top: 75px;
-    margin-bottom: 75px;
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
 }
 
 h1,h2,h3{

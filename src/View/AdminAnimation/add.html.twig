@@ -1,0 +1,11 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Ajouter une animation{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="m-4">Ajouter une nouvelle animation</h2>
+        {% include 'AdminAnimation/_form.html.twig' %}
+        <a class="btn btn-outline-primary m-4" role="button" href="../AdminAnimation/index">Retour</a>
+    </div>
+{% endblock %}

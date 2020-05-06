@@ -1,3 +1,7 @@
+.main{
+    margin-top:100vh;
+}
+
 .home{
     display: flex;
     flex-direction: row;
@@ -82,7 +86,34 @@
 
 .header {
     position: absolute;
-    background-image: radial-gradient(circle 300vmax at -100vw 180vh , #f35 10%, #f35 60%, #032497 60%);
+    background-image: radial-gradient(circle 300vmax at -100vw 180vh , var(--secondary-bg-color) 10%, var(--secondary-bg-color) 60%, var(--main-bg-color) 60%);
     width: 100vw;
     height:100vh;
+}
+
+.pres img{
+    border-radius: 7%;
+}
+
+.slogan {
+    text-align: center;
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.slogan p{
+    font-size: var(--medium-size);
+    margin:0;
+    color: var(--secondary-bg-color);
+    font-style:italic;
+}
+
+@media screen and (max-width: 991px) {
+    .pres img{
+        margin-top: var(--spacing-sm);
+    }
+
+    .pres p{
+        text-align: center;
+    }
 }
