@@ -1,8 +1,3 @@
-/*.card {*/
-/*    margin: var(--spacing-lg);*/
-/*    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);*/
-/*}*/
-
 .service-title {
     margin: var(--spacing);
 }
@@ -12,24 +7,6 @@
     width: 75%;
 }
 
-/*.card h3{*/
-/*    margin-top:10px;*/
-/*    margin-bottom: 20px;*/
-/*}*/
-
-/*.card p{*/
-/*    width: 90%;*/
-/*    margin:auto;*/
-/*    padding-bottom: 20px;*/
-/*}*/
-
-/*.card-body{*/
-/*    border-right: 2px solid var(--secondary-bg-color);*/
-/*    border-left: 2px solid var(--secondary-bg-color);*/
-/*    border-bottom: 2px solid var(--secondary-bg-color);*/
-/*    border-radius: 0 0 10px 10px;*/
-/*}*/
-
 .main-card {
     width: 100%;
     margin-bottom: var(--spacing-sm);
@@ -38,14 +15,6 @@
 .animation-card {
     margin-bottom: var(--spacing-sm);
 }
-
-/*.animation-card .card-body{*/
-/*    border-left: 0;*/
-/*    border-right: 2px solid var(--secondary-bg-color);*/
-/*    border-top: 2px solid var(--secondary-bg-color);*/
-/*    border-bottom: 2px solid var(--secondary-bg-color);*/
-/*    border-radius: 0 10px 10px 0;*/
-/*}*/
 
 .animation-title {
     margin: var(--spacing);
@@ -63,10 +32,16 @@
     height: 200px;
 }
 
-.card-description h3 {
+.card-description .card-blue {
     font-weight: bold;
     color: var(--main-bg-color);
     border-bottom: 3px solid var(--main-bg-color);
+}
+
+.card-description .card-pink {
+    font-weight: bold;
+    color: var(--secondary-bg-color);
+    border-bottom: 3px solid var(--secondary-bg-color);
 }
 
 .card-title-sm {
@@ -95,5 +70,11 @@
 @media screen and (max-width: 767px) {
     .animation-card img {
         border-radius: 10px 10px 0 0 ;
+    }
+    .card-title-sm {
+        font-size: var(--medium-size);
+    }
+    .card-order:nth-of-type(3) {
+        order: 1;
     }
 }
