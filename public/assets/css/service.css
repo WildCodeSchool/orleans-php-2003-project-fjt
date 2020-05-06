@@ -1,10 +1,10 @@
-.card {
-    margin: var(--spacing-lg);
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
-}
+/*.card {*/
+/*    margin: var(--spacing-lg);*/
+/*    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);*/
+/*}*/
 
 .service-title {
-    margin: var(--spacing-lg);
+    margin: var(--spacing);
 }
 
 .container-service,
@@ -12,50 +12,65 @@
     width: 75%;
 }
 
-.card h3{
-    margin-top:10px;
-    margin-bottom: 20px;
-}
+/*.card h3{*/
+/*    margin-top:10px;*/
+/*    margin-bottom: 20px;*/
+/*}*/
 
-.card p{
-    width: 90%;
-    margin:auto;
-    padding-bottom: 20px;
-}
+/*.card p{*/
+/*    width: 90%;*/
+/*    margin:auto;*/
+/*    padding-bottom: 20px;*/
+/*}*/
 
-.card-body{
-    border-right: 2px solid var(--secondary-bg-color);
-    border-left: 2px solid var(--secondary-bg-color);
-    border-bottom: 2px solid var(--secondary-bg-color);
-    border-radius: 0 0 10px 10px;
-}
+/*.card-body{*/
+/*    border-right: 2px solid var(--secondary-bg-color);*/
+/*    border-left: 2px solid var(--secondary-bg-color);*/
+/*    border-bottom: 2px solid var(--secondary-bg-color);*/
+/*    border-radius: 0 0 10px 10px;*/
+/*}*/
 
 .main-card {
     width: 100%;
-    margin-bottom: var(--spacing);
+    margin-bottom: var(--spacing-sm);
 }
 
 .animation-card {
-    margin-bottom: var(--spacing);
+    margin-bottom: var(--spacing-sm);
 }
 
-.animation-card .card-body{
-    border-left: 0;
-    border-right: 2px solid var(--secondary-bg-color);
-    border-top: 2px solid var(--secondary-bg-color);
-    border-bottom: 2px solid var(--secondary-bg-color);
-    border-radius: 0 10px 10px 0;
-}
+/*.animation-card .card-body{*/
+/*    border-left: 0;*/
+/*    border-right: 2px solid var(--secondary-bg-color);*/
+/*    border-top: 2px solid var(--secondary-bg-color);*/
+/*    border-bottom: 2px solid var(--secondary-bg-color);*/
+/*    border-radius: 0 10px 10px 0;*/
+/*}*/
 
 .animation-title {
     margin: var(--spacing);
-    margin-bottom: var(--spacing-lg);
 }
 
 .service-card,
 .animation-card,
 .main-card .card {
     border-radius: 10px;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.card-description {
+    height: 200px;
+}
+
+.card-description h3 {
+    font-weight: bold;
+    color: var(--main-bg-color);
+    border-bottom: 3px solid var(--main-bg-color);
+}
+
+.card-title-sm {
+    font-size: var(--main-size);
 }
 
 .service-card img,
