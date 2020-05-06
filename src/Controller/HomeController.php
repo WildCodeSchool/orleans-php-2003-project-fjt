@@ -99,4 +99,12 @@ class HomeController extends AbstractController
 
         return $this->twig->render('Admincontact/reception.html.twig', ['contacts' => $contact]);
     }
+
+    public function message(int $id)
+    {
+        $contactManager = new ContactManager();
+        $contact = $contactManager->selectOneById($id);
+
+        return $this->twig->render('Admincontact/message.html.twig', ['contacts' => $contact]);
+    }
 }

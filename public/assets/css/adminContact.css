@@ -1,4 +1,4 @@
-.adminContact h1, h3 {
+.adminContact h3, p {
     text-align: center;
 }
 
@@ -20,7 +20,7 @@
 
 .adminContact {
     border-radius: 30px;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     background-color: rgba(114, 114, 114, 0.3);
 }

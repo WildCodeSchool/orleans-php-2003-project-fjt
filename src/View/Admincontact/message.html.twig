@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="adminContact">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <h1>Détails du message</h1>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <h3>Nom</h3>
+                <p>{{ contacts.lastname }}</p>
+            </div>
+
+            <div class="col-3">
+                <h3>Prénom</h3>
+                <p>{{ contacts.firstname }}</p>
+            </div>
+
+            <div class="col-3">
+                <h3> Téléphone</h3>
+                <p>{{ contacts.phone }}</p>
+            </div>
+
+            <div class="col-3">
+                <h3>Adresse mail</h3>
+                <p>{{ contacts.email }}</p>
+            </div>
+        </div>
+        <div class="col-12">
+            <h3>Contenu du message</h3>
+            <p>{{ contacts.message }}</p>
+        </div>
+    </div>
+    <p> Envoyé le {{ contacts.sendDate | date("d.m.Y à h:i")}}</p>
+    <a href="/item/delete/{{contact.id}}">Supprimer</a>
+    <a href="/home/show">Back</a>
+    </div>
+{% endblock %}
