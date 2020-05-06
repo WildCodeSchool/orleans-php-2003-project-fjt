@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <section>
+        <h2 class="m-5">Gestion des pré-admissions</h2>
+        <div>
+            <form method="get" action="/AdminAdmission/allValidate/">
+                <label for="search">Rechercher</label>
+                <input id="search" type="search" name="search">
+                <button>Chercher</button>
+            </form>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col" colspan="3">Dossiers validés</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for folder in folders %}
+                {%  if folder.status is same as('Validé') %}
+                    <tr>
+                        <td>{{ folder.lastname ~ ' ' ~ folder.firstname}}</td>
+                        <td>{{ folder.zip_path }}</td>
+                        <td>
+                            <a class="btn btn-outline-primary" href="/AdminAdmission/show/{{ folder.id }}" >Consulter</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+    </section>
+{% endblock %}
