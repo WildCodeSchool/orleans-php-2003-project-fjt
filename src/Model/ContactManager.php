@@ -50,4 +50,10 @@ class ContactManager extends AbstractManager
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
     }
+
+    // fonction custom pour trier la récupération des entrées et les afficher de la plus récente à la plus ancienne
+    public function selectAllContact(): array
+    {
+        return $this->pdo->query('SELECT * FROM ' . $this->table . ' ORDER BY sendDate DESC')->fetchAll();
+    }
 }
