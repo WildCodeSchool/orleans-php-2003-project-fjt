@@ -178,4 +178,11 @@ class AdminRoomController extends AbstractController
         }
         return [$fileNameNew,$errorsUpload] ?? [];
     }
+    public function deleteRoom()
+    {
+        $roomManager = new RoomManager();
+        $id = trim($_POST['id']);
+        $roomManager->deleteRoom($id);
+        header('Location: ../AdminRoom/index');
+    }
 }
