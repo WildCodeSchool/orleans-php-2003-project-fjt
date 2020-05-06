@@ -1,5 +1,5 @@
 footer{
-    background-color: var(--secondary-bg-color);
+    background-color: var(--main-bg-color);
     color: var(--light-color);
 
     padding-top:25px;
@@ -7,26 +7,13 @@ footer{
     text-align: center;
 }
 
+footer .container-fluid{
+    margin-top: var(--spacing-sm);
+}
+
+
 .contentFooter{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
     align-items: center;
-    align-content: stretch;
-}
-
-.leftContentFooter{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-}
-
-.leftContentFooter p{
-    margin: 10px;
-    text-align: center;
 }
 
 .leftContentFooter iframe{
@@ -44,9 +31,16 @@ footer h3{
 }
 
 footer li{
-    margin:8px;
+    margin-top:8px;
+    font-size: var(--main-size);
 }
 
 footer p{
     margin-top: 32px;
+}
+
+@media screen and (max-width: 767px) {
+    .contentFooter div{
+        margin-top: var(--spacing-sm);
+    }
 }
