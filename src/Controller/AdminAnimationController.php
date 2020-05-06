@@ -84,6 +84,7 @@ class AdminAnimationController extends AbstractController
 
     private function controlData($data)
     {
+        $errors = [];
         if (empty($data['name'])) {
             $errors['name'] = 'Veuillez renseigner le nom de l\'animation';
         } elseif (strlen($data['name']) > self::MAX_NAME_LENGTH) {
