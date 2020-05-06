@@ -90,3 +90,30 @@
     width: 100vw;
     height:100vh;
 }
+
+.pres img{
+    border-radius: 7%;
+}
+
+.slogan {
+    text-align: center;
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.slogan p{
+    font-size: var(--medium-size);
+    margin:0;
+    color: var(--secondary-bg-color);
+    font-style:italic;
+}
+
+@media screen and (max-width: 991px) {
+    .pres img{
+        margin-top: var(--spacing-sm);
+    }
+
+    .pres p{
+        text-align: center;
+    }
+}
