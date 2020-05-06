@@ -52,7 +52,7 @@
             <tr>
                 <td >{{ room.address }}</td>
                 <td >{{ room.type }}</td>
-                <td>{% if room.area in [0] %}/{% else %}{{ room.area }} m²{% endif %}</td>
+                <td>{% if room.area == 0 %}/{% else %}{{ room.area }} m²{% endif %}</td>
                 <td>{% set room_price =  ((room.guarantee+room.catering+
                         room.contribution+room.equipment_contribution)/30) %}
                     {% if room.breakfast is not null and room.breakfast != 'inclus' %}

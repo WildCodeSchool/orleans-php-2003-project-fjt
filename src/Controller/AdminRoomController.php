@@ -21,6 +21,7 @@ class AdminRoomController extends AbstractController
             $roomName = $room['name'];
             $roomByAddresses[$roomName][] = $room;
         }
+
         return $this->twig->render('AdminRoom/index.html.twig', ['roomByAddresses' => $roomByAddresses,
             'addresses'=> $addresses]);
     }
@@ -71,10 +72,11 @@ class AdminRoomController extends AbstractController
             $file = $_FILES['picture'] ?? [];
             $errorsDataOne = $this->controlDataOne($data, $addressesId);
             $errorsDataTwo = $this->controlDataTwo($data);
-            $errorsFilter = $this->controlDataFilter($data);
+            $errorsFilterOne = $this->controlDataFilterOne($data);
+            $errorsFilterTwo = $this->controlDataFilterTwo($data);
             $controlFileData = $this -> controlDataFile($file);
             list($fileNameNew, $errorsUpload) = $controlFileData;
-            $errors = array_merge($errorsDataOne, $errorsDataTwo, $errorsFilter, $errorsUpload);
+            $errors = array_merge($errorsDataOne, $errorsDataTwo, $errorsFilterOne, $errorsFilterTwo, $errorsUpload);
 
             if (empty($errors)) {
                 $data['picture'] = $fileNameNew;
@@ -90,9 +92,8 @@ class AdminRoomController extends AbstractController
             'room' => $data ?? []
         ]);
     }
-    public function editRoom()
+    public function editRoom(int $id)
     {
-        $id = trim($_GET['id']);
         $roomManager = new RoomManager();
         $room = $roomManager->selectOneById($id);
         $addresses = $roomManager->selectAddress();
@@ -106,10 +107,11 @@ class AdminRoomController extends AbstractController
             $file = $_FILES['picture'] ?? [];
             $errorsDataOne = $this->controlDataOne($data, $addressesId);
             $errorsDataTwo = $this->controlDataTwo($data);
-            $errorsFilter = $this->controlDataFilter($data);
+            $errorsFilterOne = $this->controlDataFilterOne($data);
+            $errorsFilterTwo = $this->controlDataFilterTwo($data);
             $controlFileData = $this -> controlDataFile($file);
             list($fileNameNew, $errorsUpload) = $controlFileData;
-            $errors = array_merge($errorsDataOne, $errorsDataTwo, $errorsFilter, $errorsUpload);
+            $errors = array_merge($errorsDataOne, $errorsDataTwo, $errorsFilterOne, $errorsFilterTwo, $errorsUpload);
             if (empty($errors)) {
                 $data['picture'] = $fileNameNew;
                 $fileDestination = self::UPLOAD_DIR . $fileNameNew;
@@ -159,32 +161,39 @@ class AdminRoomController extends AbstractController
         return $errorsDataTwo ?? [];
     }
 
-    private function controlDataFilter(array $data) :array
+    private function controlDataFilterOne(array $data) :array
     {
-        $errorsFilter = [];
+        $errorsFilterOne = [];
         if (!filter_var($data['guarantee'], FILTER_VALIDATE_FLOAT)) {
-            $errorsFilter['guarantee'] = 'La valeur du dépôt de garantie n\'est pas autorisé';
+            $errorsFilterOne['guarantee'] = 'La valeur du dépôt de garantie n\'est pas autorisé';
         }
         if (!filter_var($data['catering'], FILTER_VALIDATE_FLOAT)) {
-            $errorsFilter['catering'] = 'La valeur du crédit restauration n\'est pas autorisé';
+            $errorsFilterOne['catering'] = 'La valeur du crédit restauration n\'est pas autorisé';
         }
         if (!filter_var($data['contribution'], FILTER_VALIDATE_FLOAT)) {
-            $errorsFilter['contribution'] = 'La valeur de la cotisation n\'est pas autorisée';
+            $errorsFilterOne['contribution'] = 'La valeur de la cotisation n\'est pas autorisée';
         }
         if (!filter_var($data['equipment_contribution'], FILTER_VALIDATE_FLOAT)) {
-            $errorsFilter['equipment_contribution'] = 'La valeur de la cotisation d\'équipement n\'est pas autorisée';
+            $errorsFilterOne['equipment_contribution']
+                = 'La valeur de la cotisation d\'équipement n\'est pas autorisée';
         }
         if (!filter_var($data['address_id'], FILTER_VALIDATE_INT)) {
-            $errorsFilter['address_id'] = 'La valeur de l\'adresse n\'est pas autorisée';
+            $errorsFilterOne['address_id'] = 'La valeur de l\'adresse n\'est pas autorisée';
         }
-        if (!filter_var($data['area'], FILTER_VALIDATE_INT)) {
-            $errorsFilter['area'] = 'La valeur de la surface n\'est pas autorisée';
+        return $errorsFilterOne ?? [];
+    }
+    private function controlDataFilterTwo(array $data) :array
+    {
+        $errorsFilterTwo = [];
+
+        if ($data['area'] > 0 && !filter_var($data['area'], FILTER_VALIDATE_INT)) {
+            $errorsFilterTwo['area'] = 'La valeur de la surface n\'est pas autorisée';
         }
         if ($data['breakfast'] !== 'inclus' && !filter_var($data['breakfast'], FILTER_VALIDATE_FLOAT)) {
-            $errorsFilter['breakfast'] = 'L\'information sur le tarif du petit déjeuner doit être 
+            $errorsFilterTwo['breakfast'] = 'L\'information sur le tarif du petit déjeuner doit être 
             un nombre ou \'inclus\'';
         }
-        return $errorsFilter ?? [];
+        return $errorsFilterTwo ?? [];
     }
 
     private function controlDataFile(array $file):array
