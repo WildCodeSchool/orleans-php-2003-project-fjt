@@ -72,8 +72,7 @@ class AdminRoomController extends AbstractController
             $errorsDataOne = $this->controlDataOne($data, $addressesId);
             $errorsDataTwo = $this->controlDataTwo($data);
             $errorsFilter = $this->controlDataFilter($data);
-            $controlFileData = $this -> controlDataFile($file);
-            list($fileNameNew, $errorsUpload) = $controlFileData;
+            list($fileNameNew, $errorsUpload) = $this -> controlDataFile($file);
             $errors = array_merge($errorsDataOne, $errorsDataTwo, $errorsFilter, $errorsUpload);
 
             if (empty($errors)) {
