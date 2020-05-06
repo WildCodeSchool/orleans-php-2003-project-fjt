@@ -4,8 +4,8 @@
     <section>
         <h2 class="m-5">Gestion des pré-admissions</h2>
 
-        <div>
-            <form method="get" action="/AdminAdmission/allWaiting/">
+        <div class="d-flex justify-content-center">
+            <form  method="get" action="/AdminAdmission/allWaiting/">
                 <label for="search">Rechercher</label>
                 <input id="search" type="search" name="search">
                 <button>Chercher</button>
@@ -31,6 +31,9 @@
             {% endfor %}
             </tbody>
         </table>
-        <a class="btn btn-outline-primary" href="/AdminAdmission/index" >Retour</a>
+        <div class="d-flex justify-content-center">
+            <a class="btn btn-outline-primary col-6" href="/AdminAdmission/index" >Retour</a>
+        </div>
+
     </section>
 {% endblock %}
