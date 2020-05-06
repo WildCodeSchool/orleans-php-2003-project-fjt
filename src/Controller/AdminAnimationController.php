@@ -145,4 +145,17 @@ class AdminAnimationController extends AbstractController
             'errors' => $errors
         ]);
     }
+
+    public function delete($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $animationManager = new AnimationManager();
+            $animation = $animationManager->selectOneById($id);
+            if ($animation) {
+                unlink(self::UPLOAD_DIR . $animation['image']);
+                $animationManager->delete($id);
+            }
+            header('Location:/AdminAnimation/index');
+        }
+    }
 }
