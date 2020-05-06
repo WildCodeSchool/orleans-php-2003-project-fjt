@@ -1,8 +1,10 @@
 {% extends 'layout.html.twig' %}
-
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/adminAdmissionShow.css">
+{% endblock %}
 {% block content %}
     <section>
-        <h2 class="m-5">Dossier N°{{ folder.zip_path }}</h2>
+        <h2 class="m-5">Dossier N°{{ folder.fold }}</h2>
         <h3>Statut: {{ folder.status }}</h3>
         <div>
             <div>
@@ -40,6 +42,7 @@
                 </div>
                 <div>
                     <ul>
+
                         {% for file in files %}
                             <li>{{ file }}</li>
                         {% endfor %}
@@ -51,7 +54,7 @@
         <div>
             <a class="btn btn-outline-primary" href="">Valider le dossier</a>
             <a class="btn btn-outline-primary" href="">Télécharger le dossier</a>
-            <a class="btn btn-outline-primary" href="">Retour</a>
+            <a class="btn btn-outline-primary" href="/AdminAdmission/index">Retour</a>
         </div>
     </section>
 {% endblock %}

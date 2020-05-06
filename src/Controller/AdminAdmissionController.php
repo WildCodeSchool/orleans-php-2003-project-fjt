@@ -23,16 +23,22 @@ class AdminAdmissionController extends AbstractController
     {
         $admissionManager = new AdminAdmissionManager();
         $folders = $admissionManager->selectAllByTen();
-        $exploded = $this->multiexplode([",",".","/","(",")"], $folders[0]['zip_path']);
-        $folders[0]['fold'] = $exploded[8];
+
+        $countFolders = count($folders);
+        for ($i = 0; $i < $countFolders; $i++) {
+            $exploded = $this->multiexplode([",",".","/","(",")"], $folders[$i]['zip_path']);
+            $folders[$i]['fold'] = $exploded[8];
+        }
         return $this->twig->render('AdminAdmission/index.html.twig', ['folders' => $folders]);
     }
     public function show(int $id)
     {
         $admissionManager = new AdminAdmissionManager();
         $folder = $admissionManager->selectOneById($id);
-        $files = (new Zipper)->make($folder['zip_path'])->listFiles();
+        $exploded = $this->multiexplode([",",".","/","(",")"], $folder['zip_path']);
+        $folder['fold'] = $exploded[8];
 
+        $files = (new Zipper)->make($folder['zip_path'])->listFiles('/^(?!.*\.log).*$/i');
         return $this->twig->render('AdminAdmission/show.html.twig', [
             'folder' => $folder,
             'files' => $files
