@@ -107,10 +107,10 @@ class AdminAnimationController extends AbstractController
             $file = $_FILES;
             $errors = $this->controlData($data);
 
-            $fileExt = pathinfo($file['image']['name'], PATHINFO_EXTENSION);
-            $fileNameNew = uniqid('', true) . '.' . $fileExt;
+            $fileExtension = pathinfo($file['image']['name'], PATHINFO_EXTENSION);
+            $fileNameNew = uniqid('', true) . '.' . $fileExtension;
 
-            if (!empty($_FILES['image']['name'])) {
+            if ($_FILES['image']['error'] == 0) {
                 $fileTmp = $file['image']['tmp_name'];
                 $mimeType = mime_content_type($fileTmp);
                 $fileSize = filesize($fileTmp);
@@ -123,7 +123,7 @@ class AdminAnimationController extends AbstractController
                     $errors['image'] = $file['image']['name'] . ' est trop lourd.
                         Le fichier ne doit pas dépasser ' . self::MAX_FILE_SIZE / 1000000 . 'Mo';
                 } elseif (!in_array($mimeType, self::ALLOWED_MIME, true)) {
-                    $errors['image'] = $file['image']['name'] . ' L\'extension ' . $fileExt . ' n\'est pas autorisée.
+                    $errors['image'] = $file['image']['name'] . ' L\'extension ' . $mimeType . ' n\'est pas autorisée.
                         Merci de choisir un fichier ' . implode(', ', self::ALLOWED_MIME);
                 } elseif (!move_uploaded_file($fileTmp, $fileDestination)) {
                     $errors['image'] = 'Le téléchargement de ' . $file['image']['name'] . ' a échoué';
