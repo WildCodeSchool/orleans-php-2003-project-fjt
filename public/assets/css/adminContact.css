@@ -1,26 +1,8 @@
-.adminContact h3, p {
-    text-align: center;
+.card-text {
+    color: var(--dark-color) ;
 }
 
-.adminContact * {
-    color: black;
-    list-style: none;
-    text-align: center;
-}
-
-.btn-light {
-    width: 100pt;
-    font-size: 8pt;
-}
-
-.adminContact li {
-    margin: 10pt 0;
-}
-
-
-.adminContact {
-    border-radius: 30px;
-    width: 90%;
-    margin: 0 auto;
-    background-color: rgba(114, 114, 114, 0.3);
+.text {
+    text-align: end;
+    font-size: 10pt;
 }

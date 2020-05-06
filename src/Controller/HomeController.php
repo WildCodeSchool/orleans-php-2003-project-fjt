@@ -107,4 +107,11 @@ class HomeController extends AbstractController
 
         return $this->twig->render('Admincontact/message.html.twig', ['contacts' => $contact]);
     }
+
+    public function delete(int $id)
+    {
+        $contactManager = new ContactManager();
+        $contactManager->delete($id);
+        header('Location:/home/show');
+    }
 }
