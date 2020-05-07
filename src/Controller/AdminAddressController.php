@@ -3,19 +3,19 @@
 
 namespace App\Controller;
 
-use App\Model\RoomManager;
+use App\Model\AddressManager;
 
 class AdminAddressController extends AbstractController
 {
     public function addAddress()
     {
-        $adminRoomManager = new RoomManager();
+        $adminAddressManager = new AddressManager();
         $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = array_map('trim', $_POST);
             $errors = $this->controlAddress($data);
             if (empty($errors)) {
-                $adminRoomManager->insertAddress($data);
+                $adminAddressManager->insertAddress($data);
                 header('Location:/AdminRoom/index');
             }
         }
