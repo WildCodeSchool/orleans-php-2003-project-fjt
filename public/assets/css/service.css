@@ -32,16 +32,22 @@
     height: 200px;
 }
 
-.card-description .card-blue {
+.card-order:nth-child(odd) .card-color,
+.card-blue {
     font-weight: bold;
     color: var(--main-bg-color);
     border-bottom: 3px solid var(--main-bg-color);
 }
 
-.card-description .card-pink {
+.card-order:nth-child(even) .card-color,
+.card-pink {
     font-weight: bold;
     color: var(--secondary-bg-color);
     border-bottom: 3px solid var(--secondary-bg-color);
+}
+
+.card-order:nth-of-type(3) {
+    order: 1;
 }
 
 .card-title-sm {
@@ -75,6 +81,6 @@
         font-size: var(--medium-size);
     }
     .card-order:nth-of-type(3) {
-        order: 1;
+        order: 0;
     }
 }

@@ -17,13 +17,7 @@
                 <div class="card service-card mb-4">
                     <img src="/assets/images/{{ service.image }}" class="card-img-top" alt="{{ service.name }}">
                     <div class="card-body card-description">
-                        <h3 class="card-title text-center
-                        {% if loop.first or loop.last %}
-                            card-blue
-                        {% else %}
-                            card-pink
-                        {% endif %}
-                        ">
+                        <h3 class="card-title card-color text-center">
                             {{ service.name|upper }}
                         </h3>
                         <p class="card-text">{{ service.description }}</p>
