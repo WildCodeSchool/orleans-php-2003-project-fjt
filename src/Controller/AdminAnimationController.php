@@ -84,6 +84,7 @@ class AdminAnimationController extends AbstractController
 
     private function controlData($data)
     {
+        $errors = [];
         if (empty($data['name'])) {
             $errors['name'] = 'Veuillez renseigner le nom de l\'animation';
         } elseif (strlen($data['name']) > self::MAX_NAME_LENGTH) {
@@ -95,5 +96,66 @@ class AdminAnimationController extends AbstractController
                 self::MAX_DESCRIPTION_LENGTH . ' caractères';
         }
         return $errors ?? [];
+    }
+
+    public function edit(int $id)
+    {
+        $errors = [];
+        $animationManager = new AnimationManager();
+        $animation = $animationManager->selectOneById($id);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = array_map('trim', $_POST);
+            $file = $_FILES;
+            $errors = $this->controlData($data);
+
+            $fileExtension = pathinfo($file['image']['name'], PATHINFO_EXTENSION);
+            $fileNameNew = uniqid('', true) . '.' . $fileExtension;
+
+            if ($_FILES['image']['error'] == 0) {
+                $fileTmp = $file['image']['tmp_name'];
+                $mimeType = mime_content_type($fileTmp);
+                $fileSize = filesize($fileTmp);
+                $fileError = $_FILES['image']['error'];
+                $fileDestination = self::UPLOAD_DIR . $fileNameNew;
+
+                if ($fileError !== 0) {
+                    $errors['image'] = $file['image']['name'] . 'errored with code' . $fileError;
+                } elseif ($fileSize > self::MAX_FILE_SIZE) {
+                    $errors['image'] = $file['image']['name'] . ' est trop lourd.
+                        Le fichier ne doit pas dépasser ' . self::MAX_FILE_SIZE / 1000000 . 'Mo';
+                } elseif (!in_array($mimeType, self::ALLOWED_MIME, true)) {
+                    $errors['image'] = $file['image']['name'] . ' L\'extension ' . $mimeType . ' n\'est pas autorisée.
+                        Merci de choisir un fichier ' . implode(', ', self::ALLOWED_MIME);
+                } elseif (!move_uploaded_file($fileTmp, $fileDestination)) {
+                    $errors['image'] = 'Le téléchargement de ' . $file['image']['name'] . ' a échoué';
+                }
+            } else {
+                $errors['image'] = 'Merci d\'ajouter une image';
+            }
+
+            if (empty($errors)) {
+                $data['image'] = $fileNameNew;
+                $animationManager->update($data);
+                header('Location:/AdminAnimation/index');
+            }
+        }
+        return $this->twig->render('AdminAnimation/edit.html.twig', [
+            'animation' => $animation,
+            'data' => $data ?? [],
+            'errors' => $errors
+        ]);
+    }
+
+    public function delete($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $animationManager = new AnimationManager();
+            $animation = $animationManager->selectOneById($id);
+            if ($animation) {
+                unlink(self::UPLOAD_DIR . $animation['image']);
+                $animationManager->delete($id);
+            }
+            header('Location:/AdminAnimation/index');
+        }
     }
 }

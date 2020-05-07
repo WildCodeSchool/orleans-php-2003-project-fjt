@@ -67,3 +67,21 @@
     }
 
 }
+/* Formulaire */
+
+.rooms form {
+    width: 80%;
+    margin: 0 auto;
+}
+.rooms form p {
+    width: 50%;
+    margin: 5% auto;
+    text-align: center;
+}
+.rooms form p a {
+    color: #090909;
+    text-decoration: underline;
+}
+.rooms form ol li {
+    list-style: none;
+}
