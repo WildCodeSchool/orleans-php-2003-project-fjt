@@ -44,4 +44,23 @@ class AnimationManager extends AbstractManager
             return (int)$this->pdo->lastInsertId();
         }
     }
+
+    public function update(array $animation): bool
+    {
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `name` = :name, `description` = :description,
+        `image` = :image WHERE id=:id");
+        $statement->bindValue('id', $animation['id'], \PDO::PARAM_INT);
+        $statement->bindValue('name', $animation['name'], \PDO::PARAM_STR);
+        $statement->bindValue('description', $animation['description'], \PDO::PARAM_STR);
+        $statement->bindValue('image', $animation['image'], \PDO::PARAM_STR);
+        return $statement->execute();
+    }
+
+    public function delete(int $id): void
+    {
+        // prepared request
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+    }
 }
