@@ -9,21 +9,22 @@
 
 namespace App\Controller;
 
-use App\Model\AdminAdmissionManager;
+use App\Model\AdmissionManager;
 
 use Chumper\Zipper\Zipper;
 
 /**
- * Class AdminAnimationController
+ * Class AdminAdmissionController
  *
  */
 class AdminAdmissionController extends AbstractController
 {
     public function index()
     {
-        $admissionManager = new AdminAdmissionManager();
+        $admissionManager = new AdmissionManager();
         $folders = $admissionManager->selectAllByTen();
-
+        // le code ci-dessous sert à générer en fonction de l'iniquid du dossier zip un numéro de dossier
+        // pour l'affichage
         $countFolders = count($folders);
         for ($i = 0; $i < $countFolders; $i++) {
             $exploded = $this->multiexplode([",",".","/","(",")"], $folders[$i]['zip_path']);
@@ -33,8 +34,10 @@ class AdminAdmissionController extends AbstractController
     }
     public function show(int $id)
     {
-        $admissionManager = new AdminAdmissionManager();
+        $admissionManager = new AdmissionManager();
         $folder = $admissionManager->selectOneById($id);
+        // le code ci-dessous sert à générer en fonction de l'iniquid du dossier zip un numéro de dossier
+        // pour l'affichage
         $exploded = $this->multiexplode([",",".","/","(",")"], $folder['zip_path']);
         $folder['fold'] = $exploded[8];
 
@@ -46,23 +49,20 @@ class AdminAdmissionController extends AbstractController
     }
     public function allWaiting()
     {
-        $search = trim($_GET['search'] ?? '');
-        $admissionManager = new AdminAdmissionManager();
-        $folders = $admissionManager->selectAllFolder($search);
+        $admissionManager = new AdmissionManager();
+        $folders = $admissionManager->selectAllFolder();
 
         return $this->twig->render('AdminAdmission/allWaiting.html.twig', ['folders' => $folders]);
     }
     public function allValidate()
     {
-        $search = trim($_GET['search'] ?? '');
-        $admissionManager = new AdminAdmissionManager();
-        $folders = $admissionManager->selectAllFolder($search);
+        $admissionManager = new AdmissionManager();
+        $folders = $admissionManager->selectAllFolder();
 
         return $this->twig->render('AdminAdmission/allValidate.html.twig', ['folders' => $folders]);
     }
     private function multiexplode($delimiters, $string)
     {
-
         $ready = str_replace($delimiters, $delimiters[0], $string);
         return explode($delimiters[0], $ready);
     }
