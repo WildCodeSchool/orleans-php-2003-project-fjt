@@ -8,11 +8,11 @@
             <h2 class="m-5">Gestion des logements</h2>
             <div class="d-flex justify-content-around ">
 
-                <a role="button" class="btn btn-outline-primary btn-lg" href="../AdminRoom/addRoom">Ajouter un logement</a>
+                <a role="button" class="btn btn-outline-primary btn-lg" href="/AdminRoom/addRoom">Ajouter un logement</a>
 
-                <a role="button" class="btn btn-outline-primary btn-lg" href="../Admin/index">Retour</a>
+                <a role="button" class="btn btn-outline-primary btn-lg" href="/Admin/index">Retour</a>
 
-                <a role="button" class="btn btn-outline-primary btn-lg" href="../Admin/addAddress">Ajouter une adresse</a>
+                <a role="button" class="btn btn-outline-primary btn-lg" href="/AdminRoom/addAddress">Ajouter une adresse</a>
 
             </div>
 
@@ -32,7 +32,7 @@
                             </td>
                             <td><form action="../AdminRoom/deleteRoom" method="post">
                                     <input type="hidden" value="{{ room.id }}" name="id">
-                                    <button class="btn btn-outline-primary">Supprimer ce logement</button>
+                                    <button class="btn btn-outline-primary" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer ce logement ?')">Supprimer ce logement</button>
                                 </form>
                             </td>
                         </tr>
@@ -57,7 +57,7 @@
                         </td>
                         <td><form action="" method="post">
                                 <input type="hidden" value="{{ address.id }}" name="id">
-                                <button class="btn btn-outline-primary">Supprimer ce logement</button>
+                                <button class="btn btn-outline-primary" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer cette adresse ?')">Supprimer ce logement</button>
                             </form>
                         </td>
                     </tr>
