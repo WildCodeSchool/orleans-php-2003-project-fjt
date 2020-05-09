@@ -24,7 +24,6 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-
         $errors = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -38,7 +37,7 @@ class HomeController extends AbstractController
             if (empty($errors)) {
                 $contactManager = new ContactManager();
                 $contactManager->insert($data);
-                header('Location:/home/index');
+                header('Location:/home/index/?success=Votre message a bien été envoyé, nous vous recontacterons dans les plus brefs délais.');
             }
         }
 
@@ -47,6 +46,7 @@ class HomeController extends AbstractController
             [
                 'post'=> $_POST,
                 'errors'=> $errors,
+                'success' => $_GET
             ]
         );
     }

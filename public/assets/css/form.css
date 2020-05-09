@@ -2,7 +2,7 @@ label {
     margin: 2px;
 }
 
-.alert-danger {
+.alert-danger, .alert-success {
     font-size: 10pt;
     text-align: center;
     padding: 0;
