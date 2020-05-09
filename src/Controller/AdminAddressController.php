@@ -9,13 +9,13 @@ class AdminAddressController extends AbstractController
 {
     public function addAddress()
     {
-        $adminAddressManager = new AddressManager();
+        $addressManager = new AddressManager();
         $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = array_map('trim', $_POST);
             $errors = $this->controlAddress($data);
             if (empty($errors)) {
-                $adminAddressManager->insertAddress($data);
+                $addressManager->insertAddress($data);
                 header('Location:/AdminRoom/index');
             }
         }
