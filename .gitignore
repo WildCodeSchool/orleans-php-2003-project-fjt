@@ -6,4 +6,5 @@ db.php
 .idea
 error_log
 /uploads/
-
+public/uploads/images
+public/assets/images
