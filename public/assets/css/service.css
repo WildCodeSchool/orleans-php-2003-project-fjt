@@ -66,6 +66,15 @@
     border-radius: 10px 0 0 10px;
 }
 
+.admin-title {
+    margin: var(--spacing-sm);
+}
+
+.admin-image img {
+    height: 200px;
+}
+
+
 @media screen and (max-width: 1300px) {
     .container-service,
     .container-animation {
