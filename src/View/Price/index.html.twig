@@ -22,12 +22,15 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                  <h3 class="card-title">Tarif</h3>
-                                 <p class="card-text card-price">{% set room_price = room.guarantee+room.catering+
-                                            room.contribution+room.equipment_contribution %}
-                                        {% if room.breakfast is not null and room.breakfast != 'inclus' %}
-                                            {% set room_price = room_price + room.breakfast %}
-                                        {% endif %}
-                                        {{  room_price |round(2, 'floor') }}€</p>
+                                <div class="d-flex">
+                                     <p class="card-text card-price">{% set room_price = room.guarantee+room.catering+
+                                                room.contribution+room.equipment_contribution %}
+                                            {% if room.breakfast is not null and room.breakfast != 'inclus' %}
+                                                {% set room_price = room_price + room.breakfast %}
+                                            {% endif %}
+                                            {{  room_price |round(2, 'floor') }}€</p>
+                                    <p class="pl-1"><strong>/mois</strong></p>
+                                </div>
                             </div>
                             <div class="d-flex flex-column">
                                 <h3 class="card-title">Adresse</h3>
