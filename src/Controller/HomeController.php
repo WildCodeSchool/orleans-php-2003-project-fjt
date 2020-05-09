@@ -37,7 +37,8 @@ class HomeController extends AbstractController
             if (empty($errors)) {
                 $contactManager = new ContactManager();
                 $contactManager->insert($data);
-                header('Location:/home/index/?success=Votre message a bien été envoyé, nous vous recontacterons dans les plus brefs délais.');
+                header('Location:/home/index/
+                ?success=Votre message a bien été envoyé, nous vous recontacterons dans les plus brefs délais.');
             }
         }
 
