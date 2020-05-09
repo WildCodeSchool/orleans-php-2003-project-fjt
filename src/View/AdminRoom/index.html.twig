@@ -30,9 +30,9 @@
                             <td>
                                 <a class="btn btn-outline-primary" href="/AdminRoom/editRoom/{{ room.id }}" value="">Mettre à jour</a>
                             </td>
-                            <td><form action="" method="post">
+                            <td><form action="../AdminRoom/deleteRoom" method="post">
                                     <input type="hidden" value="{{ room.id }}" name="id">
-                                    <button class="btn btn-outline-primary">Supprimer ce logement</button>
+                                    <button class="btn btn-outline-primary" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer ce logement ?')">Supprimer ce logement</button>
                                 </form>
                             </td>
                         </tr>
@@ -59,7 +59,7 @@
                         <td>
                             <form action="" method="post">
                                 <input type="hidden" value="{{ address.id }}" name="id">
-                                <button class="btn btn-outline-primary">Supprimer ce logement</button>
+                                <button class="btn btn-outline-primary" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer cette adresse ?')">Supprimer ce logement</button>
                             </form>
                         </td>
                     </tr>
