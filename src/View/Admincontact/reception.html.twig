@@ -26,7 +26,7 @@
             <th scope="row">{{ contact.sendDate | date("d.m.Y à H:i") }}</th>
                 <td> {{ contact.firstname }}</td>
                 <td> {{ contact.lastname }}</td>
-                <td> <a href="/home/message/{{ contact.id }}"><button class="btn btn-outline-primary" type="button" value="button" >Consulter</button></a>
+                <td> <a href="/AdminContact/details/{{ contact.id }}"><button class="btn btn-outline-primary" type="button" value="button" >Consulter</button></a>
                 </td>
         </tr>
         {% endfor %}
