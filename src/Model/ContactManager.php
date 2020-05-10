@@ -10,7 +10,7 @@ class ContactManager extends AbstractManager
     /**
      *
      */
-    const TABLE = 'contacts';
+    const TABLE = 'contact';
 
     /**
      *  Initializes this class.
@@ -26,8 +26,6 @@ class ContactManager extends AbstractManager
      */
     public function insert(array $data): void
     {
-
-        // prepared request
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
             " (`lastname`, `firstname`, `email`, `phone`, `message`, `sendDate`) 
             VALUES (:lastname, :firstname, :email, :phone, :message, NOW())");
@@ -45,7 +43,6 @@ class ContactManager extends AbstractManager
      */
     public function delete(int $id): void
     {
-        // prepared request
         $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();

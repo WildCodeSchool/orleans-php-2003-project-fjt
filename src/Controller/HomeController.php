@@ -9,7 +9,6 @@
 namespace App\Controller;
 
 use App\Model\ContactManager;
-use App\Model\ItemManager;
 
 class HomeController extends AbstractController
 {
@@ -55,7 +54,6 @@ class HomeController extends AbstractController
 
     private function secureName($data, $errors)
     {
-        //nom
         $maxNameLength = 55;
         if (empty($data['lastname'])) {
             $errors['lastname'] = 'Votre nom est requis';
@@ -63,7 +61,6 @@ class HomeController extends AbstractController
             $errors['lastname'] = "La taille de votre nom ne peut pas excéder ".$maxNameLength.' caractères.';
         }
 
-        //prénom
         if (empty($data['firstname'])) {
             $errors['firstname'] = 'Votre prénom est requis';
         } elseif (strlen($data['firstname']) > $maxNameLength) {
@@ -72,6 +69,7 @@ class HomeController extends AbstractController
 
         return $errors;
     }
+
 
     private function secureInfo($data, $errors)
     {
@@ -82,6 +80,7 @@ class HomeController extends AbstractController
         }
         return $errors;
     }
+
 
     private function secureMessage($data, $errors)
     {
