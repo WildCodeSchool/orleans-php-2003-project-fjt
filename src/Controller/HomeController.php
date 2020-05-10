@@ -75,7 +75,7 @@ class HomeController extends AbstractController
     {
         if (!empty($data['email'])) {
             if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = "Format de mail invalide";
+                $errors['email'] = "Doit correspondre au format adresse@valide.com";
             }
         }
         return $errors;
@@ -84,28 +84,9 @@ class HomeController extends AbstractController
 
     private function secureMessage($data, $errors)
     {
-        // message
         if (empty($data['message'])) {
             $errors['message'] = 'Un message est requis';
         }
         return $errors;
-    }
-
-
-    public function show()
-    {
-        $contactManager = new ContactManager();
-        $contact = $contactManager->selectAllContact();
-
-        return $this->twig->render('Admincontact/reception.html.twig', ['contacts' => $contact]);
-    }
-
-
-    public function message(int $id)
-    {
-        $contactManager = new ContactManager();
-        $contact = $contactManager->selectOneById($id);
-
-        return $this->twig->render('Admincontact/message.html.twig', ['contacts' => $contact]);
     }
 }
