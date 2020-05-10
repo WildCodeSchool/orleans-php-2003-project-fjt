@@ -50,10 +50,9 @@
                 {% for address in addresses %}
                     <tr>
                         <td>{{ address.address }}</td>
-                        <td><form action="" method="post">
-                                <input type="hidden" value="{{ address.id }}" name="id">
-                                <button class="btn btn-outline-primary">Mettre à jour</button>
-                            </form>
+                        <td>
+                            <a class="btn btn-outline-primary" href="/AdminAddress/editAddress/{{ address.id }}" value="">Mettre à jour</a>
+                        </td>
                         </td>
                         <td><form action="" method="post">
                                 <input type="hidden" value="{{ address.id }}" name="id">
