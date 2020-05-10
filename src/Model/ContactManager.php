@@ -39,7 +39,7 @@ class ContactManager extends AbstractManager
     }
 
     // fonction custom pour trier la récupération des entrées et les afficher de la plus récente à la plus ancienne
-    public function selectAllContact(): array
+    public function selectAllContacts(): array
     {
         return $this->pdo->query('SELECT * FROM ' . $this->table . ' ORDER BY sendDate DESC')->fetchAll();
     }
