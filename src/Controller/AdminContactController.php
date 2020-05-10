@@ -9,18 +9,18 @@ class AdminContactController extends AbstractController
     public function index()
     {
         $contactManager = new ContactManager();
-        $contact = $contactManager->selectAllContact();
+        $contacts = $contactManager->selectAllContacts();
 
-        return $this->twig->render('Admincontact/reception.html.twig', ['contacts' => $contact]);
+        return $this->twig->render('Admincontact/index.html.twig', ['contacts' => $contacts]);
     }
 
 
-    public function details(int $id)
+    public function show(int $id)
     {
         $contactManager = new ContactManager();
         $contact = $contactManager->selectOneById($id);
 
-        return $this->twig->render('Admincontact/message.html.twig', ['contacts' => $contact]);
+        return $this->twig->render('Admincontact/show.html.twig', ['contact' => $contact]);
     }
 
     public function delete(int $id)
