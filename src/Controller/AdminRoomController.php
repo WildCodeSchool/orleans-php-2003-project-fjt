@@ -108,7 +108,7 @@ class AdminRoomController extends AbstractController
         if (empty($data['address_id'])) {
             $errorsDataOne['address_id'] = 'L\'adresse du logement ne doit pas être vide';
         } elseif (!in_array($data['address_id'], $addressesId, true)) {
-            $errorsDataOne['address_id'] = 'L\'adresse du logement n\'est pas une adresse éxistante';
+            $errorsDataOne['address_id'] = 'L\'adresse du logement n\'est pas une adresse enregistrée';
         }
         return $errorsDataOne ?? [];
     }
@@ -132,10 +132,10 @@ class AdminRoomController extends AbstractController
     {
         $errorsFilterOne = [];
         if (!filter_var($data['guarantee'], FILTER_VALIDATE_FLOAT)) {
-            $errorsFilterOne['guarantee'] = 'La valeur du dépôt de garantie n\'est pas autorisé';
+            $errorsFilterOne['guarantee'] = 'La valeur du dépôt de garantie n\'est pas autorisée';
         }
         if (!filter_var($data['catering'], FILTER_VALIDATE_FLOAT)) {
-            $errorsFilterOne['catering'] = 'La valeur du crédit restauration n\'est pas autorisé';
+            $errorsFilterOne['catering'] = 'La valeur du crédit restauration n\'est pas autorisée';
         }
         if (!filter_var($data['contribution'], FILTER_VALIDATE_FLOAT)) {
             $errorsFilterOne['contribution'] = 'La valeur de la cotisation n\'est pas autorisée';
