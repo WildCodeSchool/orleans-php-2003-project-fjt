@@ -36,8 +36,8 @@ class HomeController extends AbstractController
             if (empty($errors)) {
                 $contactManager = new ContactManager();
                 $contactManager->insert($data);
-                header('Location:/home/index/
-                ?success=Votre message a bien été envoyé, nous vous recontacterons dans les plus brefs délais.');
+                header('Location:/home/index/' .
+                    '?success=Votre message a bien été envoyé, nous vous recontacterons dans les plus brefs délais.');
             }
         }
 
@@ -107,12 +107,5 @@ class HomeController extends AbstractController
         $contact = $contactManager->selectOneById($id);
 
         return $this->twig->render('Admincontact/message.html.twig', ['contacts' => $contact]);
-    }
-
-    public function delete(int $id)
-    {
-        $contactManager = new ContactManager();
-        $contactManager->delete($id);
-        header('Location:/home/show');
     }
 }
