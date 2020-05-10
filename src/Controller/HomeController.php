@@ -76,7 +76,7 @@ class HomeController extends AbstractController
     {
         if (!empty($data['email'])) {
             if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = "Format de mail invalide";
+                $errors['email'] = "Votre adresse doit correspondre au format adressse@valide.com";
             }
         }
         return $errors;

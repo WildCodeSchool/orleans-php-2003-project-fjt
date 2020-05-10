@@ -11,12 +11,12 @@
         </div>
 
         <div class="col-5 col-md-6 offset-1">
-            <form action="" method="POST">
+            <form novalidate action="" method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="lastname">Nom*</label>
                         <input required type="text" class="form-control" id="lastname" name="lastname" placeholder="Alderson" value="{{ post.lastname }}">
-                        <div class="formErrors">
+                        <div>
                             {% if errors.lastname %}
                                 <div class="alert alert-danger mt-1" role="alert">{{ errors.lastname }}</div>
                             {% endif %}
@@ -26,7 +26,7 @@
                     <div class="form-group col-md-4 offset-1">
                         <label for="firstname">Prénom*</label>
                         <input required type="text" class="form-control" id="firstname" name="firstname" placeholder="Elliot" value="{{ post.firstname }}">
-                        <div class="formErrors">
+                        <div>
                             {% if errors.firstname %}
                                 <div class="alert alert-danger mt-1" role="alert">{{ errors.firstname }}</div>
                             {% endif %}
@@ -39,15 +39,16 @@
                     <div class="form-group col-md-4">
                         <label for="phone">Téléphone</label>
                         <input type="tel" class="form-control" id="phone" name="phone" placeholder="0601020304" value="{{ post.phone }}">
-                        <div class="formErrors">
-                        </div>
                     </div>
 
 
                     <div class="form-group col-md-4 offset-1">
                         <label for="email">Adresse mail</label>
                         <input   type="email" class="form-control" id="email" name="email" placeholder="alderson.elliot@gmail.com" value="{{ post.email }}">
-                        <div class="formErrors">
+                        <div>
+                            {% if errors.email %}
+                                <div class="alert alert-danger mt-1" role="alert">{{ errors.email }}</div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -55,7 +56,7 @@
                 <div class="form-group col-9 px-0">
                     <label for="message">Message*</label>
                     <textarea required class="form-control" id="message" name="message" rows="4" placeholder="Je souhaiterai vous contacter à propos de..." value="{{ post.message }}"></textarea>
-                    <div class="formErrors">
+                    <div>
                         {% if errors.message %}
                             <div class="alert alert-danger mt-1" role="alert">{{ errors.message }}</div>
                         {% endif %}
@@ -63,7 +64,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Envoyer</button>
                 <div class="alert-light" role="alert">
-                    <p>Les champs marqués d'un * obligatoire</p>
+                    <p>Les champs marqués d'un * sont obligatoires</p>
                 </div>
             </form>
             <div class="col-9 px-0">
