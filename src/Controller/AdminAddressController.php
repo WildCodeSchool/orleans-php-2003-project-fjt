@@ -7,6 +7,7 @@ use App\Model\AddressManager;
 
 class AdminAddressController extends AbstractController
 {
+    const MAX_LENGTH = 255;
     public function editAddress(int $id)
     {
         $addressManager = new AddressManager();
@@ -27,16 +28,17 @@ class AdminAddressController extends AbstractController
     }
     private function controlAddress($data)
     {
+
         $errors = [];
         if (empty($data['name'])) {
-            $errors['name'] = 'Le nom du logement ne doit pas être vide';
-        } elseif (strlen($data['name']) > 255) {
+            $errors['name'] = 'Le nom du logement doit fait moins de ' . self::MAX_LENGTH . ' caractères.';
+        } elseif (strlen($data['name']) > self::MAX_LENGTH) {
             $errors['name'] = 'Le nom du logement est trop long';
         }
         if (empty($data['address'])) {
             $errors['address'] = 'L\'adresse du logement ne doit pas être vide';
-        } elseif (strlen($data['address']) > 255) {
-            $errors['address'] = 'L\'adresse du logement est trop longue';
+        } elseif (strlen($data['address']) > self::MAX_LENGTH) {
+            $errors['address'] = 'L\'adresse du logement doit fait moins de ' . self::MAX_LENGTH . ' caractères.';
         }
 
         return $errors ?? [];
