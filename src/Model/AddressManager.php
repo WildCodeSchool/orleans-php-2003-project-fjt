@@ -41,6 +41,6 @@ class AddressManager extends AbstractManager
         $statement->bindValue(':address', $data['address'], \PDO::PARAM_STR);
         $statement->bindValue(':description', $data['description'], \PDO::PARAM_STR);
         $statement->execute();
-
     }
+    
 }
