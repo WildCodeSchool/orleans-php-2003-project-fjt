@@ -27,6 +27,11 @@ class AnimationManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
+    public function selectByFour()
+    {
+        return $this->pdo->query('SELECT * FROM animation ORDER BY id DESC LIMIT 4')->fetchAll();
+    }
+
     /**
      * @param array $animation
      * @return int
