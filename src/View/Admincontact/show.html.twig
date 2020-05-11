@@ -12,18 +12,18 @@
                     <div class="row mr-3">
                         <div class="col-3 d-flex align-items-center flex-column">
                             <h3>Nom</h3>
-                            <span>{{ contacts.lastname }}</span>
+                            <span>{{ contact.lastname }}</span>
                         </div>
 
                         <div class="col-3 d-flex align-items-center flex-column">
                             <h3>Prénom</h3>
-                            <span>{{ contacts.firstname }}</span>
+                            <span>{{ contact.firstname }}</span>
                         </div>
 
                         <div class="col-3 d-flex align-items-center flex-column">
                             <h3>Téléphone</h3>
-                            {% if contacts.phone != 0 %}
-                            <span>{{ contacts.phone }}</span>
+                            {% if contact.phone != 0 %}
+                            <span>{{ contact.phone }}</span>
                                 {% else %}
                                 <p>Non renseigné</p>
                             {% endif %}
@@ -31,24 +31,20 @@
 
                         <div class="col-3 d-flex align-items-center flex-column">
                             <h3>Adresse mail</h3>
-                            {% if contacts.email %}
-                            <span>{{ contacts.email }}</span>
-                            {% else %}
-                                <p>Non renseigné</p>
-                            {% endif %}
+                            <span>{{ contact.email }}</span>
                         </div>
                     </div>
 
                 </div>
                 <div class="card-body text-secondary pb-0">
-                    <p class="card-text">{{ contacts.message }}</p>
-                    <p class="text"> Envoyé le {{ contacts.sendDate | date("d.m.Y à H:i")}}</p>
+                    <p class="card-text">{{ contact.message }}</p>
+                    <p class="text"> Envoyé le {{ contact.sendDate | date("d.m.Y à H:i")}}</p>
 
                 </div>
             </div>
                 <div class="row">
                     <div class="col-3 offset-4">
-                        <a href="/AdminContact/delete/{{contacts.id}}">
+                        <a href="/AdminContact/delete/{{contact.id}}">
                             <button type="button" class="btn btn-outline-danger">Supprimer</button>
                         </a>
                     </div>
