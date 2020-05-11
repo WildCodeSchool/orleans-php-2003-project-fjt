@@ -57,7 +57,6 @@ class AdminAddressController extends AbstractController
             $errors['address'] = 'L\'adresse du logement ne doit pas être vide';
         } elseif (strlen($data['address']) > self::MAX_LENGTH) {
             $errors['address'] = 'L\'adresse du logement doit fait moins de ' . self::MAX_LENGTH . ' caractères.';
-
         }
 
         return $errors ?? [];
