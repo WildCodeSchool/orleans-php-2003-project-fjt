@@ -22,10 +22,12 @@ class AdminContactController extends AbstractController
         return $this->twig->render('Admincontact/show.html.twig', ['contact' => $contact]);
     }
 
-    public function delete(int $id)
+    public function delete($id)
     {
-        $contactManager = new ContactManager();
-        $contactManager->delete($id);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $contactManager = new ContactManager();
+            $contactManager->delete($id);
+        }
         header('Location:/AdminContact/index');
     }
 }

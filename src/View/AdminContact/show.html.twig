@@ -48,7 +48,9 @@
             </div>
             <div class="row">
                 <div class="col-3 offset-4">
-                    <a href="/AdminContact/delete/{{contact.id}}" class="btn btn-outline-danger"> Supprimer </a>
+                    <form action="/AdminContact/delete/{{contact.id}}" method="post">
+                        <input type="submit" class="btn btn-outline-danger" value="Supprimer" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer ce message ?')">
+                    </form>
                 </div>
                 <div class="col-3">
                     <a href="/AdminContact/index" class="btn btn-outline-secondary"> Boîte de réception </a>
