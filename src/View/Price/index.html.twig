@@ -72,14 +72,14 @@
                                         {% if room.breakfast is not null and room.breakfast != 'inclus' %}
                                             {% set room_price = room_price + room.breakfast %}
                                         {% endif %}
-                                        {{  room_price |round(2, 'floor') }}€
+                                        {{  room_price |round(2, 'floor') }} €
                                     </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-between modal-price mt-3">
-                                    <p>Loyer + garantie</p>
-                                    <p>{{ room.guarantee }}€</p>
+                                    <p>Loyer</p>
+                                    <p>{{ room.guarantee }} €</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -89,7 +89,7 @@
                                         {% if room.catering is null %}
                                             /
                                         {% else %}
-                                            {{ room.catering }}€
+                                            {{ room.catering }} €
                                         {% endif %}
                                     </p>
                                 </div>
@@ -101,19 +101,19 @@
                                         {% if room.contribution is null %}
                                             /
                                         {% else %}
-                                            {{ room.contribution }}€
+                                            {{ room.contribution }} €
                                         {% endif %}
                                     </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-between modal-price">
-                                    <p>Equipement</p>
+                                    <p>Cotisation d'équipement</p>
                                     <p>
                                         {% if room.equipment_contribution is null %}
                                             /
                                         {% else %}
-                                            {{ room.equipment_contribution }}€
+                                            {{ room.equipment_contribution }} €
                                         {% endif %}
                                     </p>
                                 </div>
@@ -127,7 +127,7 @@
                                         {% elseif room.breakfast == 'inclus' %}
                                             {{ room.breakfast|upper }}
                                         {% else %}
-                                            {{ room.breakfast }}€
+                                            {{ room.breakfast }} €
                                         {% endif %}
                                     </p>
                                 </div>
