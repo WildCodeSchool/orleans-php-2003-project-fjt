@@ -39,4 +39,9 @@ class ContactManager extends AbstractManager
 
         $statement->execute();
     }
+
+    public function selectAllContacts(): array
+    {
+        return $this->pdo->query('SELECT * FROM ' . $this->table . ' ORDER BY sendDate DESC')->fetchAll();
+    }
 }
