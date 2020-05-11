@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
     <section>
-        <h2 class="m-5">Dossier N°{{ folder.fold }}</h2>
+        <h2 class="m-5">Dossier de {{ folder.lastname ~ ' ' ~ folder.firstname  }}</h2>
         <h3>Statut: {{ folder.status }}</h3>
         <div class="d-flex flex-column fiche-signaletique p-4 border border-primary rounded m-3 col-lg-8">
             <div class="d-flex my-3">

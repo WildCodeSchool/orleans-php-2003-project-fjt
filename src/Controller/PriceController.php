@@ -45,8 +45,9 @@ class PriceController extends AbstractController
             );
             if (empty($errors)) {
                 $zipper = new Zipper;
-                $zipName = $data['firstname'] . $data['lastname'] . '(' . uniqid('', true) . ')'. ".zip";
-                $zipper->make('../public/assets/uploads/' . $zipName);
+                $zipName = $data['lastname'] . '_' . uniqid('', true) . ".zip";
+                $folderName = $data['lastname'] . '_' . $data['firstname'] ;
+                $zipper->make('../public/assets/uploads/' . $zipName)->folder($folderName);
                 foreach ($files['name'] as $position => $name) {
                     $fileDestination = self::UPLOAD_DIR . $filesNameNew[$position];
 

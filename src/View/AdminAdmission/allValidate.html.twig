@@ -13,7 +13,7 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th scope="col" colspan="3">Dossiers validés</th>
+                <th scope="col" colspan="2">Dossiers validés</th>
             </tr>
             </thead>
             <tbody>
@@ -21,7 +21,6 @@
                 {%  if folder.status is same as('Validé') %}
                     <tr>
                         <td>{{ folder.lastname ~ ' ' ~ folder.firstname}}</td>
-                        <td>{{ folder.zip_path }}</td>
                         <td>
                             <a class="btn btn-outline-primary" href="/AdminAdmission/show/{{ folder.id }}" >Consulter</a>
                         </td>
