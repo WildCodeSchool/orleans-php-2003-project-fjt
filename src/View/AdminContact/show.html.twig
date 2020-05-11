@@ -46,12 +46,13 @@
 
                 </div>
             </div>
-                <div class="row">
-                    <div class="col-3">
-                        <a href="/AdminContact/index">
-                            <button type="button" class="btn btn-outline-secondary">Retour</button>
-                        </a>
-                    </div>
+            <div class="row">
+                <div class="col-3 offset-4">
+                    <a href="/AdminContact/delete/{{contact.id}}" class="btn btn-outline-danger"> Supprimer </a>
                 </div>
+                <div class="col-3">
+                    <a href="/AdminContact/index" class="btn btn-outline-secondary"> Retour </a>
+                </div>
+            </div>
         </div>
 {% endblock %}
