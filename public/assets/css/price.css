@@ -16,6 +16,7 @@
 /* CARD */
 .card-rooms h2 {
     margin: var(--spacing);
+    text-align: center;
 }
 
 .card-rooms {
@@ -36,8 +37,7 @@
     border-radius: 0 0 15px 15px ;
 }
 
-.card-rooms h3 {
-    font-weight: bold;
+.icon-here {
     color: var(--main-bg-color);
 }
 
@@ -47,7 +47,8 @@
     font-size: var(--medium-size);
 }
 
-.rooms .card .btn {
+.rooms .card .btn,
+.modal-footer .btn {
     align-self: flex-end;
     color: var(--light-color);
     background-color: var(--secondary-bg-color);
@@ -96,4 +97,25 @@
 }
 .rooms form ol li {
     list-style: none;
+}
+
+/* Modal */
+.modal-total {
+    border-bottom: 3px solid var(--main-bg-color);
+}
+
+.modal-total-room {
+    color: var(--main-bg-color);
+    font-size: var(--medium-size);
+    font-weight: bold;
+}
+
+.modal-total-price {
+    color: var(--secondary-bg-color);
+    font-size: var(--medium-size);
+    font-weight: bold;
+}
+
+.modal-body-room img {
+    border-radius: 10px;
 }

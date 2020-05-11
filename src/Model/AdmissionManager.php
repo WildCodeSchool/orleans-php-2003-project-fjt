@@ -39,4 +39,19 @@ class AdmissionManager extends AbstractManager
         $statement->bindValue(':mail', $infosToAdd['mail'], PDO::PARAM_STR);
         $statement->execute();
     }
+    public function selectAllFolder(string $search = ''): array
+    {
+        $query = 'SELECT * FROM ' . self::TABLE ;
+        if ($search) {
+            $query .= ' WHERE lastname LIKE :search' ;
+        }
+        $query .=' ORDER BY lastname, firstname';
+        $statement = $this->pdo->prepare($query);
+        if ($search) {
+            $statement->bindValue('search', $search . '%');
+        }
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
 }

@@ -26,6 +26,24 @@ class AdminAddressController extends AbstractController
             'data' => $data ?? []
         ]);
     }
+
+    public function addAddress()
+    {
+        $addressManager = new AddressManager();
+        $errors = [];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = array_map('trim', $_POST);
+            $errors = $this->controlAddress($data);
+            if (empty($errors)) {
+                $addressManager->insertAddress($data);
+                header('Location:/AdminRoom/index');
+            }
+        }
+        return $this->twig->render('AdminAddress/addAddress.html.twig', [
+            'data'=> $data ?? [],
+            'errors'=> $errors ?? []]);
+    }
+      
     private function controlAddress($data)
     {
 
@@ -39,6 +57,7 @@ class AdminAddressController extends AbstractController
             $errors['address'] = 'L\'adresse du logement ne doit pas être vide';
         } elseif (strlen($data['address']) > self::MAX_LENGTH) {
             $errors['address'] = 'L\'adresse du logement doit fait moins de ' . self::MAX_LENGTH . ' caractères.';
+
         }
 
         return $errors ?? [];

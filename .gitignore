@@ -5,5 +5,7 @@
 db.php
 .idea
 error_log
+/uploads/
+public/assets/images
 public/uploads/
-
+.DS_Store
