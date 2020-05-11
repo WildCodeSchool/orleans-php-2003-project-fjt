@@ -31,7 +31,7 @@ class AdminAdmissionController extends AbstractController
     {
         $admissionManager = new AdmissionManager();
         $folder = $admissionManager->selectOneById($id);
-        $files = (new Zipper)->make($folder['zip_path'])->listFiles('/^(?!.*\.log).*$/i');
+        $files = (new Zipper)->make('../public' . $folder['zip_path'])->listFiles('/^(?!.*\.log).*$/i');
         return $this->twig->render('AdminAdmission/show.html.twig', [
             'folder' => $folder,
             'files' => $files
@@ -52,5 +52,9 @@ class AdminAdmissionController extends AbstractController
         $folders = $admissionManager->selectAllFolder($search);
 
         return $this->twig->render('AdminAdmission/allValidate.html.twig', ['folders' => $folders]);
+    }
+    public function download()
+    {
+        header('Location: ' . $_POST['zipPath']);
     }
 }
