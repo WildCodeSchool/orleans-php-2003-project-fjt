@@ -31,9 +31,9 @@ class AdminAddressController extends AbstractController
 
         $errors = [];
         if (empty($data['name'])) {
-            $errors['name'] = 'Le nom du logement doit fait moins de ' . self::MAX_LENGTH . ' caractères.';
+            $errors['name'] = 'Le nom du logement ne doit pas être vide';
         } elseif (strlen($data['name']) > self::MAX_LENGTH) {
-            $errors['name'] = 'Le nom du logement est trop long';
+            $errors['name'] = 'Le nom du logement doit fait moins de ' . self::MAX_LENGTH . ' caractères.';
         }
         if (empty($data['address'])) {
             $errors['address'] = 'L\'adresse du logement ne doit pas être vide';
