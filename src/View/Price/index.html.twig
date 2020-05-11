@@ -96,7 +96,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-between modal-price">
-                                    <p>Contribution</p>
+                                    <p>Cotisation</p>
                                     <p>
                                         {% if room.contribution is null %}
                                             /
@@ -108,7 +108,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-between modal-price">
-                                    <p>Cotisation d'équipement</p>
+                                    <p>Cotisation d'équipement
+                                        {% if room.equipment is not null %}
+                                        ({{ room.equipment }})
+                                        {% endif %}
+                                    </p>
                                     <p>
                                         {% if room.equipment_contribution is null %}
                                             /
