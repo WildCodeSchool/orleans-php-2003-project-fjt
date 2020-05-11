@@ -1,0 +1,57 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/adminContact.css">
+{% endblock %}
+{% block content %}
+        <div class="container pb-5">
+            <div class="row d-flex justify-content-center pb-5">
+                <h1>Détails du message</h1>
+            </div>
+            <div class="card border-secondary mb-3" >
+                <div class="card-header">
+                    <div class="row mr-3">
+                        <div class="col-3 d-flex align-items-center flex-column">
+                            <h3>Nom</h3>
+                            <span>{{ contact.lastname }}</span>
+                        </div>
+
+                        <div class="col-3 d-flex align-items-center flex-column">
+                            <h3>Prénom</h3>
+                            <span>{{ contact.firstname }}</span>
+                        </div>
+
+                        <div class="col-3 d-flex align-items-center flex-column">
+                            <h3>Téléphone</h3>
+                            {% if contact.phone != 0 %}
+                            <span>{{ contact.phone }}</span>
+                                {% else %}
+                                <p>Non renseigné</p>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-3 d-flex align-items-center flex-column">
+                            <h3>Adresse mail</h3>
+                            {% if contact.email %}
+                            <span>{{ contact.email }}</span>
+                            {% else %}
+                                <p>Non renseigné</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body text-secondary pb-0">
+                    <p class="card-text">{{ contact.message }}</p>
+                    <p class="text"> Envoyé le {{ contact.sendDate | date("d.m.Y à H:i")}}</p>
+
+                </div>
+            </div>
+                <div class="row">
+                    <div class="col-3">
+                        <a href="/AdminContact/index">
+                            <button type="button" class="btn btn-outline-secondary">Retour</button>
+                        </a>
+                    </div>
+                </div>
+        </div>
+{% endblock %}
