@@ -20,12 +20,29 @@ use Chumper\Zipper\Zipper;
 class AdminAdmissionController extends AbstractController
 {
 
+    public function index()
+    {
+        $admissionManager = new AdmissionManager();
+        $folders = $admissionManager->selectAllByTen();
+
+        return $this->twig->render('AdminAdmission/index.html.twig', ['folders' => $folders]);
+    }
+    public function show(int $id)
+    {
+        $admissionManager = new AdmissionManager();
+        $folder = $admissionManager->selectOneById($id);
+        $files = (new Zipper)->make($folder['zip_path'])->listFiles('/^(?!.*\.log).*$/i');
+        return $this->twig->render('AdminAdmission/show.html.twig', [
+            'folder' => $folder,
+            'files' => $files
+        ]);
+    }
+
     public function allWaiting()
     {
         $search = trim($_GET['search'] ?? '');
         $admissionManager = new AdmissionManager();
         $folders = $admissionManager->selectAllFolder($search);
-
         return $this->twig->render('AdminAdmission/allWaiting.html.twig', ['folders' => $folders]);
     }
     public function allValidate()

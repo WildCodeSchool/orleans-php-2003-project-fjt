@@ -1,0 +1,62 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <section>
+        <h2 class="m-5">Gestion des pré-admissions</h2>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col" colspan="2">Dossiers en attente</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for folder in folders %}
+                {%  if folder.status is same as('En attente') %}
+                    <tr>
+                        <td>{{ folder.lastname ~ ' ' ~ folder.firstname}}</td>
+                        <td>
+                            <a class="btn btn-outline-primary" href="/AdminAdmission/show/{{ folder.id }}" >Consulter</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td scope="col" colspan="3"><a class="btn btn-outline-primary" href="/AdminAdmission/allWaiting">Toutes les demandes en attentes</a></td>
+            </tr>
+            </tfoot>
+        </table>
+
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col" colspan="2">Dossiers validés</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for folder in folders %}
+                {%  if folder.status is same as('Validé') %}
+                    <tr>
+                        <td>{{ folder.lastname ~ ' ' ~ folder.firstname}}</td>
+                        <td>
+                            <a class="btn btn-outline-primary" href="/AdminAdmission/show/{{ folder.id }}" >Consulter</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td scope="col" colspan="3"><a class="btn btn-outline-primary" href="/AdminAdmission/allValidate">Toutes les demandes validées</a></td>
+            </tr>
+            </tfoot>
+        </table>
+        <div class="container-fluid">
+            <a class="btn btn-outline-primary offset-3 col-6" href="/Admin/index" >Retour</a>
+        </div>
+
+    </section>
+{% endblock %}
