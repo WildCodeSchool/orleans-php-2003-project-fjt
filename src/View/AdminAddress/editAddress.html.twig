@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+{% block navbar %}
+    {% include '/Home/navbar.html.twig' %}
+{% endblock %}
+{% block content %}
+    <section>
+        <div class="admin-price container-fluid">
+            <h2>Modifier une adresse:</h2>
+            {{ dump.address }}
+            {% include 'AdminAddress/_formAddress.html.twig' %}
+        </div>
+
+    </section>
+
+{% endblock %}
+{% block footer %}
+    {% include '/Home/footer.html.twig' %}
+{% endblock %}
