@@ -57,7 +57,7 @@
     left: 1vw;
 }
 
-.home button{
+.home a{
     position: relative;
     width: 100px;
     height: 40px;
@@ -71,7 +71,7 @@
 .pictureFJT{
     position: absolute;
     width: 300px;
-    height: 650px;
+    height: 75vh;
     opacity: 0.9;
     border-radius: 20px;
     z-index: 1;
@@ -109,11 +109,31 @@
 }
 
 @media screen and (max-width: 991px) {
+    .home{
+        width: 90%;
+        margin:auto;
+    }
+
+    .leftHome{
+        width:100%;
+        margin:auto;
+    }
+
+    .rightHome{
+        display: none;
+    }
+
     .pres img{
         margin-top: var(--spacing-sm);
     }
 
     .pres p{
         text-align: center;
+    }
+}
+
+@media screen and (max-width: 604px) {
+    .home form{
+        display: none;
     }
 }
