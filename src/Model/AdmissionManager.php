@@ -37,13 +37,26 @@ class AdmissionManager extends AbstractManager
         $statement->bindValue(':mail', $infosToAdd['mail'], \PDO::PARAM_STR);
         $statement->execute();
     }
+  
     public function selectAllByTen(): array
     {
         return $this->pdo->query('SELECT * FROM ' . self::TABLE . ' ORDER BY lastname, firstname 
         LIMIT 10')->fetchAll();
     }
-    public function selectAllFolder(): array
+
+    public function selectAllFolder(string $search = ''): array
     {
-        return $this->pdo->query('SELECT * FROM ' . self::TABLE)->fetchAll();
+        $query = 'SELECT * FROM ' . self::TABLE ;
+        if ($search) {
+            $query .= ' WHERE lastname LIKE :search' ;
+        }
+        $query .=' ORDER BY lastname, firstname';
+        $statement = $this->pdo->prepare($query);
+        if ($search) {
+            $statement->bindValue('search', $search . '%');
+        }
+        $statement->execute();
+
+        return $statement->fetchAll();
     }
 }

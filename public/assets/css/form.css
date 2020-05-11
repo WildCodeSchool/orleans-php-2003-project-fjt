@@ -1,3 +1,15 @@
 label {
     margin: 2px;
 }
+
+.alert-danger, .alert-success {
+    font-size: 10pt;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+.alert-light {
+    font-size: 8pt;
+}

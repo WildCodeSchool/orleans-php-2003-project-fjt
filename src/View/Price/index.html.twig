@@ -6,75 +6,188 @@
 
 {% block content %}
     <div class="rooms">
-        <section>
-            <h2>Nos logements:</h2>
-            <div class=" row justify-content-around ">
+        <section class="card-rooms container-fluid mt-0">
+            <h2>Nos logements</h2>
+            <div class=" row justify-content-center ">
                 {% for room in rooms %}
-                    <div class="card col-lg-5 col-10 " >
+                    <div class="card col-lg-3 col-10 m-3" >
                         <figure>
                             <figcaption class="card-title">{{ room.type }}</figcaption>
                             <img src="{{ room.picture }}" class="card-img-top" alt="picture_{{ room.type }}_{{ room.address }}">
                         </figure>
                         <div class="card-body justify-content-around">
-                            <h3 class="card-title">Description:</h3>
-                            <p class="card-text">{{ room.description }}</p>
-                            <h3 class="card-title">Tarif:</h3>
-                            <p class="card-text"><strong>{% set room_price = room.guarantee+room.catering+
-                                        room.contribution+room.equipment_contribution %}
-                                    {% if room.breakfast is not null and room.breakfast != 'inclus' %}
-                                        {% set room_price = room_price + room.breakfast %}
-                                    {% endif %}
-                                    {{  room_price |round(2, 'floor') }}€</strong></p>
-                            <h3 class="card-title">Adresse:</h3>
-                            <p class="card-text">{{ room.address }}</p>
-                            <a href="#" class="btn btn-primary">+ d'infos</a>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="d-flex">
+                                     <p class="card-text card-price">
+                                         {% set room_price = room.guarantee+room.catering+
+                                                room.contribution+room.equipment_contribution %}
+                                            {% if room.breakfast is not null and room.breakfast != 'inclus' %}
+                                                {% set room_price = room_price + room.breakfast %}
+                                            {% endif %}
+                                            {{  room_price |round(2, 'floor') }}€
+                                     </p>
+                                    <p class="pl-1"><strong>/mois</strong></p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-map-marker-alt fa-2x icon-here mr-3"></i>
+                                <p class="card-text card-address">{{ room.address }}</p>
+                            </div>
+                            <button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#room-modal{{ room.id }}{{ room.guarantee }}">+ d'infos</button>
                         </div>
                     </div>
                 {% endfor %}
             </div>
         </section>
 
-        <section>
-            <h2>Grille tarifaire:</h2>
-            <table class="table table-striped table-borderless">
-                <thead>
-                <tr>
-                    <th scope="col">Adresse</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Surface</th>
-                    <th scope="col">Nuitée</th>
-                    <th scope="col">Semaine</th>
-                    <th scope="col">Mois</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for room in rooms %}
-                    <tr>
-                        <td >{{ room.address }}</td>
-                        <td >{{ room.type }}</td>
-                        <td>{% if room.area is empty %}/{% else %}{{ room.area }} m²{% endif %}</td>
-                        <td>{% set room_price =  ((room.guarantee+room.catering+
-                                room.contribution+room.equipment_contribution)/30) %}
-                            {% if room.breakfast is not null and room.breakfast != 'inclus' %}
-                                {% set room_price = room_price + room.breakfast %}
-                            {% endif %}
-                            {{  room_price |round(2, 'floor') }} €</td>
-                        <td>{% set room_price =  (((room.guarantee+room.catering+
-                                room.contribution+room.equipment_contribution)/30)*7) %}
-                            {% if room.breakfast is not null and room.breakfast != 'inclus' %}
-                                {% set room_price = room_price + room.breakfast %}
-                            {% endif %}
-                            {{  room_price |round(2, 'floor') }} €</td>
-                        <td>{% set room_price = room.guarantee+room.catering+
-                                room.contribution+room.equipment_contribution %}
-                            {% if room.breakfast is not null and room.breakfast != 'inclus' %}
-                                {% set room_price = room_price + room.breakfast %}
-                            {% endif %}
-                            {{  room_price |round(2, 'floor') }} €</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+        {# Modal #}
+        {% for room in rooms %}
+        <div class="modal fade" id="room-modal{{ room.id }}{{ room.guarantee }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLongTitle">{{ room.type|capitalize }} - {{ room.address }}</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body modal-body-room">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <img src="{{ room.picture }}" class="card-img-top" alt="picture_{{ room.type }}_{{ room.address }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="m-3">{{ room.description|nl2br }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between modal-total">
+                                    <p class="modal-total-room mb-0">Total</p>
+                                    <p class="modal-total-price mb-0">
+                                        {% set room_price = room.guarantee+room.catering+
+                                            room.contribution+room.equipment_contribution %}
+                                        {% if room.breakfast is not null and room.breakfast != 'inclus' %}
+                                            {% set room_price = room_price + room.breakfast %}
+                                        {% endif %}
+                                        {{  room_price |round(2, 'floor') }} €
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between modal-price mt-3">
+                                    <p>Loyer</p>
+                                    <p>{{ room.guarantee }} €</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between modal-price">
+                                    <p>Restauration</p>
+                                    <p>
+                                        {% if room.catering is null %}
+                                            /
+                                        {% else %}
+                                            {{ room.catering }} €
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between modal-price">
+                                    <p>Cotisation</p>
+                                    <p>
+                                        {% if room.contribution is null %}
+                                            /
+                                        {% else %}
+                                            {{ room.contribution }} €
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between modal-price">
+                                    <p>Cotisation d'équipement
+                                        {% if room.equipment is not null %}
+                                        ({{ room.equipment }})
+                                        {% endif %}
+                                    </p>
+                                    <p>
+                                        {% if room.equipment_contribution is null %}
+                                            /
+                                        {% else %}
+                                            {{ room.equipment_contribution }} €
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between modal-price">
+                                    <p>Petit déjeuner</p>
+                                    <p>
+                                        {% if room.breakfast is null %}
+                                            NON INCLUS
+                                        {% elseif room.breakfast == 'inclus' %}
+                                            {{ room.breakfast|upper }}
+                                        {% else %}
+                                            {{ room.breakfast }} €
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    <section>
+        <h2>Grille tarifaire</h2>
+        <table class="table table-striped table-borderless">
+            <thead>
+            <tr>
+                <th scope="col">Adresse</th>
+                <th scope="col">Type</th>
+                <th scope="col">Surface</th>
+                <th scope="col">Nuitée</th>
+                <th scope="col">Semaine</th>
+                <th scope="col">Mois</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for room in rooms %}
+            <tr>
+                <td >{{ room.address }}</td>
+                <td >{{ room.type }}</td>
+                <td>{% if room.area == 0 %}/{% else %}{{ room.area }} m²{% endif %}</td>
+                <td>{% set room_price =  ((room.guarantee+room.catering+
+                        room.contribution+room.equipment_contribution)/30) %}
+                    {% if room.breakfast is not null and room.breakfast != 'inclus' %}
+                        {% set room_price = room_price + room.breakfast %}
+                    {% endif %}
+                    {{  room_price |round(2, 'floor') }} €</td>
+                <td>{% set room_price =  (((room.guarantee+room.catering+
+                        room.contribution+room.equipment_contribution)/30)*7) %}
+                    {% if room.breakfast is not null and room.breakfast != 'inclus' %}
+                        {% set room_price = room_price + room.breakfast %}
+                    {% endif %}
+                    {{  room_price |round(2, 'floor') }} €</td>
+                <td>{% set room_price = room.guarantee+room.catering+
+                        room.contribution+room.equipment_contribution %}
+                    {% if room.breakfast is not null and room.breakfast != 'inclus' %}
+                        {% set room_price = room_price + room.breakfast %}
+                    {% endif %}
+                    {{  room_price |round(2, 'floor') }} €</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        
             <div class="mt-5">
                 <h2>Formulaire de pré-insciption</h2>
                 <form class="d-flex flex-column justify-content-around border border-primary rounded-lg" action="" method="post" enctype="multipart/form-data" >

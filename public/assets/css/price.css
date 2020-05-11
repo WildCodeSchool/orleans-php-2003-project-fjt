@@ -14,11 +14,20 @@
 }
 
 /* CARD */
+.card-rooms h2 {
+    margin: var(--spacing);
+    text-align: center;
+}
+
+.card-rooms {
+    width: 90%;
+}
 
 .rooms .card {
-    margin: 3% 0;
-    padding: 0;
     border-radius: 10px;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0;
     width: 18rem;
 
 }
@@ -28,21 +37,22 @@
     border-radius: 0 0 15px 15px ;
 }
 
-.rooms .card-body h3:first-child {
-    text-align: center;
+.icon-here {
+    color: var(--main-bg-color);
 }
-.rooms h2 {
-    text-decoration: underline;
+
+.card-price {
+    font-weight: bold;
+    color: var(--secondary-bg-color);
+    font-size: var(--medium-size);
 }
-.rooms .card-body p {
-    text-align: center;
-}
-.card-body p:nth-of-type(2) {
-    align-self: center;
-}
-.rooms .card .btn {
+
+.rooms .card .btn,
+.modal-footer .btn {
     align-self: flex-end;
     color: var(--light-color);
+    background-color: var(--secondary-bg-color);
+    border-color: var(--secondary-bg-color);
 }
 .rooms .card figure {
     margin: 0;
@@ -53,7 +63,7 @@
     color: var(--light-color);
     font-weight: bolder;
     background-color: darkgray;
-    padding: var(--spacing-sm);
+    padding: calc(var(--spacing-sm) / 2);
     border-radius: 10px;
     min-width: 5%;
     text-align: center;
@@ -64,6 +74,9 @@
 @media screen and ( max-width: 768px ){
     .rooms .table, .rooms section:nth-of-type(2) h2 {
         display: none;
+    }
+    .card-rooms {
+        width: auto;
     }
 
 }
@@ -84,4 +97,25 @@
 }
 .rooms form ol li {
     list-style: none;
+}
+
+/* Modal */
+.modal-total {
+    border-bottom: 3px solid var(--main-bg-color);
+}
+
+.modal-total-room {
+    color: var(--main-bg-color);
+    font-size: var(--medium-size);
+    font-weight: bold;
+}
+
+.modal-total-price {
+    color: var(--secondary-bg-color);
+    font-size: var(--medium-size);
+    font-weight: bold;
+}
+
+.modal-body-room img {
+    border-radius: 10px;
 }

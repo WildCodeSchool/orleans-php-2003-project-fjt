@@ -19,6 +19,7 @@ use Chumper\Zipper\Zipper;
  */
 class AdminAdmissionController extends AbstractController
 {
+
     public function index()
     {
         $admissionManager = new AdmissionManager();
@@ -36,18 +37,20 @@ class AdminAdmissionController extends AbstractController
             'files' => $files
         ]);
     }
+
     public function allWaiting()
     {
+        $search = trim($_GET['search'] ?? '');
         $admissionManager = new AdmissionManager();
-        $folders = $admissionManager->selectAllFolder();
-
+        $folders = $admissionManager->selectAllFolder($search);
         return $this->twig->render('AdminAdmission/allWaiting.html.twig', ['folders' => $folders]);
     }
     public function allValidate()
     {
+        $search = trim($_GET['search'] ?? '');
         $admissionManager = new AdmissionManager();
-        $folders = $admissionManager -> selectAllFolder();
+        $folders = $admissionManager->selectAllFolder($search);
 
-        return $this -> twig -> render('AdminAdmission/allValidate.html.twig', ['folders' => $folders]);
+        return $this->twig->render('AdminAdmission/allValidate.html.twig', ['folders' => $folders]);
     }
 }
