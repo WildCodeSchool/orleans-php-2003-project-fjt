@@ -142,47 +142,48 @@
         </div>
         {% endfor %}
 
-        <section>
-            <h2>Grille tarifaire</h2>
-            <table class="table table-striped table-borderless">
-                <thead>
-                <tr>
-                    <th scope="col">Adresse</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Surface</th>
-                    <th scope="col">Nuitée</th>
-                    <th scope="col">Semaine</th>
-                    <th scope="col">Mois</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for room in rooms %}
-                    <tr>
-                        <td >{{ room.address }}</td>
-                        <td >{{ room.type }}</td>
-                        <td>{% if room.area is empty %}/{% else %}{{ room.area }} m²{% endif %}</td>
-                        <td>{% set room_price =  ((room.guarantee+room.catering+
-                                room.contribution+room.equipment_contribution)/30) %}
-                            {% if room.breakfast is not null and room.breakfast != 'inclus' %}
-                                {% set room_price = room_price + room.breakfast %}
-                            {% endif %}
-                            {{  room_price |round(2, 'floor') }} €</td>
-                        <td>{% set room_price =  (((room.guarantee+room.catering+
-                                room.contribution+room.equipment_contribution)/30)*7) %}
-                            {% if room.breakfast is not null and room.breakfast != 'inclus' %}
-                                {% set room_price = room_price + room.breakfast %}
-                            {% endif %}
-                            {{  room_price |round(2, 'floor') }} €</td>
-                        <td>{% set room_price = room.guarantee+room.catering+
-                                room.contribution+room.equipment_contribution %}
-                            {% if room.breakfast is not null and room.breakfast != 'inclus' %}
-                                {% set room_price = room_price + room.breakfast %}
-                            {% endif %}
-                            {{  room_price |round(2, 'floor') }} €</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+    <section>
+        <h2>Grille tarifaire</h2>
+        <table class="table table-striped table-borderless">
+            <thead>
+            <tr>
+                <th scope="col">Adresse</th>
+                <th scope="col">Type</th>
+                <th scope="col">Surface</th>
+                <th scope="col">Nuitée</th>
+                <th scope="col">Semaine</th>
+                <th scope="col">Mois</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for room in rooms %}
+            <tr>
+                <td >{{ room.address }}</td>
+                <td >{{ room.type }}</td>
+                <td>{% if room.area == 0 %}/{% else %}{{ room.area }} m²{% endif %}</td>
+                <td>{% set room_price =  ((room.guarantee+room.catering+
+                        room.contribution+room.equipment_contribution)/30) %}
+                    {% if room.breakfast is not null and room.breakfast != 'inclus' %}
+                        {% set room_price = room_price + room.breakfast %}
+                    {% endif %}
+                    {{  room_price |round(2, 'floor') }} €</td>
+                <td>{% set room_price =  (((room.guarantee+room.catering+
+                        room.contribution+room.equipment_contribution)/30)*7) %}
+                    {% if room.breakfast is not null and room.breakfast != 'inclus' %}
+                        {% set room_price = room_price + room.breakfast %}
+                    {% endif %}
+                    {{  room_price |round(2, 'floor') }} €</td>
+                <td>{% set room_price = room.guarantee+room.catering+
+                        room.contribution+room.equipment_contribution %}
+                    {% if room.breakfast is not null and room.breakfast != 'inclus' %}
+                        {% set room_price = room_price + room.breakfast %}
+                    {% endif %}
+                    {{  room_price |round(2, 'floor') }} €</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        
             <div class="mt-5">
                 <h2>Formulaire de pré-insciption</h2>
                 <form class="d-flex flex-column justify-content-around border border-primary rounded-lg" action="" method="post" enctype="multipart/form-data" >
