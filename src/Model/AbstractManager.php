@@ -54,7 +54,6 @@ abstract class AbstractManager
     /**
      * Get one row from database by ID.
      *
-     * @param  int $id
      *
      * @return array
      */

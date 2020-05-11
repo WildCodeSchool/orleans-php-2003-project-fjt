@@ -63,8 +63,9 @@ class ItemController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function edit(int $id): string
+    public function editRoom(int $id): string
     {
+
         $itemManager = new ItemManager();
         $item = $itemManager->selectOneById($id);
 
