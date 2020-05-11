@@ -74,6 +74,10 @@
     height: 200px;
 }
 
+.admin-highlight:first-child .service-card {
+    border: 2px solid var(--secondary-bg-color);
+}
+
 
 @media screen and (max-width: 1300px) {
     .container-service,

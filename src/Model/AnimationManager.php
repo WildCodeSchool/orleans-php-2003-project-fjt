@@ -29,7 +29,13 @@ class AnimationManager extends AbstractManager
 
     public function selectByFour()
     {
-        return $this->pdo->query('SELECT * FROM animation ORDER BY id DESC LIMIT 4')->fetchAll();
+        return $this->pdo->query("SELECT * FROM " . self::TABLE . " ORDER BY highlight DESC, id DESC
+        LIMIT 4")->fetchAll();
+    }
+
+    public function selectByHighlight()
+    {
+        return $this->pdo->query("SELECT * FROM " . self::TABLE . " ORDER BY highlight DESC")->fetchAll();
     }
 
     /**
@@ -67,5 +73,19 @@ class AnimationManager extends AbstractManager
         $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
+    }
+
+    public function updateHighlight()
+    {
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `highlight` = false");
+        return $statement->execute();
+    }
+
+    public function updateOneToHighlight($id)
+    {
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `highlight` = true
+        WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        return $statement->execute();
     }
 }

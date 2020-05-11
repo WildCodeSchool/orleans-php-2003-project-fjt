@@ -26,7 +26,7 @@ class AdminAnimationController extends AbstractController
     public function index()
     {
         $animationManager = new AnimationManager();
-        $animations = $animationManager->selectAll();
+        $animations = $animationManager->selectByHighlight();
 
         return $this->twig->render('AdminAnimation/index.html.twig', ['animations' => $animations]);
     }
@@ -155,6 +155,16 @@ class AdminAnimationController extends AbstractController
                 unlink(self::UPLOAD_DIR . $animation['image']);
                 $animationManager->delete($id);
             }
+            header('Location:/AdminAnimation/index');
+        }
+    }
+
+    public function highlightAnimation($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $animationManager = new AnimationManager();
+            $animationManager->updateHighlight();
+            $animationManager->updateOneToHighlight($id);
             header('Location:/AdminAnimation/index');
         }
     }
