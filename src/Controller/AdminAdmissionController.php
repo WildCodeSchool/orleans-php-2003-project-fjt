@@ -32,9 +32,27 @@ class AdminAdmissionController extends AbstractController
         $admissionManager = new AdmissionManager();
         $folder = $admissionManager->selectOneById($id);
         $files = (new Zipper)->make($folder['zip_path'])->listFiles('/^(?!.*\.log).*$/i');
+        $status = ['En attente', 'Validé'];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = array_map('trim', $_POST);
+            $errors = [];
+
+            if (empty($data['status'])) {
+                $errors['status'] = 'le status ne doit pas être vide.';
+            }
+            if (!in_array($data['status'], $status)) {
+                $errors['status'] = 'le status n\'éxiste pas, il doit être \'En attente\' ou \'Validé\'.';
+            }
+            if (empty($errors)) {
+                $admissionManager->update($data);
+                header('Location:/AdminAdmission/index');
+            }
+        }
         return $this->twig->render('AdminAdmission/show.html.twig', [
             'folder' => $folder,
-            'files' => $files
+            'files' => $files,
+            'status'=> $status,
+            'errors'=> $errors ?? []
         ]);
     }
 

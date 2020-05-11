@@ -52,9 +52,32 @@
 
                 </div>
             </div>
+            <form class="d-flex container-fluid" action="" method="post">
+                <div class="form-group  offset-3 col-4 my-3 d-flex">
+                    <input type="hidden" value="{{ folder.id }}" name="id">
+                    <label class="col-3" for="status">Statut :</label>
+                    <select class="form-control" name="status" class="" id="status">
+
+                        {% for statut in status %}
+                            {% if folder.status is same as(statut) %}
+                                <option selected value="{{ statut }}">{{ statut }}</option>
+                            {% else %}
+                                <option value="{{statut }}">{{ statut }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    {% if errors.status %}
+                        <div class="text-danger">{{ errors.status }}</div>
+                    {% endif %}
+                </div>
+                <div  class="form-group col-2 my-3">
+                    <input class="btn btn-outline-primary" type="submit" value="Valider le statut">
+                </div>
+
+            </form>
         </div>
         <div class="d-flex justify-content-around col-8">
-            <a class="btn btn-outline-primary col-3" href="">Valider le dossier</a>
+            <a class="btn btn-outline-primary col-3" href="">Supprimer le dossier</a>
             <a class="btn btn-outline-primary col-3" href="">Télécharger le dossier</a>
             <a class="btn btn-outline-primary col-3" href="/AdminAdmission/index">Retour</a>
         </div>
