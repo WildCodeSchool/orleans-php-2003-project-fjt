@@ -38,10 +38,10 @@ class AdminAdmissionController extends AbstractController
             $errors = [];
 
             if (empty($data['status'])) {
-                $errors['status'] = 'le status ne doit pas être vide.';
+                $errors['status'] = 'Veuillez préciser le statut du d.ossier';
             }
             if (!in_array($data['status'], $status)) {
-                $errors['status'] = 'le status n\'éxiste pas, il doit être \'En attente\' ou \'Validé\'.';
+                $errors['status'] = 'le statut n\'éxiste pas, il doit être \'En attente\' ou \'Validé\'.';
             }
             if (empty($errors)) {
                 $admissionManager->update($data);
