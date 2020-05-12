@@ -60,8 +60,4 @@ class AdmissionManager extends AbstractManager
 
         return $statement->fetchAll();
     }
-    public function download()
-    {
-        header('Location: ' . $_POST['zipPath']);
-    }
 }
