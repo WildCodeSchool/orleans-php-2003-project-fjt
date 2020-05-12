@@ -9,8 +9,9 @@
 {% endblock %}
 
 {% block content %}
+    <h1 class="section-h1">Prestations</h1>
     <div class="container-fluid container-service text-lg-left text-center">
-        <h2 class="service-title pl-lg-3">Nos services</h2>
+        <h2 class="service-title pl-lg-3 text-center">Nos services</h2>
         <div class="row justify-content-center">
             {% for service in services %}
             <div class="col-md-6 card-deck card-order">
@@ -31,7 +32,7 @@
     <br/>
 
     <div class="container-fluid container-animation text-lg-left text-center">
-        <h2 class="animation-title">Nos animations</h2>
+        <h2 class="animation-title text-center">Nos animations</h2>
         <div class="justify-content-center d-lg-flex d-sm-block">
     {% for animation in animations %}
         {% if loop.first %}

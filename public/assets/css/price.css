@@ -15,7 +15,7 @@
 
 /* CARD */
 .card-rooms h2 {
-    margin: var(--spacing);
+    margin-bottom: var(--spacing);
     text-align: center;
 }
 
@@ -78,8 +78,8 @@
     .card-rooms {
         width: auto;
     }
-
 }
+
 /* Formulaire */
 
 .rooms form {
