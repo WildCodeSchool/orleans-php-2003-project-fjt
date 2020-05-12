@@ -60,10 +60,19 @@ class AdmissionManager extends AbstractManager
 
         return $statement->fetchAll();
     }
+
     public function delete(int $id): void
     {
         $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
+    }
+  
+    public function update(array $data): bool
+    {
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `status` = :status WHERE id=:id");
+        $statement->bindValue(':id', $data['id'], \PDO::PARAM_INT);
+        $statement->bindValue(':status', $data['status'], \PDO::PARAM_STR);
+        return $statement->execute();
     }
 }

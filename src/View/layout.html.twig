@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/navbar.css">
-      {% block stylesheet %}{% endblock %}
+    {% block stylesheet %}{% endblock %}
     <link rel="icon" href="/assets/images/favicon.ico">
 </head>
 
@@ -20,11 +20,9 @@
     {% block header %}{% endblock %}
 </header>
 <main class="main">
-  {% block content %}{% endblock %}
- </main>
-<footer class="footer">
-    {% include "Home/footer.html.twig" %}
-</footer>
+    {% block content %}{% endblock %}
+</main>
+{% block footer %}{% endblock %}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -33,5 +31,6 @@
 {% block javascript %}{% endblock %}
 </body>
 </html>
+
 
 
