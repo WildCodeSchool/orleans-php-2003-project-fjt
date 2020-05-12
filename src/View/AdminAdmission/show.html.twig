@@ -77,7 +77,9 @@
             </form>
         </div>
         <div class="d-flex justify-content-around col-8">
-            <a class="btn btn-outline-primary col-3" href="">Supprimer le dossier</a>
+            <form action="/AdminAdmission/delete/{{ folder.id }}" method="post">
+                <input type="submit" class="btn btn-outline-danger" value="Supprimer" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer le dossier {{ folder.lastname ~ ' ' ~ folder.firstname }} ?')">
+            </form>
             <a class="btn btn-outline-primary col-3" href="">Télécharger le dossier</a>
             <a class="btn btn-outline-primary col-3" href="/AdminAdmission/index">Retour</a>
         </div>

@@ -22,9 +22,9 @@ class AdmissionManager extends AbstractManager
     public function insert(array $infosToAdd): void
     {
         $statement = $this->pdo->prepare('INSERT INTO ' . self::TABLE . ' (`marital_status`,`firstname`
-        ,`lastname`, `street`,`city`,`phone`,`postal_code`,`dateofbirth`,`zip_path`,`mail`) VALUES
+        ,`lastname`, `street`,`city`,`phone`,`postal_code`,`dateofbirth`,`zip_path`,`mail`,`folderName`) VALUES
          ( :marital_status,:firstname,:lastname,:street,:city,:phone,:postal_code,:dateofbirth,
-         :zip_path, :mail)');
+         :zip_path, :mail, :folderName)');
         $statement->bindValue(':marital_status', $infosToAdd['maritalstatus'], \PDO::PARAM_STR);
         $statement->bindValue(':firstname', $infosToAdd['firstname'], \PDO::PARAM_STR);
         $statement->bindValue(':lastname', $infosToAdd['lastname'], \PDO::PARAM_STR);
@@ -35,6 +35,7 @@ class AdmissionManager extends AbstractManager
         $statement->bindValue(':dateofbirth', $infosToAdd['dateofbirth'], \PDO::PARAM_STR);
         $statement->bindValue(':zip_path', $infosToAdd['zip_path'], \PDO::PARAM_STR);
         $statement->bindValue(':mail', $infosToAdd['mail'], \PDO::PARAM_STR);
+        $statement->bindValue(':folderName', $infosToAdd['folderName'], \PDO::PARAM_STR);
         $statement->execute();
     }
   
@@ -59,6 +60,14 @@ class AdmissionManager extends AbstractManager
 
         return $statement->fetchAll();
     }
+
+    public function delete(int $id): void
+    {
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+    }
+  
     public function update(array $data): bool
     {
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `status` = :status WHERE id=:id");
