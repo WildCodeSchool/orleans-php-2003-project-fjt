@@ -9,7 +9,7 @@
 
                 <a role="button" class="btn btn-outline-primary btn-lg offset-md-0 col-md-3 offset-2 col-8 my-3 my-md-0 " href="/AdminRoom/addRoom">Ajouter un logement</a>
 
-                <a role="button" class="btn btn-outline-primary btn-lg offset-md-0 col-md-3 offset-2 col-8 my-3 my-md-0 " href="/Admin/index">Retour</a>
+                <a role="button" class="btn btn-outline-primary btn-lg offset-md-0 col-md-3 offset-2 col-8 my-3 my-md-0 d-flex justify-content-center align-items-center" href="/Admin/index">Retour</a>
 
                 <a role="button" class="btn btn-outline-primary btn-lg offset-md-0 col-md-3 offset-2 col-8 my-3 my-md-0 " href="/AdminAddress/addAddress">Ajouter une adresse</a>
 
@@ -27,7 +27,7 @@
                         <tr>
                             <td class="align-middle col-4">{{ room.type }}</td>
                             <td class="align-middle col-4">
-                                <a class="btn btn-outline-primary" href="/AdminRoom/editRoom/{{ room.id }}" value="">Mettre à jour</a>
+                                <a class="btn btn-outline-primary col-12 col-lg-6 maj" href="/AdminRoom/editRoom/{{ room.id }}" value="">Mettre à jour</a>
                             </td>
                             <td class="col-4">
                                 <form action="/AdminRoom/deleteRoom" method="post">
@@ -51,7 +51,7 @@
                     <tr>
                         <td class="align-middle col-4">{{ address.address }}</td>
                         <td class="align-middle col-4">
-                          <a class="btn btn-outline-primary" href="/AdminAddress/editAddress/{{ address.id }}" value="">Mettre à jour</a>
+                          <a class="btn btn-outline-primary col-12 col-lg-6 maj" href="/AdminAddress/editAddress/{{ address.id }}" value="">Mettre à jour</a>
                         </td>
                         <td class="col-4">
                             <form action="/AdminAddress/deleteAddress" method="post">
