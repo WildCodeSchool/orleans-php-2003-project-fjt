@@ -1,12 +1,8 @@
-{% extends 'layout.html.twig' %}
+{% extends 'basicLayout.html.twig' %}
 
 {% block stylesheet %}
     <link rel="stylesheet" href="/assets/css/home.css">
     <link rel="stylesheet" href="/assets/css/navbarHome.css">
-{% endblock %}
-
-{% block navbar %}
-    {% include '/Home/navbar.html.twig' %}
 {% endblock %}
 
 {% block header %}
@@ -45,10 +41,6 @@
         <p>Notre plus précieux capital, c'est vous, notre première réussite, c'est la vôtre...</p>
     </div>
     {% include 'Contact/_form.html.twig' %}
-{% endblock %}
-
-{% block footer %}
-    {% include '/Home/footer.html.twig' %}
 {% endblock %}
 
 {% block javascript %}
