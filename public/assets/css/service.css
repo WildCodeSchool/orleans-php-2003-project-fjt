@@ -1,5 +1,5 @@
 .service-title {
-    margin: var(--spacing);
+    margin-bottom: var(--spacing);
 }
 
 .container-service,
@@ -17,7 +17,7 @@
 }
 
 .animation-title {
-    margin: var(--spacing);
+    margin-bottom: var(--spacing);
 }
 
 .service-card,
