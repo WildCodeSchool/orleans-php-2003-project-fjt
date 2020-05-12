@@ -58,7 +58,7 @@
                     <label class="col-3" for="status">Statut :</label>
                     <select class="form-control" name="status" class="" id="status">
 
-                        {% for statut in status %}
+                        {% for statut in statuses %}
                             {% if folder.status is same as(statut) %}
                                 <option selected value="{{ statut }}">{{ statut }}</option>
                             {% else %}
