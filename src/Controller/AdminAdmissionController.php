@@ -19,7 +19,7 @@ use Chumper\Zipper\Zipper;
  */
 class AdminAdmissionController extends AbstractController
 {
-    const UPLOAD_DIR = '../public';
+    const UPLOAD_DIR = '../public/uploads/';
     public function index()
     {
         $admissionManager = new AdmissionManager();
