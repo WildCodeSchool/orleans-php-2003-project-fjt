@@ -9,7 +9,7 @@ class AdminRoomController extends AbstractController
 {
     public const ALLOWED_MIME = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg'];
     public const MAX_SIZE = 1000000;
-    public const UPLOAD_DIR = '../public/assets/images/uploads/';
+    public const UPLOAD_DIR = '../public/uploads/images/';
 
     public function index()
     {
