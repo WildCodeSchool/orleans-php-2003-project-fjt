@@ -1,4 +1,4 @@
-{% extends 'layout.html.twig' %}
+{% extends 'adminLayout.html.twig' %}
 
 {% block stylesheet %}
     <link rel="stylesheet" href="/assets/css/adminContact.css">
@@ -24,8 +24,8 @@
         {% for contact in contacts %}
         <tr>
             <th scope="row">{{ contact.sendDate | date("d.m.Y à H:i") }}</th>
-                <td> {{ contact.firstname }}</td>
                 <td> {{ contact.lastname }}</td>
+                <td> {{ contact.firstname }}</td>
                 <td> <a class="btn btn-outline-primary" href="/AdminContact/show/{{ contact.id }}" type="button" value="button">Consulter</a>
                 </td>
         </tr>
@@ -41,7 +41,7 @@
 
     <div class="container mt-5">
         <div class="col-12 d-flex justify-content-center">
-            <a class="btn btn-outline-secondary" href="/home/index">Retour à l'accueil </a>
+            <a class="btn btn-outline-secondary" href="/Admin/index">Retour à l'accueil administrateur </a>
         </div>
     </div>
 {% endblock %}

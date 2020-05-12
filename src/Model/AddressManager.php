@@ -42,4 +42,11 @@ class AddressManager extends AbstractManager
         $statement->bindValue(':description', $data['description'], \PDO::PARAM_STR);
         $statement->execute();
     }
+    public function deleteAddress($id): void
+    {
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
+        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
+
+        $statement->execute();
+    }
 }

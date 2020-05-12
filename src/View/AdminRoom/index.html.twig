@@ -1,7 +1,5 @@
-{% extends 'layout.html.twig' %}
-{% block navbar %}
-    {% include '/Home/navbar.html.twig' %}
-{% endblock %}
+{% extends 'adminLayout.html.twig' %}
+
 {% block content %}
     <section>
         <div class="adminroom-index">
@@ -30,7 +28,7 @@
                             <td>
                                 <a class="btn btn-outline-primary" href="/AdminRoom/editRoom/{{ room.id }}" value="">Mettre à jour</a>
                             </td>
-                            <td><form action="../AdminRoom/deleteRoom" method="post">
+                            <td><form action="/AdminRoom/deleteRoom" method="post">
                                     <input type="hidden" value="{{ room.id }}" name="id">
                                     <button class="btn btn-outline-primary" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer ce logement ?')">Supprimer ce logement</button>
                                 </form>
@@ -54,9 +52,9 @@
                           <a class="btn btn-outline-primary" href="/AdminAddress/editAddress/{{ address.id }}" value="">Mettre à jour</a>
                         </td>
                         <td>
-                            <form action="" method="post">
+                            <form action="/AdminAddress/deleteAddress" method="post">
                                 <input type="hidden" value="{{ address.id }}" name="id">
-                                <button class="btn btn-outline-primary" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer cette adresse ?')">Supprimer ce logement</button>
+                                <button class="btn btn-outline-primary" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer cette adresse ?')">Supprimer cette adresse</button>
                             </form>
                         </td>
                     </tr>
@@ -65,7 +63,4 @@
             </table>
         </div>
     </section>
-{% endblock %}
-{% block footer %}
-    {% include '/Home/footer.html.twig' %}
 {% endblock %}

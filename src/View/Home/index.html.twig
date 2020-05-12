@@ -1,12 +1,8 @@
-{% extends 'layout.html.twig' %}
+{% extends 'basicLayout.html.twig' %}
 
 {% block stylesheet %}
     <link rel="stylesheet" href="/assets/css/home.css">
     <link rel="stylesheet" href="/assets/css/navbarHome.css">
-{% endblock %}
-
-{% block navbar %}
-    {% include '/Home/navbar.html.twig' %}
 {% endblock %}
 
 {% block header %}
@@ -17,8 +13,8 @@
                 <p>Decouvrez nos solutions de logements, restaurations, loisirs aux prix attractifs au sein d’Orleans !</p>
                 <form method="post">
                     <label for="mail">Mail:</label>
-                    <input class="form-control" type="email" id="mail" name="mail" placeholder="Email">
-                    <button class="btn btn-primary">Contact</button>
+                    <input class="form-control" type="email" id="emailHome" name="email" placeholder="Email">
+                    <a class="btn btn-primary" href="#contact">Contact</a>
                 </form>
             </div>
         </div>
@@ -44,13 +40,10 @@
     <div class="slogan">
         <p>Notre plus précieux capital, c'est vous, notre première réussite, c'est la vôtre...</p>
     </div>
-    {% include 'contact/_form.html.twig' %}
-{% endblock %}
-
-{% block footer %}
-    {% include '/Home/footer.html.twig' %}
+    {% include 'Contact/_form.html.twig' %}
 {% endblock %}
 
 {% block javascript %}
     <script src="/assets/scripts/navBgOnScroll.js"></script>
+    <script src="/assets/scripts/contentInputHome.js"></script>
 {% endblock %}
