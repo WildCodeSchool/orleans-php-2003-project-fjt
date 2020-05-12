@@ -11,7 +11,7 @@
 
     margin: auto;
     margin-top:16vh;
-    width: 60%;
+    width: 75%;
     height: 100vh;
 }
 
@@ -20,18 +20,22 @@
     margin-bottom: 70px;
 }
 
+.textHome {
+    color: var(--light-color);
+    margin-top: 12vh;
+    text-align: left;
+}
+
 .textHome p, .textHome input{
     margin-left: 100px;
 }
 
-.textHome {
-    color: var(--light-color);
-    margin-top: 10vh;
-    text-align: left;
+.textHome p{
+    margin-top:15vh;
 }
 
 .leftHome{
-    width: 60%;
+    width: 50%;
     margin-right: 50px;
 }
 
@@ -46,7 +50,7 @@
 .textHome input{
     width:80%;
     height:60px;
-    margin-top:100px;
+    margin-top:32px;
 
     border-radius: 10px;
     border:0;
@@ -57,7 +61,7 @@
     left: 1vw;
 }
 
-.home button{
+.home a{
     position: relative;
     width: 100px;
     height: 40px;
@@ -70,11 +74,12 @@
 
 .pictureFJT{
     position: absolute;
-    width: 300px;
-    height: 650px;
+    width: 380px;
+    height: 75vh;
     opacity: 0.9;
     border-radius: 20px;
     z-index: 1;
+    object-fit: cover;
 }
 
 .youngPeople{
@@ -86,7 +91,7 @@
 
 .header {
     position: absolute;
-    background-image: radial-gradient(circle 300vmax at -100vw 180vh , var(--secondary-bg-color) 10%, var(--secondary-bg-color) 60%, var(--main-bg-color) 60%);
+    background-image: radial-gradient(circle 300vmax at -110vw 180vh , var(--secondary-bg-color) 10%, var(--secondary-bg-color) 60%, var(--main-bg-color) 60%);
     width: 100vw;
     height:100vh;
 }
@@ -109,11 +114,40 @@
 }
 
 @media screen and (max-width: 991px) {
+    .home{
+        width: 90%;
+        margin:auto;
+    }
+
+    .leftHome{
+        width:100%;
+        margin:auto;
+    }
+
+    .rightHome{
+        display: none;
+    }
+
     .pres img{
         margin-top: var(--spacing-sm);
     }
 
     .pres p{
         text-align: center;
+    }
+}
+
+@media screen and (max-width: 604px) {
+    .home form{
+        display: none;
+    }
+
+    .textHome {
+        text-align: center;
+        margin-top: 80px;
+    }
+
+    .textHome p{
+        margin: 0;
     }
 }
