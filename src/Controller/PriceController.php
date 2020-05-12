@@ -61,7 +61,8 @@ class PriceController extends AbstractController
                     $filesDel = '../public/assets/uploads/' . $fileName;
                     unlink($filesDel);
                 }
-                $data['zip_path'] = '../public/assets/uploads/' . $zipName;
+                $data['zip_path'] = '/assets/uploads/' . $zipName;
+                $data['folderName'] = $folderName;
                 $admissionManager->insert($data);
                 header('Location:/Home/index');
             }
@@ -119,7 +120,7 @@ class PriceController extends AbstractController
     private function controlFormLengthTwo($data)
     {
         $errorsFormLengthTwo = [];
-        if (strlen($data['maritalstatus']) > 11) {
+        if (strlen($data['maritalstatus']) > 50) {
             $errorsFormLengthTwo['maritalstatus'] = 'Ce champ est trop long';
         }
         if (strlen($data['firstname']) > 45) {
