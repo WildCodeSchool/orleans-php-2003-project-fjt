@@ -43,7 +43,15 @@ class AdminAddressController extends AbstractController
             'data'=> $data ?? [],
             'errors'=> $errors ?? []]);
     }
-      
+  
+    public function deleteAddress()
+    {
+        $addressManager = new AddressManager();
+        $id = trim($_POST['id']);
+        $addressManager->deleteAddress($id);
+        header('Location: /AdminRoom/index');
+    }
+
     private function controlAddress($data)
     {
 
