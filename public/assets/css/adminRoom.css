@@ -1,3 +1,14 @@
-.adminroom-index tbody td {
-    width: calc(100%/3);
+@media screen and ( max-width: 768px ){
+    .maj {
+        height: 4em;
+        padding-top: 9%;
+    }
+
+}
+@media screen and ( max-width: 375px ){
+    .maj {
+        height: 5.5em;
+        padding-top: 25%;
+    }
+
 }
