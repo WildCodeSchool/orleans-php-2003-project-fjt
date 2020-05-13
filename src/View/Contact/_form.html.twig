@@ -11,7 +11,7 @@
         </div>
 
         <div class="mt-5 col-sm-12 col-md-5 offset-md-1">
-            <form action="" method="POST">
+            <form method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-5 mr-md-4">
                         <label for="lastname">Nom*</label>
@@ -55,7 +55,7 @@
 
                 <div class="form-group col-13 pl-0">
                     <label for="message">Message*</label>
-                    <textarea required class="form-control" id="message" name="message" rows="4" placeholder="Je souhaiterai vous contacter à propos de..." value="{{ post.message }}"></textarea>
+                    <textarea required class="form-control" id="message" name="message" rows="4" placeholder="Je souhaiterai vous contacter à propos de...">{{ post.message }}</textarea>
                     <div>
                         {% if errors.message %}
                             <div class="alert alert-danger mt-1" role="alert">{{ errors.message }}</div>
