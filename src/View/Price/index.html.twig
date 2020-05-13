@@ -187,7 +187,7 @@
         
             <div class="mt-5">
                 <h2>Formulaire de pré-insciption</h2>
-                <form class="d-flex flex-column justify-content-around border border-primary rounded-lg" action="" method="post" enctype="multipart/form-data" >
+                <form class="d-flex flex-column justify-content-around border border-primary rounded-lg" method="post" enctype="multipart/form-data" >
                     <p class="w-75 w-md-50">Vous pouvez nous joindre par téléphone au 02.38.42.23.30 ou par email en utilisant la partie <a
                                 href="/#contact">Contact</a> de notre site. Si vous le désirez vous pouvez remplir un dossier
                         de pré-admission en ligne ci-dessous:</p>
@@ -282,7 +282,7 @@
                         </ol>
                         <div class="d-flex flex-column col-md-5 form-group">
                             <label for="file">Vos Documents</label>
-                            <input class="form-control" type="file" name='file[]' multiple>
+                            <input class="form-control" type="file" name='file[]' id="file" multiple>
                             {% if errors.file %}
 
                                 <div class="text-danger">{{ errors.file }}</div>
