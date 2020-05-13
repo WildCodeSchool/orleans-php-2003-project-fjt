@@ -27,6 +27,8 @@ nav img{
     top: 20px;
 }
 
-nav button{
-    margin-top:20px;
+@media screen and (max-width: 661px) {
+    .navbar-brand img{
+        width: 75px;
+    }
 }

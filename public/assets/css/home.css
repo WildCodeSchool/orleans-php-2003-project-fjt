@@ -113,6 +113,10 @@
     font-style:italic;
 }
 
+#contact{
+    scroll-margin-top: 200px;
+}
+
 @media screen and (max-width: 991px) {
     .home{
         width: 90%;
