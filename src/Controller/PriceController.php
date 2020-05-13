@@ -20,7 +20,7 @@ class PriceController extends AbstractController
      */
     public const ALLOWED_MIME = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg', 'application/pdf'];
     public const MAX_SIZE = 1000000;
-    public const UPLOAD_DIR = '../public/assets/uploads/';
+    public const UPLOAD_DIR = '../public/uploads/';
 
     public function index()
     {
@@ -47,21 +47,21 @@ class PriceController extends AbstractController
                 $zipper = new Zipper;
                 $zipName = $data['lastname'] . '_' . uniqid('', true) . ".zip";
                 $folderName = $data['lastname'] . '_' . $data['firstname'] ;
-                $zipper->make('../public/assets/uploads/' . $zipName)->folder($folderName);
+                $zipper->make('../public/uploads/' . $zipName)->folder($folderName);
                 foreach ($files['name'] as $position => $name) {
                     $fileDestination = self::UPLOAD_DIR . $filesNameNew[$position];
 
                     if (!move_uploaded_file($files['tmp_name'][$position], $fileDestination)) {
                         $errors['uploads'][$name] = 'Les fichiers n\'a pas pu être téléchargé';
                     }
-                    $zipper->add('../public/assets/uploads/' . $filesNameNew[$position]);
+                    $zipper->add(self::UPLOAD_DIR . $filesNameNew[$position]);
                 }
-                $zipper->make('../public/assets/uploads/' . $zipName . "/")->close();
+                $zipper->make(self::UPLOAD_DIR . $zipName . "/")->close();
                 foreach ($filesNameNew as $fileName) {
-                    $filesDel = '../public/assets/uploads/' . $fileName;
+                    $filesDel = self::UPLOAD_DIR . $fileName;
                     unlink($filesDel);
                 }
-                $data['zip_path'] = '/assets/uploads/' . $zipName;
+                $data['zip_path'] = $zipName;
                 $data['folderName'] = $folderName;
                 $admissionManager->insert($data);
                 header('Location:/Home/index');
