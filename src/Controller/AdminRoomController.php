@@ -18,7 +18,7 @@ class AdminRoomController extends AbstractController
         $roomByAddresses = [];
         $addresses = $roomManager->selectAddress();
         foreach ($rooms as $room) {
-            $roomName = $room['name'];
+            $roomName = $room['address'];
             $roomByAddresses[$roomName][] = $room;
         }
 
@@ -46,9 +46,9 @@ class AdminRoomController extends AbstractController
             $errors = array_merge($errorsDataOne, $errorsDataTwo, $errorsFilterOne, $errorsFilterTwo, $errorsUpload);
 
             if (empty($errors)) {
-                $data['picture'] = $fileNameNew;
                 $fileDestination = self::UPLOAD_DIR . $fileNameNew;
-                move_uploaded_file($fileNameNew, $fileDestination);
+                $data['picture'] = '/uploads/images/' . $fileNameNew;
+                move_uploaded_file($file['tmp_name'], $fileDestination);
                 $roomManager->insert($data);
                 header('Location:/AdminRoom/index');
             }
@@ -56,7 +56,7 @@ class AdminRoomController extends AbstractController
         return $this->twig->render('AdminRoom/addRoom.html.twig', [
             'addresses' => $addresses ,
             'errors' => $errors ?? [] ,
-            'room' => $data ?? []
+            'data' => $data ?? [],
         ]);
     }
     public function editRoom(int $id)
@@ -82,7 +82,7 @@ class AdminRoomController extends AbstractController
             if (empty($errors)) {
                 $data['picture'] = $fileNameNew;
                 $fileDestination = self::UPLOAD_DIR . $fileNameNew;
-                move_uploaded_file($fileNameNew, $fileDestination);
+                move_uploaded_file($file['tmp_name'], $fileDestination);
                 $roomManager->update($data);
                 header('Location:/AdminRoom/index');
             }
@@ -187,7 +187,7 @@ class AdminRoomController extends AbstractController
         } else {
             $errorsUpload['picture'] = "Problème lors de l'import du fichier";
         }
-        return [$fileNameNew, $errorsUpload] ?? [];
+        return [$fileNameNew , $errorsUpload] ?? [];
     }
     public function deleteRoom()
     {
