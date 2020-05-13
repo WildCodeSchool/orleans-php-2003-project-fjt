@@ -64,7 +64,7 @@ body{
 }
 
 section{
-    margin-top: var(--spacing-lg);
+    margin-top: var(--spacing);
     margin-bottom: var(--spacing-lg);
 }
 

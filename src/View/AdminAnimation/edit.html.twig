@@ -3,8 +3,10 @@
 {% block title %}Modifier {{ animation.name }}{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h2 class="m-4">Modifier {{ animation.name }}</h2>
-        {% include 'AdminAnimation/_form.html.twig' %}
-    </div>
+    <section>
+        <div class="container-fluid">
+            <h1 class="m-lg-4 text-center">Modifier {{ animation.name }}</h1>
+            {% include 'AdminAnimation/_form.html.twig' %}
+        </div>
+    </section>
 {% endblock %}
