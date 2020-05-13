@@ -96,4 +96,8 @@
     .card-order:nth-of-type(3) {
         order: 0;
     }
+    .service-card img,
+    .main-card .card img {
+        height: 200px;
+    }
 }

@@ -38,14 +38,14 @@
                 <div class="card-deck main-card">
                     <div class="card">
                         <img src="/uploads/images/{{ animation.image }}" class="card-img-top" alt="{{ animation.name }}">
-                        <div class="card-body card-description">
+                        <div class="card-body card-description overflow-auto">
                             <h3 class="card-title text-center card-blue">{{ animation.name|upper }}</h3>
                             <p class="card-text">{{ animation.description }}</p>
                         </div>
                     </div>
                 </div>
         </div>
-            <div class="d-flex flex-column pl-3 pr-3">
+            <div class="d-flex flex-column pl-3 pr-3 col-lg-6">
             {% else %}
                 <div class="card animation-card">
                     <div class="row no-gutters">
@@ -53,7 +53,7 @@
                             <img src="/uploads/images/{{ animation.image }}" class="card-img-top h-100" alt="{{ animation.name }}">
                         </div>
                         <div class="col-md-6 col-xs-1">
-                            <div class="card-body card-description">
+                            <div class="card-body card-description overflow-auto">
                                 <h3 class="card-title card-title-sm text-center card-pink">{{ animation.name|upper }}</h3>
                                 <p class="card-text">{{ animation.description }}</p>
                             </div>
