@@ -71,11 +71,9 @@
                     <p>Les champs marqués d'un * sont obligatoires</p>
                 </div>
             </form>
-            <div class="col-9 px-0">
-                {% if success.success %}
-                    <div class="alert alert-success mt-1" role="alert">{{ success.success }}</div>
-                {% endif %}
-            </div>
+            {% if success.success %}
+                <div class="alert alert-success mt-1" role="alert">{{ success.success }}</div>
+            {% endif %}
         </div>
     </div>
 </section>
