@@ -47,7 +47,7 @@ class AdminRoomController extends AbstractController
 
             if (empty($errors)) {
                 $fileDestination = self::UPLOAD_DIR . $fileNameNew;
-                $data['picture'] = '/uploads/images/' . $fileNameNew;
+                $data['picture'] = $fileNameNew;
                 move_uploaded_file($file['tmp_name'], $fileDestination);
                 $roomManager->insert($data);
                 header('Location:/AdminRoom/index');
