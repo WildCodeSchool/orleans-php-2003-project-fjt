@@ -102,4 +102,9 @@ class HomeController extends AbstractController
         }
         return $errors;
     }
+
+    public function showLegals()
+    {
+        return $this->twig->render('Home/details_legals.html.twig');
+    }
 }

@@ -64,7 +64,7 @@ class PriceController extends AbstractController
                 $data['zip_path'] = $zipName;
                 $data['folderName'] = $folderName;
                 $admissionManager->insert($data);
-                header('Location:/Home/index');
+                header('Location: /price/index');
             }
         }
         return $this -> twig -> render('Price/index.html.twig', [

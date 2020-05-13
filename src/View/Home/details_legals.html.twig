@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+{% block title %}
+    Mention légales
+{% endblock %}
+{% block navbar %}
+    {% include "Home/navbar.html.twig"%}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="col-12 mt-5">
+            <h1 class="text-center">Mentions légales</h1>
+        </div>
+
+        <div class="col-12">
+            <h3  class="mt-5">Editeurs du Site :</h3>
+            <p>Foyer des Jeunes Travailleurs</p>
+            <p>Reponsable editorial : Sylvain Blondeau</p>
+            <p>29 rue du Colombier Orléans</p>
+            <p>Téléphone : 02 38 42 23 30</p>
+        </div>
+
+        <div class="col-12">
+            <h3  class="mt-5">Hebergement :</h3>
+            <p>Site non hébergé</p>
+        </div>
+
+        <div class="col-12">
+            <h3  class="mt-5">Développement :</h3>
+            <p>Amandine Helene, Anthony Berduck, Julien Gault, Yannice Maladin</p>
+            <p>1 Avenue du Champ de Mars, 45074 Orléans</p>
+            <p>Téléphone : 06 58 11 24 70</p>
+            <p>Site Web : https://www.wildcodeschool.com/fr-FR</p>
+        </div>
+    </div>
+{% endblock %}
