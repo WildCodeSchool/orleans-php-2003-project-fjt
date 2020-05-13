@@ -284,6 +284,7 @@
                         <div class="d-flex flex-column col-md-5 form-group">
                             <label for="file">Ajoutez vos documents</label>
                             <input class="form-control" type="file" name='file[]' multiple>
+
                             {% if errors.file %}
 
                                 <div class="text-danger">{{ errors.file }}</div>
