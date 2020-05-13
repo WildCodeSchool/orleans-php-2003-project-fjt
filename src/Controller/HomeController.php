@@ -14,14 +14,14 @@ class HomeController extends AbstractController
 {
 
     /**
-     * Display home page
+     * Display home page without loading
      *
      * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function index()
+    public function indexBis()
     {
         $errors = [];
 
@@ -42,7 +42,7 @@ class HomeController extends AbstractController
         }
 
         return $this->twig->render(
-            'Home/index.html.twig',
+            'Home/indexbis.html.twig',
             [
                 'post'=> $_POST,
                 'errors'=> $errors,
@@ -51,6 +51,18 @@ class HomeController extends AbstractController
         );
     }
 
+    /**
+     * Display home page with loading
+     *
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function index()
+    {
+        return $this->twig->render('Home/index.html.twig');
+    }
 
     private function secureName($data, $errors)
     {

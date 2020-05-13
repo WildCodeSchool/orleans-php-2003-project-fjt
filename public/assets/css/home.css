@@ -93,7 +93,7 @@
     position: absolute;
     width: 100vw;
     height:100vh;
-    background-image: radial-gradient(circle 300vmax at -110vw 180vh , var(--secondary-bg-color) 10%, var(--secondary-bg-color) 60%, var(--main-bg-color) 60%);
+    background-image: radial-gradient(299vmax at -98vw 180vh, rgb(3, 36, 151) 10%, rgb(3, 36, 151) 60%, rgb(255, 0, 83) 60%);
 }
 
 .pres img{
@@ -111,6 +111,16 @@
     margin:0;
     color: var(--secondary-bg-color);
     font-style:italic;
+}
+
+#circle{
+    position: absolute;
+    width:100vw;
+    height:100vh;
+}
+
+.header, .main, .footer{
+    display: none;
 }
 
 #contact{
