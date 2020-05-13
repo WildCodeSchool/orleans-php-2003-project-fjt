@@ -186,11 +186,11 @@
         </table>
         
             <div class="mt-5">
-                <h2>Formulaire de pré-insciption</h2>
-                <form class="d-flex flex-column justify-content-around border border-primary rounded-lg" method="post" enctype="multipart/form-data" >
-                    <p class="w-75 w-md-50">Vous pouvez nous joindre par téléphone au 02.38.42.23.30 ou par email en utilisant la partie <a
-                                href="/#contact">Contact</a> de notre site. Si vous le désirez vous pouvez remplir un dossier
-                        de pré-admission en ligne ci-dessous:</p>
+                <h2>Formulaire de pré-inscription</h2>
+                <form class="d-flex flex-column justify-content-around border border-primary rounded-lg" action="" method="post" enctype="multipart/form-data" >
+                    <p class="w-75 w-md-50">Vous pouvez nous joindre par téléphone au 02.38.42.23.30 ou via <a
+                                href="/#contact">le formulaire de contact</a> de notre site. Vous pouvez égalemment remplir le dossier
+                        de pré-admission en ligne ci-dessous :</p>
                     <div class="d-flex">
                         <div class="offset-lg-1 col-lg-2 form-group text-center">
                             <input name="maritalstatus" id="maritalstatus2" type="radio" value="Célibataire" required>
@@ -239,7 +239,7 @@
 
                     <div class="d-flex justify-content-around my-3 flex-column flex-md-row">
                         <div class="d-flex flex-column col-md-5 form-group">
-                            <label for="street">Rue</label>
+                            <label for="street">Allée</label>
                             <input class="form-control" type="text" name="street" id="street" value="{{ data.street }}" required>
                             {% if errors.street %}
                                 <div class="text-danger">{{ errors.street }}</div>
@@ -273,6 +273,7 @@
 
                     <div class="d-flex justify-content-around my-3 flex-column flex-md-row">
                         <ol class="col-md-5">
+                            <h4>Documents nécessaires :</h4>
                             <li>- Pièce d'identité</li>
                             <li>- Avis d'imposition</li>
                             <li>- Carte vitale</li>
@@ -281,8 +282,9 @@
                             <li>- Engagement d'un garant</li>
                         </ol>
                         <div class="d-flex flex-column col-md-5 form-group">
-                            <label for="file">Vos Documents</label>
-                            <input class="form-control" type="file" name='file[]' id="file" multiple>
+                            <label for="file">Ajoutez vos documents</label>
+                            <input class="form-control" type="file" name='file[]' multiple>
+
                             {% if errors.file %}
 
                                 <div class="text-danger">{{ errors.file }}</div>
