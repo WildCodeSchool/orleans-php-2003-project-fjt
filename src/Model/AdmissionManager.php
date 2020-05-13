@@ -70,9 +70,9 @@ class AdmissionManager extends AbstractManager
   
     public function update(array $data): bool
     {
-        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `status` = :status WHERE id=:id");
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `statut` = :statut WHERE id=:id");
         $statement->bindValue(':id', $data['id'], \PDO::PARAM_INT);
-        $statement->bindValue(':status', $data['status'], \PDO::PARAM_STR);
+        $statement->bindValue(':statut', $data['statut'], \PDO::PARAM_STR);
         return $statement->execute();
     }
 }

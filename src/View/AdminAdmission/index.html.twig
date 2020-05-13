@@ -13,7 +13,7 @@
             </thead>
             <tbody>
             {% for folder in folders %}
-                {%  if folder.status is same as('En attente') %}
+                {%  if folder.statut is same as('En attente') %}
                     <tr>
                         <td>{{ folder.lastname ~ ' ' ~ folder.firstname}}</td>
                         <td>
@@ -39,7 +39,7 @@
             </thead>
             <tbody>
             {% for folder in folders %}
-                {%  if folder.status is same as('Validé') %}
+                {%  if folder.statut is same as('Validé') %}
                     <tr>
                         <td>{{ folder.lastname ~ ' ' ~ folder.firstname}}</td>
                         <td>

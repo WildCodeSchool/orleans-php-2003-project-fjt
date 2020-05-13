@@ -6,83 +6,60 @@
 {% block content %}
     <section>
         <h1 class="m-lg-4 text-center">Dossier de {{ folder.lastname ~ ' ' ~ folder.firstname  }}</h1>
-        <h3>Statut: {{ folder.status }}</h3>
+        <h3>Statut: {{ folder.statut }}</h3>
         <div class="d-flex flex-column fiche-signaletique p-4 border border-primary rounded m-3 col-lg-8">
-            <div class="d-flex my-3">
-                <div class=" col-4 text-center">
-                    <p>Nom</p>
+            <div class="d-flex col-12 mb-4 justify-content-center flex-md-row flex-column">
+                <form class="col-md-4 col-10 m-2" method="post">
+                    <input type="hidden" value="{{ folder.id }}" name="id">
+                    <input type="hidden" name="statut" value="En attente">
+                    <input class="btn btn-outline-danger col-12" type="submit" value="Mettre en attente">
+                </form>
+                <form class="col-md-4 col-10 m-2"  method="post">
+                    <input type="hidden" value="{{ folder.id }}" name="id">
+                    <input type="hidden" name="statut" value="Validé">
+                    <input class="btn btn-outline-primary col-12" type="submit" value="Valider">
+                </form>
+            </div>
+            <div class="d-flex my-3 flex-column flex-md-row">
+                <div class=" col-md-4">
+                    <p class="text-md-left text-center title ">Nom</p>
                     <p>{{ folder.lastname }}</p>
                 </div>
-                <div class="col-4 text-center">
-                    <p>Prénom</p>
+                <div class="col-md-4">
+                    <p class="text-md-left text-center title" >Prénom</p>
                     <p>{{ folder.firstname }}</p>
                 </div>
-                <div class="col-4 text-center">
-                    <p>Coordonnées</p>
+                <div class="col-md-4">
+                    <p class="text-md-left text-center title">Coordonnées</p>
                     <p>{{ folder.street}}</p>
                     <p>{{ folder.postal_code }}</p>
                     <p>{{ folder.city }}</p>
                 </div>
             </div>
-            <div class="d-flex my-3 justify-content-center ">
-                <div class="col-5">
-                    <div>
-                        <p>- Situation :</p>
-                        <p>{{ folder.marital_status }}</p>
-                    </div>
-                    <div>
-                        <p>- date de naissance :</p>
-                        <p>{{ folder.dateofbirth }}</p>
-                    </div>
-                    <div>
-                        <p>- Téléphone :</p>
-                        <p>{{ folder.phone }}</p>
-                    </div>
-                    <div>
-                        <p>- Email :</p>
-                        <p>{{ folder.mail }}</p>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-around align-items-center flex-column col-5">
-                    <p>Documents administratifs:</p>
-                    <ul>
-                        {% for file in files %}
-                            <li>{{ file }}</li>
-                        {% endfor %}
+            <div class="d-flex my-3 justify-content-md-around flex-md-row flex-column ">
+                <div class="col-md-5">
+                    <ul >
+                        <li> Situation : {{ folder.marital_status }}</li>
+                        <li> Date de naissance : {{ folder.dateofbirth }}</li>
+                        <li> Téléphone : {{ folder.phone }}</li>
+                        <li> Email : {{ folder.mail }}</li>
                     </ul>
+                </div>
+                <div class="d-flex flex-column col-md-5">
+                    <p class="title">Documents administratifs:</p>
+                    <p>Le dossier contient {{ files }} fichier(s)</p>
 
                 </div>
             </div>
-            <form class="d-flex container-fluid" action="" method="post">
-                <div class="form-group  offset-3 col-4 my-3 d-flex">
-                    <input type="hidden" value="{{ folder.id }}" name="id">
-                    <label class="col-3" for="status">Statut :</label>
-                    <select class="form-control" name="status" class="" id="status">
 
-                        {% for statut in statuses %}
-                            {% if folder.status is same as(statut) %}
-                                <option selected value="{{ statut }}">{{ statut }}</option>
-                            {% else %}
-                                <option value="{{statut }}">{{ statut }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                    {% if errors.status %}
-                        <div class="text-danger">{{ errors.status }}</div>
-                    {% endif %}
-                </div>
-                <div  class="form-group col-2 my-3">
-                    <input class="btn btn-outline-primary" type="submit" value="Valider le statut">
-                </div>
 
-            </form>
         </div>
-        <div class="d-flex justify-content-around col-8">
-            <form action="/AdminAdmission/delete/{{ folder.id }}" method="post">
-                <input type="submit" class="btn btn-outline-danger" value="Supprimer" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer le dossier {{ folder.lastname ~ ' ' ~ folder.firstname }} ?')">
+        <div class="d-flex justify-content-around col-md-8 col-11">
+            <form class="col-md-3 p-0" action="/AdminAdmission/delete/{{ folder.id }}" method="post">
+                <input type="submit" class="btn btn-outline-danger col-12 " value="Supprimer" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer le dossier {{ folder.lastname ~ ' ' ~ folder.firstname }} ?')">
             </form>
-            <a class="btn btn-outline-primary col-3" href="{{ folder.zip_path }}">Télécharger</a>
-            <a class="btn btn-outline-primary col-3" href="/AdminAdmission/index">Retour</a>
+            <a class="btn btn-outline-primary col-md-3 col-4" href="/uploads/{{ folder.zip_path }}">Télécharger</a>
+            <a class="btn btn-outline-primary col-md-3 col-4" href="/AdminAdmission/index">Retour</a>
         </div>
     </section>
 {% endblock %}
