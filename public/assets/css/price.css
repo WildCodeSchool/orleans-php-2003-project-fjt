@@ -62,7 +62,7 @@
     margin: 2%;
     color: var(--light-color);
     font-weight: bolder;
-    background-color: darkgray;
+    background-color: var(--main-bg-color);
     padding: calc(var(--spacing-sm) / 2);
     border-radius: 10px;
     min-width: 5%;
@@ -77,6 +77,10 @@
     }
     .card-rooms {
         width: auto;
+    }
+    .rooms .card figcaption {
+        max-height: 7vh;
+        padding: 2%;
     }
 }
 
