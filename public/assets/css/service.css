@@ -29,7 +29,7 @@
 }
 
 .card-description {
-    height: 200px;
+    height: 225px;
 }
 
 .card-order:nth-child(odd) .card-color,
