@@ -10,7 +10,7 @@
                     <div class="card col-lg-3 col-10 m-3" >
                         <figure>
                             <figcaption class="card-title overflow-auto">{{ room.type }}</figcaption>
-                            <img src="{{ room.picture }}" class="card-img-top" alt="picture_{{ room.type }}_{{ room.address }}">
+                            <img src="/uploads/images/{{ room.picture }}" class="card-img-top" alt="picture_{{ room.type }}_{{ room.address }}">
                         </figure>
                         <div class="card-body justify-content-around">
                             <div class="d-flex justify-content-center align-items-center">
@@ -55,7 +55,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 text-center">
-                                    <img src="{% if room.picture %}{{ room.picture }}{% else %}https://via.placeholder.com/150{% endif %}" class="card-img-top" alt="picture_{{ room.type }}_{{ room.address }}">
+                                    <img src="{% if room.picture %}/uploads/images/{{ room.picture }}{% else %}https://via.placeholder.com/150{% endif %}" class="card-img-top" alt="picture_{{ room.type }}_{{ room.address }}">
                                 </div>
                             </div>
                             <div class="row">

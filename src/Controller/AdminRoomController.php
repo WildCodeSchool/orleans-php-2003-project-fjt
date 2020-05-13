@@ -18,7 +18,7 @@ class AdminRoomController extends AbstractController
         $roomByAddresses = [];
         $addresses = $roomManager->selectAddress();
         foreach ($rooms as $room) {
-            $roomName = $room['name'];
+            $roomName = $room['address'];
             $roomByAddresses[$roomName][] = $room;
         }
 
@@ -47,7 +47,7 @@ class AdminRoomController extends AbstractController
 
             if (empty($errors)) {
                 $fileDestination = self::UPLOAD_DIR . $fileNameNew;
-                $data['picture'] = '/uploads/images/' . $fileNameNew;
+                $data['picture'] = $fileNameNew;
                 move_uploaded_file($file['tmp_name'], $fileDestination);
                 $roomManager->insert($data);
                 header('Location:/AdminRoom/index');
@@ -56,7 +56,7 @@ class AdminRoomController extends AbstractController
         return $this->twig->render('AdminRoom/addRoom.html.twig', [
             'addresses' => $addresses ,
             'errors' => $errors ?? [] ,
-            'room' => $data ?? []
+            'data' => $data ?? [],
         ]);
     }
     public function editRoom(int $id)
