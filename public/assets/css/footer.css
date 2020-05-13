@@ -41,6 +41,10 @@ footer p{
 
 @media screen and (max-width: 767px) {
     .contentFooter div{
-        margin-top: var(--spacing-sm);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .contentFooter div:nth-child(1){
+        display: none;
     }
 }

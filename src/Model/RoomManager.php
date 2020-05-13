@@ -35,16 +35,7 @@ class RoomManager extends AbstractManager
         return $this->pdo->query('SELECT *, r.id FROM room r JOIN address ON r.address_id = address.id ORDER BY 
         address.id ASC, r.area ASC')->fetchAll();
     }
-    public function insertAddress(array $data): void
-    {
-        $statement = $this->pdo->prepare('INSERT INTO address (`name`,`address`,`description`) VALUES
-         (:name,:address,:description)');
 
-        $statement->bindValue(':name', $data['name'], \PDO::PARAM_STR);
-        $statement->bindValue(':address', $data['address'], \PDO::PARAM_STR);
-        $statement->bindValue(':description', $data['description'], \PDO::PARAM_STR);
-        $statement->execute();
-    }
     public function selectAddress(): array
     {
         return $this->pdo->query('SELECT * FROM address ORDER BY 
@@ -61,9 +52,18 @@ class RoomManager extends AbstractManager
 
         $statement->execute();
     }
-    private static function bound($adminPrice, $statement)
+    public function update($data)
     {
-        foreach ($adminPrice as $key => $value) {
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `type` = :type,
+         `guarantee` = :guarantee, `equipment` = :equipment, `catering` = :catering, `contribution` = :contribution,
+          `breakfast` = :breakfast, `equipment_contribution` = :equipment_contribution,
+          `picture` = :picture, `area` = :area, `address_id` = :address_id WHERE id=:id");
+        self ::bound($data, $statement);
+        return $statement->execute();
+    }
+    private static function bound($data, $statement)
+    {
+        foreach ($data as $key => $value) {
             if (is_int($value) || is_float($value)) {
                 $statement->bindValue(':' . $key, $value, \PDO::PARAM_INT);
             } elseif ($value === null) {

@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Roboto&display=swap');
 @import 'navbar.css';
-@import 'form.css';
 @import "price.css";
 @import "footer.css";
 @import "adminRoom.css";
@@ -19,7 +18,7 @@
     --spacing-lg: calc(var(--spacing)*2);
 
     --main-size: 14pt;
-    --medium-size: 20pt;
+    --medium-size: 25pt;
     --large-size: 30pt;
     --extra-large-size: 40pt;
 
@@ -65,7 +64,7 @@ body{
 }
 
 section{
-    margin-top: var(--spacing-lg);
+    margin-top: var(--spacing);
     margin-bottom: var(--spacing-lg);
 }
 
@@ -102,4 +101,23 @@ a:hover {
 .btn-primary:hover {
     background-color: var(--main-bg-color);
     color: var(--light-color);
+}
+.section-h1 {
+    margin-top: var(--spacing-sm);
+    margin-left: 17%;
+}
+@media screen and ( max-width: 768px ){
+    .section-h1 {
+        margin-top: var(--spacing-sm);
+        margin-left: 13%;
+
+    }
+
+}
+@media screen and ( max-width: 375px ){
+    .section-h1 {
+        margin: 5% 0;
+        text-align: center;
+    }
+
 }

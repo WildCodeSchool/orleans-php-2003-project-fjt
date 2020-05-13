@@ -1,0 +1,30 @@
+<form class="d-flex row col-md-10 mx-auto flex-column align-items-center border border-primary rounded p-4" method="post" enctype="multipart/form-data">
+
+    <div class="form-group col-lg-5 my-3">
+        <input type="hidden" value="{{ address.id }}" name="id">
+        <label for="name">Nom: </label>
+        <input class="form-control" id="name" name="name" type="text" value="{% if data %}{{ data.name }}{% else %}{{ address.name }}{% endif %}" required >
+        {% if errors.name %}
+            <div class="text-danger">{{ errors.name }}</div>
+        {% endif %}
+    </div>
+    <div class="form-group col-lg-5 my-3">
+        <label for="address">Adresse: </label>
+        <input class="form-control" id="address" name="address" type="text" value="{% if data %}{{ data.address }}{% else %}{{ address.address }}{% endif %}" required >
+        {% if errors.address %}
+            <div class="text-danger">{{ errors.address }}</div>
+        {% endif %}
+    </div>
+    <div class="form-group col-lg-5 my-3">
+        <label for="description">Description: </label>
+        <textarea class="form-control" id="description" name="description" cols="30" rows="10" >{% if data %}{{ data.description }}{% else %}{{ address.description }}{% endif %}</textarea>
+        {% if errors.description %}
+            <div class="text-danger">{{ errors.description }}</div>
+        {% endif %}
+    </div>
+    <div class="mx-auto col-lg-10 d-flex justify-content-between my-4">
+        <input class="btn btn-outline-primary col-4" type="submit" value="Valider">
+        <a class="btn btn-outline-primary col-4" href="/AdminRoom/index">Retour</a>
+    </div>
+
+</form>

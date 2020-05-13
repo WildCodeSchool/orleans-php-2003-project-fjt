@@ -9,7 +9,7 @@ class AdminRoomController extends AbstractController
 {
     public const ALLOWED_MIME = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg'];
     public const MAX_SIZE = 1000000;
-    public const UPLOAD_DIR = '../public/assets/images/uploads/';
+    public const UPLOAD_DIR = '../public/uploads/images/';
 
     public function index()
     {
@@ -21,43 +21,11 @@ class AdminRoomController extends AbstractController
             $roomName = $room['name'];
             $roomByAddresses[$roomName][] = $room;
         }
+
         return $this->twig->render('AdminRoom/index.html.twig', ['roomByAddresses' => $roomByAddresses,
             'addresses'=> $addresses]);
     }
 
-    public function addAddress()
-    {
-        $adminRoomManager = new RoomManager();
-        $errors = [];
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = array_map('trim', $_POST);
-            $errors = $this->controlAddress($data);
-            if (empty($errors)) {
-                $adminRoomManager->insertAddress($data);
-                header('Location:/AdminRoom/index');
-            }
-        }
-        return $this->twig->render('AdminRoom/addAddress.html.twig', [
-            'data'=> $data ?? [],
-            'errors'=> $errors ?? []]);
-    }
-    private function controlAddress($data)
-    {
-        $errors = [];
-        if (empty($data['name'])) {
-            $errors['name'] = 'Le nom du logement ne doit pas être vide';
-        } elseif (strlen($data['name']) > 255) {
-            $errors['name'] = 'Le nom du logement est trop long';
-        }
-        if (empty($data['address'])) {
-            $errors['address'] = 'L\'adresse du logement ne doit pas être vide';
-        } elseif (strlen($data['address']) > 255) {
-            $errors['address'] = 'L\'adresse du logement est trop longue';
-        }
-
-        return $errors ?? [];
-    }
-  
     public function addRoom()
     {
         $roomManager = new RoomManager();
@@ -71,9 +39,11 @@ class AdminRoomController extends AbstractController
             $file = $_FILES['picture'] ?? [];
             $errorsDataOne = $this->controlDataOne($data, $addressesId);
             $errorsDataTwo = $this->controlDataTwo($data);
-            $errorsFilter = $this->controlDataFilter($data);
-            list($fileNameNew, $errorsUpload) = $this -> controlDataFile($file);
-            $errors = array_merge($errorsDataOne, $errorsDataTwo, $errorsFilter, $errorsUpload);
+            $errorsFilterOne = $this->controlDataFilterOne($data);
+            $errorsFilterTwo = $this->controlDataFilterTwo($data);
+            $controlFileData = $this -> controlDataFile($file);
+            list($fileNameNew, $errorsUpload) = $controlFileData;
+            $errors = array_merge($errorsDataOne, $errorsDataTwo, $errorsFilterOne, $errorsFilterTwo, $errorsUpload);
 
             if (empty($errors)) {
                 $data['picture'] = $fileNameNew;
@@ -89,7 +59,41 @@ class AdminRoomController extends AbstractController
             'room' => $data ?? []
         ]);
     }
-
+    public function editRoom(int $id)
+    {
+        $roomManager = new RoomManager();
+        $room = $roomManager->selectOneById($id);
+        $addresses = $roomManager->selectAddress();
+        $addressesId = [];
+        foreach ($addresses as $address) {
+            $addressesId[] = $address['id'];
+        }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = array_map('trim', $_POST);
+            $data['id'] = $id;
+            $file = $_FILES['picture'] ?? [];
+            $errorsDataOne = $this->controlDataOne($data, $addressesId);
+            $errorsDataTwo = $this->controlDataTwo($data);
+            $errorsFilterOne = $this->controlDataFilterOne($data);
+            $errorsFilterTwo = $this->controlDataFilterTwo($data);
+            $controlFileData = $this -> controlDataFile($file);
+            list($fileNameNew, $errorsUpload) = $controlFileData;
+            $errors = array_merge($errorsDataOne, $errorsDataTwo, $errorsFilterOne, $errorsFilterTwo, $errorsUpload);
+            if (empty($errors)) {
+                $data['picture'] = $fileNameNew;
+                $fileDestination = self::UPLOAD_DIR . $fileNameNew;
+                move_uploaded_file($fileNameNew, $fileDestination);
+                $roomManager->update($data);
+                header('Location:/AdminRoom/index');
+            }
+        }
+        return $this->twig->render('AdminRoom/editRoom.html.twig', [
+            'addresses' => $addresses ,
+            'errors' => $errors ?? [] ,
+            'room' => $room ?? [],
+            'data' => $data ?? []
+        ]);
+    }
     private function controlDataOne($data, $addressesId)
     {
         $errorsDataOne = [];
@@ -104,7 +108,7 @@ class AdminRoomController extends AbstractController
         if (empty($data['address_id'])) {
             $errorsDataOne['address_id'] = 'L\'adresse du logement ne doit pas être vide';
         } elseif (!in_array($data['address_id'], $addressesId, true)) {
-             $errorsDataOne['address_id'] = 'L\'adresse du logement n\'est pas une adresse éxistante';
+            $errorsDataOne['address_id'] = 'L\'adresse du logement n\'est pas une adresse enregistrée';
         }
         return $errorsDataOne ?? [];
     }
@@ -124,35 +128,43 @@ class AdminRoomController extends AbstractController
         return $errorsDataTwo ?? [];
     }
 
-    private function controlDataFilter(array $data) :array
+    private function controlDataFilterOne(array $data): array
     {
-        $errorsFilter = [];
+        $errorsFilterOne = [];
         if (!filter_var($data['guarantee'], FILTER_VALIDATE_FLOAT)) {
-            $errorsFilter['guarantee'] = 'La valeur du dépôt de garantie n\'est pas autorisé';
+            $errorsFilterOne['guarantee'] = 'La valeur du dépôt de garantie n\'est pas autorisée';
         }
         if (!filter_var($data['catering'], FILTER_VALIDATE_FLOAT)) {
-            $errorsFilter['catering'] = 'La valeur du crédit restauration n\'est pas autorisé';
+            $errorsFilterOne['catering'] = 'La valeur du crédit restauration n\'est pas autorisée';
         }
         if (!filter_var($data['contribution'], FILTER_VALIDATE_FLOAT)) {
-            $errorsFilter['contribution'] = 'La valeur de la cotisation n\'est pas autorisée';
+            $errorsFilterOne['contribution'] = 'La valeur de la cotisation n\'est pas autorisée';
         }
         if (!filter_var($data['equipment_contribution'], FILTER_VALIDATE_FLOAT)) {
-            $errorsFilter['equipment_contribution'] = 'La valeur de la cotisation d\'équipement n\'est pas autorisée';
+            $errorsFilterOne['equipment_contribution']
+                = 'La valeur de la cotisation d\'équipement n\'est pas autorisée';
         }
         if (!filter_var($data['address_id'], FILTER_VALIDATE_INT)) {
-            $errorsFilter['address_id'] = 'La valeur de l\'adresse n\'est pas autorisée';
+            $errorsFilterOne['address_id'] = 'La valeur de l\'adresse n\'est pas autorisée';
         }
-        if (!filter_var($data['area'], FILTER_VALIDATE_INT)) {
-            $errorsFilter['area'] = 'La valeur de la surface n\'est pas autorisée';
-        }
-        if ($data['breakfast'] !== 'inclus' && !filter_var($data['breakfast'], FILTER_VALIDATE_FLOAT)) {
-            $errorsFilter['breakfast'] = 'L\'information sur le tarif du petit déjeuner doit être 
-            un nombre ou \'inclus\'';
-        }
-        return $errorsFilter ?? [];
+        return $errorsFilterOne ?? [];
     }
 
-    private function controlDataFile(array $file):array
+    private function controlDataFilterTwo(array $data): array
+    {
+        $errorsFilterTwo = [];
+
+        if ($data['area'] > 0 && !filter_var($data['area'], FILTER_VALIDATE_INT)) {
+            $errorsFilterTwo['area'] = 'La valeur de la surface n\'est pas autorisée';
+        }
+        if ($data['breakfast'] !== 'inclus' && !filter_var($data['breakfast'], FILTER_VALIDATE_FLOAT)) {
+            $errorsFilterTwo['breakfast'] = 'L\'information sur le tarif du petit déjeuner doit être 
+            un nombre ou \'inclus\'';
+        }
+        return $errorsFilterTwo ?? [];
+    }
+
+    private function controlDataFile(array $file): array
     {
         $errorsUpload = [];
         $fileNameNew = '';
@@ -166,7 +178,7 @@ class AdminRoomController extends AbstractController
                  les types de fichiers autorisés sont " . implode(', ', self::ALLOWED_MIME) . '.';
             }
             if ($fileSize > self::MAX_SIZE) {
-                $errorsUpload['picture'] = 'Le fichier doit faire moins de ' . (self::MAX_SIZE/1000000) .
+                $errorsUpload['picture'] = 'Le fichier doit faire moins de ' . (self::MAX_SIZE / 1000000) .
                     ' Mo';
             }
             if (empty($errorsUpload)) {
@@ -175,7 +187,7 @@ class AdminRoomController extends AbstractController
         } else {
             $errorsUpload['picture'] = "Problème lors de l'import du fichier";
         }
-        return [$fileNameNew,$errorsUpload] ?? [];
+        return [$fileNameNew, $errorsUpload] ?? [];
     }
     public function deleteRoom()
     {

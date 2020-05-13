@@ -1,108 +1,218 @@
-{% extends 'layout.html.twig' %}
-
-{% block navbar %}
-    {% include '/Home/navbar.html.twig' %}
-{% endblock %}
-
+{% extends 'basicLayout.html.twig' %}
+{% block title %}Tarifs{% endblock %}
 {% block content %}
+    <h1 class="section-h1">Tarifs</h1>
     <div class="rooms">
-        <section>
-            <h2>Nos logements:</h2>
-            <div class=" row justify-content-around ">
+        <section class="card-rooms container-fluid mt-0">
+            <h2>Nos logements</h2>
+            <div class=" row justify-content-center ">
                 {% for room in rooms %}
-                    <div class="card col-lg-5 col-10 " >
+                    <div class="card col-lg-3 col-10 m-3" >
                         <figure>
                             <figcaption class="card-title">{{ room.type }}</figcaption>
                             <img src="{{ room.picture }}" class="card-img-top" alt="picture_{{ room.type }}_{{ room.address }}">
                         </figure>
                         <div class="card-body justify-content-around">
-                            <h3 class="card-title">Description:</h3>
-                            <p class="card-text">{{ room.description }}</p>
-                            <h3 class="card-title">Tarif:</h3>
-                            <p class="card-text"><strong>{% set room_price = room.guarantee+room.catering+
-                                        room.contribution+room.equipment_contribution %}
-                                    {% if room.breakfast is not null and room.breakfast != 'inclus' %}
-                                        {% set room_price = room_price + room.breakfast %}
-                                    {% endif %}
-                                    {{  room_price |round(2, 'floor') }}€</strong></p>
-                            <h3 class="card-title">Adresse:</h3>
-                            <p class="card-text">{{ room.address }}</p>
-                            <a href="#" class="btn btn-primary">+ d'infos</a>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="d-flex">
+                                     <p class="card-text card-price">
+                                         {% set room_price = room.guarantee+room.catering+
+                                                room.contribution+room.equipment_contribution %}
+                                            {% if room.breakfast is not null and room.breakfast != 'inclus' %}
+                                                {% set room_price = room_price + room.breakfast %}
+                                            {% endif %}
+                                            {{  room_price |round(2, 'floor') }}€
+                                     </p>
+                                    <p class="pl-1"><strong>/mois</strong></p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-map-marker-alt fa-2x icon-here mr-3"></i>
+                                <p class="card-text card-address">{{ room.address }}</p>
+                            </div>
+                            <button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#room-modal{{ room.id }}{{ room.guarantee }}">+ d'infos</button>
                         </div>
                     </div>
                 {% endfor %}
             </div>
         </section>
 
-        <section>
-            <h2>Grille tarifaire:</h2>
-            <table class="table table-striped table-borderless">
-                <thead>
-                <tr>
-                    <th scope="col">Adresse</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Surface</th>
-                    <th scope="col">Nuitée</th>
-                    <th scope="col">Semaine</th>
-                    <th scope="col">Mois</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for room in rooms %}
-                    <tr>
-                        <td >{{ room.address }}</td>
-                        <td >{{ room.type }}</td>
-                        <td>{% if room.area is empty %}/{% else %}{{ room.area }} m²{% endif %}</td>
-                        <td>{% set room_price =  ((room.guarantee+room.catering+
-                                room.contribution+room.equipment_contribution)/30) %}
-                            {% if room.breakfast is not null and room.breakfast != 'inclus' %}
-                                {% set room_price = room_price + room.breakfast %}
-                            {% endif %}
-                            {{  room_price |round(2, 'floor') }} €</td>
-                        <td>{% set room_price =  (((room.guarantee+room.catering+
-                                room.contribution+room.equipment_contribution)/30)*7) %}
-                            {% if room.breakfast is not null and room.breakfast != 'inclus' %}
-                                {% set room_price = room_price + room.breakfast %}
-                            {% endif %}
-                            {{  room_price |round(2, 'floor') }} €</td>
-                        <td>{% set room_price = room.guarantee+room.catering+
-                                room.contribution+room.equipment_contribution %}
-                            {% if room.breakfast is not null and room.breakfast != 'inclus' %}
-                                {% set room_price = room_price + room.breakfast %}
-                            {% endif %}
-                            {{  room_price |round(2, 'floor') }} €</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-            <div class="mt-5">
-                <h2>Formulaire de pré-insciption</h2>
-                <form class="d-flex flex-column justify-content-around border border-primary rounded-lg" action="" method="post" enctype="multipart/form-data" >
-                    <p>Vous pouvez nous joindre par téléphone au 02.38.42.23.30 ou par email en utilisant la partie <a
-                                href="../home/index">Contact</a> de notre site. Si vous le désirez vous pouvez remplir un dossier
-                        de pré-admission en ligne ci-dessous:</p>
-                    <div class="d-flex justify-content-center">
-                        <div class="col-3 form-group">
-                            <input name="maritalstatus" id="maritalstatus" type="radio" value="Célibataire" required>
-                            <label for="maritalstatus">Célibataire</label>
+        {# Modal #}
+        {% for room in rooms %}
+        <div class="modal fade" id="room-modal{{ room.id }}{{ room.guarantee }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLongTitle">{{ room.type|capitalize }} - {{ room.address }}</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body modal-body-room">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <img src="{{ room.picture }}" class="card-img-top" alt="picture_{{ room.type }}_{{ room.address }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="m-3">{{ room.description|nl2br }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between modal-total">
+                                    <p class="modal-total-room mb-0">Total</p>
+                                    <p class="modal-total-price mb-0">
+                                        {% set room_price = room.guarantee+room.catering+
+                                            room.contribution+room.equipment_contribution %}
+                                        {% if room.breakfast is not null and room.breakfast != 'inclus' %}
+                                            {% set room_price = room_price + room.breakfast %}
+                                        {% endif %}
+                                        {{  room_price |round(2, 'floor') }} €
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between modal-price mt-3">
+                                    <p>Loyer</p>
+                                    <p>{{ room.guarantee }} €</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between modal-price">
+                                    <p>Restauration</p>
+                                    <p>
+                                        {% if room.catering is null %}
+                                            /
+                                        {% else %}
+                                            {{ room.catering }} €
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between modal-price">
+                                    <p>Cotisation</p>
+                                    <p>
+                                        {% if room.contribution is null %}
+                                            /
+                                        {% else %}
+                                            {{ room.contribution }} €
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between modal-price">
+                                    <p>Cotisation d'équipement
+                                        {% if room.equipment is not null %}
+                                        ({{ room.equipment }})
+                                        {% endif %}
+                                    </p>
+                                    <p>
+                                        {% if room.equipment_contribution is null %}
+                                            /
+                                        {% else %}
+                                            {{ room.equipment_contribution }} €
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between modal-price">
+                                    <p>Petit déjeuner</p>
+                                    <p>
+                                        {% if room.breakfast is null %}
+                                            NON INCLUS
+                                        {% elseif room.breakfast == 'inclus' %}
+                                            {{ room.breakfast|upper }}
+                                        {% else %}
+                                            {{ room.breakfast }} €
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-3 form-group">
-                            <input name="maritalstatus" id="maritalstatus" type="radio" value="En couple" required>
-                            <label for="maritalstatus">En couple</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    <section>
+        <h2>Grille tarifaire</h2>
+        <table class="table table-striped table-borderless">
+            <thead>
+            <tr>
+                <th scope="col">Adresse</th>
+                <th scope="col">Type</th>
+                <th scope="col">Surface</th>
+                <th scope="col">Nuitée</th>
+                <th scope="col">Semaine</th>
+                <th scope="col">Mois</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for room in rooms %}
+            <tr>
+                <td >{{ room.address }}</td>
+                <td >{{ room.type }}</td>
+                <td>{% if room.area == 0 %}/{% else %}{{ room.area }} m²{% endif %}</td>
+                <td>{% set room_price =  ((room.guarantee+room.catering+
+                        room.contribution+room.equipment_contribution)/30) %}
+                    {% if room.breakfast is not null and room.breakfast != 'inclus' %}
+                        {% set room_price = room_price + room.breakfast %}
+                    {% endif %}
+                    {{  room_price |round(2, 'floor') }} €</td>
+                <td>{% set room_price =  (((room.guarantee+room.catering+
+                        room.contribution+room.equipment_contribution)/30)*7) %}
+                    {% if room.breakfast is not null and room.breakfast != 'inclus' %}
+                        {% set room_price = room_price + room.breakfast %}
+                    {% endif %}
+                    {{  room_price |round(2, 'floor') }} €</td>
+                <td>{% set room_price = room.guarantee+room.catering+
+                        room.contribution+room.equipment_contribution %}
+                    {% if room.breakfast is not null and room.breakfast != 'inclus' %}
+                        {% set room_price = room_price + room.breakfast %}
+                    {% endif %}
+                    {{  room_price |round(2, 'floor') }} €</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        
+            <div class="mt-5">
+                <h2>Formulaire de pré-inscription</h2>
+                <form class="d-flex flex-column justify-content-around border border-primary rounded-lg" action="" method="post" enctype="multipart/form-data" >
+                    <p class="w-75 w-md-50">Vous pouvez nous joindre par téléphone au 02.38.42.23.30 ou via <a
+                                href="/#contact">le formulaire de contact</a> de notre site. Vous pouvez égalemment remplir le dossier
+                        de pré-admission en ligne ci-dessous :</p>
+                    <div class="d-flex">
+                        <div class="offset-lg-1 col-lg-2 form-group text-center">
+                            <input name="maritalstatus" id="maritalstatus2" type="radio" value="Célibataire" required>
+                            <label for="maritalstatus2">Célibataire</label>
+                        </div>
+                        <div class="col-lg-2 form-group text-md-center">
+                            <input name="maritalstatus" id="maritalstatus1" type="radio" value="En couple" required>
+                            <label for="maritalstatus1">En couple</label>
                         </div>
                         {% if errors.maritalstatus %}
                             <div class="text-danger">{{ errors.maritalstatus }}</div>
                         {% endif %}
                     </div>
-                    <div class="d-flex justify-content-around my-3">
-                        <div class="d-flex flex-column col-5 form-group">
+                    <div class="d-flex justify-content-around my-3 flex-column flex-md-row">
+                        <div class="d-flex flex-column col-md-5 form-group">
                             <label for="firstname">Nom</label>
                             <input class="form-control" name="firstname" id="firstname" type="text" value="{{ data.firstname }}" required>
                             {% if errors.firstname %}
                                 <div class="text-danger">{{ errors.firstname }}</div>
                             {% endif %}
                         </div>
-                        <div class="d-flex flex-column col-5 form-group">
+                        <div class="d-flex flex-column col-md-5 form-group">
                             <label for="lastname">Prénom</label>
                             <input class="form-control" type="text" name="lastname" id="lastname" value="{{ data.lastname }}" required>
                             {% if errors.lastname %}
@@ -110,47 +220,15 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="d-flex justify-content-around my-3">
-                        <div class="d-flex flex-column col-5 form-group">
-                            <label for="street">Rue</label>
-                            <input class="form-control" type="text" name="street" id="street" value="{{ data.street }}" required>
-                            {% if errors.street %}
-                                <div class="text-danger">{{ errors.street }}</div>
-                            {% endif %}
-                        </div>
-                        <div class="d-flex flex-column col-5 form-group">
-                            <label for="city">Ville</label>
-                            <input class="form-control" type="text" id="city" name="city" value="{{ data.city }}" required>
-                            {% if errors.city %}
-                                <div class="text-danger">{{ errors.city }}</div>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-around my-3">
-                        <div class="d-flex flex-column col-5 form-group">
-                            <label for="phone">Téléphone</label>
-                            <input class="form-control" type="tel" id="phone" name="phone" value="{{ data.phone }}" required >
-                            {% if errors.phone %}
-                                <div class="text-danger">{{ errors.phone }}</div>
-                            {% endif %}
-                        </div>
-                        <div class="d-flex flex-column col-5 form-group">
-                            <label for="postalcode">Code postal</label>
-                            <input class="form-control" type="number" id="postalcode" name="postalcode" value="{{ data.postalcode }}" required >
-                            {% if errors.postalcode %}
-                                <div class="text-danger">{{ errors.postalcode }}</div>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-around my-3">
-                        <div class="d-flex flex-column col-5 form-group">
+                    <div class="d-flex justify-content-around my-3 flex-column flex-md-row">
+                        <div class="d-flex flex-column col-md-5 form-group">
                             <label for="dateofbirth">Date de naissance</label>
                             <input class="form-control" type="date" id="dateofbirth" name="dateofbirth" value="{{ data.dateofbirth }}" required >
                             {% if errors.dateofbirth %}
                                 <div class="text-danger">{{ errors.dateofbirth }}</div>
                             {% endif %}
                         </div>
-                        <div class="d-flex flex-column col-5 form-group">
+                        <div class="d-flex flex-column col-md-5 form-group">
                             <label for="mail">Adresse mail</label>
                             <input class="form-control" type="email" id="mail" name="mail" value="{{ data.mail }}" required >
                             {% if errors.mail %}
@@ -158,8 +236,44 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="d-flex justify-content-around my-3">
-                        <ol class="col-5">
+
+                    <div class="d-flex justify-content-around my-3 flex-column flex-md-row">
+                        <div class="d-flex flex-column col-md-5 form-group">
+                            <label for="street">Allée</label>
+                            <input class="form-control" type="text" name="street" id="street" value="{{ data.street }}" required>
+                            {% if errors.street %}
+                                <div class="text-danger">{{ errors.street }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="d-flex flex-column col-md-5 form-group">
+                            <label for="city">Ville</label>
+                            <input class="form-control" type="text" id="city" name="city" value="{{ data.city }}" required>
+                            {% if errors.city %}
+                                <div class="text-danger">{{ errors.city }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-around my-3 flex-column flex-md-row">
+                        <div class="d-flex flex-column col-md-5 form-group">
+                            <label for="postalcode">Code postal</label>
+                            <input class="form-control" type="number" id="postalcode" name="postalcode" value="{{ data.postalcode }}" required >
+                            {% if errors.postalcode %}
+                                <div class="text-danger">{{ errors.postalcode }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="d-flex flex-column col-md-5 form-group">
+                            <label for="phone">Téléphone</label>
+                            <input class="form-control" type="tel" id="phone" name="phone" value="{{ data.phone }}" required >
+                            {% if errors.phone %}
+                                <div class="text-danger">{{ errors.phone }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex justify-content-around my-3 flex-column flex-md-row">
+                        <ol class="col-md-5">
+                            <h4>Documents nécessaires :</h4>
                             <li>- Pièce d'identité</li>
                             <li>- Avis d'imposition</li>
                             <li>- Carte vitale</li>
@@ -167,9 +281,10 @@
                             <li>- Autorisation d'hébergement pour les mineurs</li>
                             <li>- Engagement d'un garant</li>
                         </ol>
-                        <div class="d-flex flex-column col-5 form-group">
-                            <label for="file">Vos Documents</label>
+                        <div class="d-flex flex-column col-md-5 form-group">
+                            <label for="file">Ajoutez vos documents</label>
                             <input class="form-control" type="file" name='file[]' multiple>
+
                             {% if errors.file %}
 
                                 <div class="text-danger">{{ errors.file }}</div>
@@ -178,8 +293,8 @@
                         </div>
                     </div>
 
-                    <div class="d-flex offset-3 col-6 form-group">
-                        <button class="my-3 btn btn-primary btn-lg">Envoyer le dossier</button>
+                    <div class="d-flex offset-lg-3 col-lg-6 form-group justify-content-center">
+                        <button class="my-3 btn btn-primary btn-lg col-lg-5 col-md-6">Envoyer le dossier</button>
                     </div>
                 </form>
             </div>

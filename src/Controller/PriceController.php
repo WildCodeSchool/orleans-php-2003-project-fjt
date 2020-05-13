@@ -20,7 +20,7 @@ class PriceController extends AbstractController
      */
     public const ALLOWED_MIME = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg', 'application/pdf'];
     public const MAX_SIZE = 1000000;
-    public const UPLOAD_DIR = '../public/assets/images/';
+    public const UPLOAD_DIR = '../public/uploads/';
 
     public function index()
     {
@@ -45,21 +45,24 @@ class PriceController extends AbstractController
             );
             if (empty($errors)) {
                 $zipper = new Zipper;
-                $zipName = $data['firstname'] . $data['lastname'] . '(' . uniqid('', true) . ')'. ".zip";
-                $zipper->make('../public/assets/images/uploads/' . $zipName)->folder($zipName);
+                $zipName = $data['lastname'] . '_' . uniqid('', true) . ".zip";
+                $folderName = $data['lastname'] . '_' . $data['firstname'] ;
+                $zipper->make('../public/uploads/' . $zipName)->folder($folderName);
                 foreach ($files['name'] as $position => $name) {
                     $fileDestination = self::UPLOAD_DIR . $filesNameNew[$position];
+
                     if (!move_uploaded_file($files['tmp_name'][$position], $fileDestination)) {
                         $errors['uploads'][$name] = 'Les fichiers n\'a pas pu être téléchargé';
                     }
-                    $zipper->add('../public/assets/images/' . $filesNameNew[$position]);
+                    $zipper->add(self::UPLOAD_DIR . $filesNameNew[$position]);
                 }
-                $zipper->make('../public/assets/uploads/' . $zipName . "/")->close();
+                $zipper->make(self::UPLOAD_DIR . $zipName . "/")->close();
                 foreach ($filesNameNew as $fileName) {
-                    $filesDel = '../public/assets/images/' . $fileName;
+                    $filesDel = self::UPLOAD_DIR . $fileName;
                     unlink($filesDel);
                 }
-                $data['zip_path'] = '../public/assets/uploads/' . $zipName;
+                $data['zip_path'] = $zipName;
+                $data['folderName'] = $folderName;
                 $admissionManager->insert($data);
                 header('Location:/Home/index');
             }
@@ -117,7 +120,7 @@ class PriceController extends AbstractController
     private function controlFormLengthTwo($data)
     {
         $errorsFormLengthTwo = [];
-        if (strlen($data['maritalstatus']) > 11) {
+        if (strlen($data['maritalstatus']) > 50) {
             $errorsFormLengthTwo['maritalstatus'] = 'Ce champ est trop long';
         }
         if (strlen($data['firstname']) > 45) {
@@ -141,7 +144,7 @@ class PriceController extends AbstractController
             $fileSize = filesize($fileTmp);
             $mimeType = mime_content_type($fileTmp);
             $fileError = $files['error'][$position];
-            $fileExtension = pathinfo($files['tmp_name'][$position], PATHINFO_EXTENSION);
+            $fileExtension = pathinfo($files['name'][$position], PATHINFO_EXTENSION);
             if ($fileError === 0) {
                 if (!in_array($mimeType, self::ALLOWED_MIME, true)) {
                     $errorsUpload['file'] = "Le fichier" . $name ." n'est pas autorisée,

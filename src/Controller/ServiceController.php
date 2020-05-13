@@ -34,7 +34,7 @@ class ServiceController extends AbstractController
         $services = $serviceManager->selectAll();
 
         $animationManager = new AnimationManager();
-        $animations = $animationManager->selectAll();
+        $animations = $animationManager->selectByFour();
 
         return $this->twig->render('Service/index.html.twig', ['services' => $services, 'animations' => $animations]);
     }

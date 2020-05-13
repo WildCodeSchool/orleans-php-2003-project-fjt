@@ -1,0 +1,13 @@
+{% extends 'adminLayout.html.twig' %}
+{% block title %}Modifier une adresse{% endblock %}
+{% block content %}
+    <section>
+        <div class="admin-price container-fluid">
+            <h1 class="m-lg-4 text-center">Modifier une adresse</h1>
+            {{ dump.address }}
+            {% include 'AdminAddress/_formAddress.html.twig' %}
+        </div>
+
+    </section>
+
+{% endblock %}

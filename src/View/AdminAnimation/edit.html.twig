@@ -1,11 +1,12 @@
-{% extends 'layout.html.twig' %}
+{% extends 'adminLayout.html.twig' %}
 
-{% block title %}Modifier l'animation{% endblock %}
+{% block title %}Modifier {{ animation.name }}{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h2 class="m-4">Modifier {{ animation.name }}</h2>
-        {% include 'AdminAnimation/_form.html.twig' %}
-        <a class="btn btn-outline-primary m-4" role="button" href="../index">Retour</a>
-    </div>
+    <section>
+        <div class="container-fluid">
+            <h1 class="m-lg-4 text-center">Modifier {{ animation.name }}</h1>
+            {% include 'AdminAnimation/_form.html.twig' %}
+        </div>
+    </section>
 {% endblock %}

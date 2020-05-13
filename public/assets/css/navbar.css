@@ -14,8 +14,8 @@ nav div{
     font-size: var(--medium-size);
 }
 
-.nav-link{
-    color:var(--light-color);
+.navbar-dark .navbar-nav .nav-link {
+    color: var(--light-color);
 }
 
 nav ul li{
@@ -27,6 +27,8 @@ nav img{
     top: 20px;
 }
 
-nav button{
-    margin-top:20px;
+@media screen and (max-width: 661px) {
+    .navbar-brand img{
+        width: 75px;
+    }
 }

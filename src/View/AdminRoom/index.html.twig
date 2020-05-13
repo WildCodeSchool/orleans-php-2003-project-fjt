@@ -1,18 +1,18 @@
-{% extends 'layout.html.twig' %}
-{% block navbar %}
-    {% include '/Home/navbar.html.twig' %}
-{% endblock %}
+{% extends 'adminLayout.html.twig' %}
+{% block title %}Gestion des logements{% endblock %}
 {% block content %}
+
     <section>
-        <div class="adminroom-index">
-            <h2 class="m-5">Gestion des logements</h2>
-            <div class="d-flex justify-content-around ">
+        <h1 class="m-5 text-center">Gestion des logements</h1>
+        <div class="adminroom-index ">
 
-                <a role="button" class="btn btn-outline-primary btn-lg" href="/AdminRoom/addRoom">Ajouter un logement</a>
+            <div class="d-flex justify-content-around flex-column flex-md-row">
 
-                <a role="button" class="btn btn-outline-primary btn-lg" href="/Admin/index">Retour</a>
+                <a role="button" class="btn btn-outline-primary btn-lg offset-md-0 col-md-3 offset-2 col-8 my-3 my-md-0 " href="/AdminRoom/addRoom">Ajouter un logement</a>
 
-                <a role="button" class="btn btn-outline-primary btn-lg" href="/AdminRoom/addAddress">Ajouter une adresse</a>
+                <a role="button" class="btn btn-outline-primary btn-lg offset-md-0 col-md-3 offset-2 col-8 my-3 my-md-0 d-flex justify-content-center align-items-center" href="/Admin/index">Retour</a>
+
+                <a role="button" class="btn btn-outline-primary btn-lg offset-md-0 col-md-3 offset-2 col-8 my-3 my-md-0 " href="/AdminAddress/addAddress">Ajouter une adresse</a>
 
             </div>
 
@@ -26,13 +26,14 @@
                 <tbody>
                 {% for room in rooms %}
                         <tr>
-                            <td>{{ room.type }}</td>
-                            <td>
-                                <a class="btn btn-outline-primary" href="">Mettre à jour</a>
+                            <td class="align-middle col-4">{{ room.type }}</td>
+                            <td class="align-middle col-4">
+                                <a class="btn btn-outline-primary col-12 col-lg-6 maj" href="/AdminRoom/editRoom/{{ room.id }}" value="">Mettre à jour</a>
                             </td>
-                            <td><form action="../AdminRoom/deleteRoom" method="post">
+                            <td class="col-4">
+                                <form action="/AdminRoom/deleteRoom" method="post">
                                     <input type="hidden" value="{{ room.id }}" name="id">
-                                    <button class="btn btn-outline-primary">Supprimer ce logement</button>
+                                    <button class="btn btn-outline-danger" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer ce logement ?')">Supprimer ce logement</button>
                                 </form>
                             </td>
                         </tr>
@@ -49,15 +50,14 @@
                 <tbody>
                 {% for address in addresses %}
                     <tr>
-                        <td>{{ address.address }}</td>
-                        <td><form action="" method="post">
-                                <input type="hidden" value="{{ address.id }}" name="id">
-                                <button class="btn btn-outline-primary">Mettre à jour</button>
-                            </form>
+                        <td class="align-middle col-4">{{ address.address }}</td>
+                        <td class="align-middle col-4">
+                          <a class="btn btn-outline-primary col-12 col-lg-6 maj" href="/AdminAddress/editAddress/{{ address.id }}" value="">Mettre à jour</a>
                         </td>
-                        <td><form action="" method="post">
+                        <td class="col-4">
+                            <form action="/AdminAddress/deleteAddress" method="post">
                                 <input type="hidden" value="{{ address.id }}" name="id">
-                                <button class="btn btn-outline-primary">Supprimer ce logement</button>
+                                <button class="btn btn-outline-danger" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer cette adresse ?')">Supprimer cette adresse</button>
                             </form>
                         </td>
                     </tr>
@@ -66,7 +66,4 @@
             </table>
         </div>
     </section>
-{% endblock %}
-{% block footer %}
-    {% include '/Home/footer.html.twig' %}
 {% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'adminLayout.html.twig' %}
+{% block title %}Boîte de réception{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/adminContact.css">
+{% endblock %}
+{% block content %}
+    <section>
+        <div class="container-fluid">
+            <div class="col-12 d-flex justify-content-center"><h1 class="m-lg-4 text-center">Boîte de réception</h1></div>
+            <div class="col-12 d-flex justify-content-center"><h3>Prises de contact reçues</h3></div>
+        </div>
+
+    {% if contacts %}
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Reçu le</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for contact in contacts %}
+        <tr>
+            <th scope="row">{{ contact.sendDate | date("d.m.Y à H:i") }}</th>
+                <td> {{ contact.lastname }}</td>
+                <td> {{ contact.firstname }}</td>
+                <td> <a class="btn btn-outline-primary" href="/AdminContact/show/{{ contact.id }}" type="button" value="button">Consulter</a>
+                </td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    {% else %}
+        <div class="col-12">
+            <div class="col-12 d-flex justify-content-center mt-5"><h3>Aucun nouveau message</h3></div>
+        </div>
+    {% endif %}
+
+    <div class="container mt-5">
+        <div class="col-12 d-flex justify-content-center">
+            <a class="btn btn-outline-primary" href="/Admin/index">Retour </a>
+        </div>
+    </div>
+    </section>
+{% endblock %}

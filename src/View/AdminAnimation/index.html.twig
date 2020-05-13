@@ -1,16 +1,23 @@
-{% extends 'layout.html.twig' %}
-{%  block navbar %}{%  endblock %}
+{% extends 'adminLayout.html.twig' %}
+{% block title %}Gestion des animations{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/service.css">
+{% endblock %}
 
 {% block content %}
-    <div class="container-fluid container-service text-lg-left text-center">
-        <h2 class="service-title pl-lg-3">Gestion des animations</h2>
-        <a role="button" class="btn btn-outline-primary btn-lg m-4" href="../AdminAnimation/add">Ajouter une animation</a>
+  <section>
+    <h1 class="m-lg-4 text-center">Gestion des animations</h1>
+    <div class="container-fluid container-service mb-4 text-lg-left text-center">
+        <div class="admin-button d-flex justify-content-between m-4">
+            <a role="button" class="btn btn-outline-primary btn-lg m-4" href="/AdminAnimation/add">Ajouter une animation</a>
+            <a role="button" class="btn btn-outline-primary btn-lg m-4 " href="/Admin/index">Retour</a>
+        </div>
         <div class="row justify-content-center">
             {% for animation in animations %}
-                <div class="col-md-6 card-deck">
-                    <div class="card service-card">
+                <div class="col-lg-3 card-deck mb-4 admin-highlight">
+                    <div class="card service-card admin-image">
                         <img src="/uploads/images/{{ animation.image }}" class="card-img-top" alt="{{ animation.name }}">
-                        <div class="card-body card-description">
+                        <div class="card-body d-flex flex-column justify-content-between">
                             <h3 class="card-title">{{ animation.name }}</h3>
                             <p class="card-text">{{ animation.description }}</p>
                             <div class="button-animation d-flex justify-content-between">
@@ -19,10 +26,16 @@
                                     <input type="submit" class="btn btn-outline-danger" value="Supprimer" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer {{ animation.name }} ?')">
                                 </form>
                             </div>
+                            <div>
+                                <form action="/AdminAnimation/highlightAnimation/{{ animation.id }}" method="post">
+                                    <input type="submit" class="btn btn-outline-primary mt-3" value="Mettre en avant">
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
     </div>
+  </section>
 {% endblock %}
