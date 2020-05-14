@@ -102,7 +102,9 @@
 .rooms form ol li {
     list-style: none;
 }
-
+.summary {
+    font-weight: bolder;
+}
 /* Modal */
 .modal-total {
     border-bottom: 3px solid var(--main-bg-color);
