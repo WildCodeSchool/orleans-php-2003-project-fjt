@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="/assets/css/navbarHome.css">
 {% endblock %}
 
+{% block loading %}
+    <div id="circle"></div>
+{% endblock %}
+
 {% block header %}
     <div class="home">
         <div class="leftHome">
@@ -32,7 +36,7 @@
         <div class="row">
             <div class="leftContent col-12 col-lg-6">
                 <h2 class="text-center text-md-left">Présentation du foyer</h2>
-                <p class="text-left">L’ association RJAC propose un ensemble de logements conventionnés APL à destination des jeunes de 16 à 30 ans. Nous mettons également à disposition un service de restauration, ainsi que des salles de réunion, des lieux et des temps de rencontres, une possibilité d'accompagnement individualisé et des facilités de fonctionnement.</p>
+                <p>L’ association RJAC propose un ensemble de logements conventionnés APL à destination des jeunes de 16 à 30 ans. Nous mettons également à disposition un service de restauration, ainsi que des salles de réunion, des lieux et des temps de rencontres, une possibilité d'accompagnement individualisé et des facilités de fonctionnement.</p>
             </div>
             <img class="col-12 col-lg-5 offset-lg-1" src="/assets/images/presFJT.jpg" alt="imgFJT"/>
         </div>
@@ -44,6 +48,11 @@
 {% endblock %}
 
 {% block javascript %}
-    <script src="/assets/scripts/navBgOnScroll.js"></script>
+{% if noanim==false %}
+<script src="/assets/scripts/loadingHome.js"></script>
+{% else %}
+<script src="/assets/scripts/fastLoadingHome.js"></script>
+{% endif %}
+<script src="/assets/scripts/navBgOnScroll.js"></script>
     <script src="/assets/scripts/contentInputHome.js"></script>
 {% endblock %}

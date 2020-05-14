@@ -16,11 +16,12 @@
 </head>
 
 <body>
-<header class="header">
+{% block loading %}{% endblock %}
+<header class="header" id="header">
     {% block navbar %}{% endblock %}
     {% block header %}{% endblock %}
 </header>
-<main class="main">
+<main class="main" id="main">
     {% block content %}{% endblock %}
 </main>
 {% block footer %}{% endblock %}
