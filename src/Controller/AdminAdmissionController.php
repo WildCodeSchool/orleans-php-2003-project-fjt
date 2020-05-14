@@ -24,15 +24,14 @@ class AdminAdmissionController extends AbstractController
     {
         $admissionManager = new AdmissionManager();
         $folders = $admissionManager->selectAllByTen();
-
         return $this->twig->render('AdminAdmission/index.html.twig', ['folders' => $folders]);
     }
     public function show(int $id)
     {
         $admissionManager = new AdmissionManager();
         $folder = $admissionManager->selectOneById($id);
-        $files = (new Zipper)->zip(self::UPLOAD_DIR . $folder['zip_path'])->folder($folder['folderName'])->
-        listFiles('/^(?!.*\.log).*$/i');
+        $files = count((new Zipper)->zip(self::UPLOAD_DIR . $folder['zip_path'])->folder($folder['folderName'])->
+        listFiles('/^(?!.*\.log).*$/i'));
         $statuses = ['En attente', 'Validé'];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = array_map('trim', $_POST);
@@ -52,7 +51,6 @@ class AdminAdmissionController extends AbstractController
         return $this->twig->render('AdminAdmission/show.html.twig', [
             'folder' => $folder,
             'files' => $files,
-            'statuses'=> $statuses,
             'errors'=> $errors ?? []
         ]);
     }
