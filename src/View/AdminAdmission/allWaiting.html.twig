@@ -21,7 +21,7 @@
             </thead>
             <tbody>
             {% for folder in folders %}
-                {%  if folder.statut is same as('En attente') %}
+                {%  if folder.status is same as('En attente') %}
                     <tr>
                         <td>{{ folder.lastname ~ ' ' ~ folder.firstname}}</td>
                         <td>

@@ -20,7 +20,7 @@
             </thead>
             <tbody>
             {% for folder in folders %}
-                {%  if folder.statut is same as('Validé') %}
+                {%  if folder.status is same as('Validé') %}
                     <tr>
                         <td>{{ folder.lastname ~ ' ' ~ folder.firstname}}</td>
                         <td>

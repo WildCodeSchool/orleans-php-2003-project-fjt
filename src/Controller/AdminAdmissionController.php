@@ -37,11 +37,11 @@ class AdminAdmissionController extends AbstractController
             $data = array_map('trim', $_POST);
             $errors = [];
 
-            if (empty($data['statut'])) {
-                $errors['statut'] = 'Veuillez préciser le statut du dossier.';
+            if (empty($data['status'])) {
+                $errors['status'] = 'Veuillez préciser le statut du dossier.';
             }
-            if (!in_array($data['statut'], $statuses)) {
-                $errors['statut'] = 'le statut n\'existe pas, il doit être ' . implode(' ou ', $statuses) . '.';
+            if (!in_array($data['status'], $statuses)) {
+                $errors['status'] = 'le statut n\'existe pas, il doit être ' . implode(' ou ', $statuses) . '.';
             }
             if (empty($errors)) {
                 $admissionManager->update($data);
