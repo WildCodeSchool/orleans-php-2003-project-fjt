@@ -6,3 +6,6 @@ section {
 .fiche-signaletique {
     width: 90%;
 }
+.title {
+    color: var(--main-bg-color);
+}

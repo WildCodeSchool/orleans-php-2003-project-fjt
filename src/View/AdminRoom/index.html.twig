@@ -14,20 +14,21 @@
             </div>
 
             {% for addressName,rooms in roomByAddresses %}
-            <table class="table table-bordered">
+            <table class="table table-bordered ">
                 <thead>
-                <tr>
-                    <th scope="col" colspan="3">{{ addressName }}</th>
+                <tr class="text-wrap">
+                    <th scope="col" colspan="4">{{ addressName }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for room in rooms %}
-                        <tr>
-                            <td class="align-middle col-4">{{ room.type }}</td>
-                            <td class="align-middle col-4">
+                        <tr class="text-wrap" >
+                            <td class="align-middle col-2 ">{{ room.type }}</td>
+                            <td class="align-middle col-2 ">{{ room.area }}</td>
+                            <td class="align-middle col-4 ">
                                 <a class="btn btn-outline-primary col-12 col-lg-6 maj" href="/AdminRoom/editRoom/{{ room.id }}" value="">Mettre à jour</a>
                             </td>
-                            <td class="col-4">
+                            <td class="col-4 align-middle">
                                 <form action="/AdminRoom/deleteRoom" method="post">
                                     <input type="hidden" value="{{ room.id }}" name="id">
                                     <button class="btn btn-outline-danger" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer ce logement ?')">Supprimer ce logement</button>
@@ -40,18 +41,18 @@
             </table>
             <table class="table table-bordered mt-5">
                 <thead>
-                <tr>
+                <tr class="text-wrap">
                     <th scope="col" colspan="3">Adresses disponibles</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for address in addresses %}
-                    <tr>
+                    <tr class="text-wrap">
                         <td class="align-middle col-4">{{ address.address }}</td>
                         <td class="align-middle col-4">
                           <a class="btn btn-outline-primary col-12 col-lg-6 maj" href="/AdminAddress/editAddress/{{ address.id }}" value="">Mettre à jour</a>
                         </td>
-                        <td class="col-4">
+                        <td class="col-4 align-middle">
                             <form action="/AdminAddress/deleteAddress" method="post">
                                 <input type="hidden" value="{{ address.id }}" name="id">
                                 <button class="btn btn-outline-danger" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer cette adresse ?')">Supprimer cette adresse</button>
