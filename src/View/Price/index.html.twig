@@ -191,7 +191,7 @@
         
             <div class="mt-5">
                 <h2>Formulaire de pré-inscription</h2>
-                <form class="d-flex flex-column justify-content-around border border-primary rounded-lg" action="" method="post" enctype="multipart/form-data" >
+                <form class="d-flex flex-column justify-content-around border border-primary rounded-lg" method="post" enctype="multipart/form-data" >
                     <p class="w-75 w-md-50">Vous pouvez nous joindre par téléphone au 02.38.42.23.30 ou via <a
                                 href="/#contact">le formulaire de contact</a> de notre site. Vous pouvez égalemment remplir le dossier
                         de pré-admission en ligne ci-dessous :</p>
@@ -277,7 +277,7 @@
 
                     <div class="d-flex justify-content-around my-3 flex-column flex-md-row">
                         <ol class="col-md-5">
-                            <h4>Documents nécessaires :</h4>
+                            <li class="summary">Documents nécessaires :</li>
                             <li>- Pièce d'identité</li>
                             <li>- Avis d'imposition</li>
                             <li>- Carte vitale</li>
@@ -287,7 +287,7 @@
                         </ol>
                         <div class="d-flex flex-column col-md-5 form-group">
                             <label for="file">Ajoutez vos documents</label>
-                            <input class="form-control" type="file" name='file[]' multiple>
+                            <input class="form-control" type="file" name='file[]' id="file" multiple>
 
                             {% if errors.file %}
 
