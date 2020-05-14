@@ -14,14 +14,14 @@ class HomeController extends AbstractController
 {
 
     /**
-     * Display home page without loading
+     * Display home page
      *
      * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function indexBis()
+    public function index()
     {
         $errors = [];
 
@@ -37,31 +37,20 @@ class HomeController extends AbstractController
                 $contactManager = new ContactManager();
                 $contactManager->insert($data);
                 header('Location:/home/index/' .
-                    '?success=Votre message a bien été envoyé, nous vous recontacterons dans les plus brefs délais.');
+                    '?success=Votre message a bien été envoyé, nous vous recontacterons dans les plus brefs délais.
+                    &noanim=1');
             }
         }
 
         return $this->twig->render(
-            'Home/indexbis.html.twig',
+            'Home/index.html.twig',
             [
+                'noanim'=>$_GET['noanim'] ?? false,
                 'post'=> $_POST,
                 'errors'=> $errors,
                 'success' => $_GET
             ]
         );
-    }
-
-    /**
-     * Display home page with loading
-     *
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    public function index()
-    {
-        return $this->twig->render('Home/index.html.twig');
     }
 
     private function secureName($data, $errors)

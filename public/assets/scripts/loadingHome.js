@@ -2,8 +2,8 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-let mainColor="#032497";
-let secondColor="rgb(255, 0, 83)";
+let mainColor="rgb(255, 0, 83)";
+let secondColor="#032497";
 
 window.onload = async function () {
     let elem = document.getElementById('circle');
