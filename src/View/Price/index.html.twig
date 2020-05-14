@@ -162,22 +162,22 @@
             <tbody>
             {% for room in rooms %}
             <tr>
-                <td class="col-5">{{ room.address }}</td>
+                <td class="col-4">{{ room.address }}</td>
                 <td class="align-middle">{{ room.type }}</td>
-                <td class="align-middle">{% if room.area == 0 %}/{% else %}{{ room.area }} m²{% endif %}</td>
-                <td class="align-middle">{% set room_price =  ((room.guarantee+room.catering+
+                <td class="align-middle col-1">{% if room.area == 0 %}/{% else %}{{ room.area }} m²{% endif %}</td>
+                <td class="align-middle col-1">{% set room_price =  ((room.guarantee+room.catering+
                         room.contribution+room.equipment_contribution)/30) %}
                     {% if room.breakfast is not null and room.breakfast != 'inclus' %}
                         {% set room_price = room_price + room.breakfast %}
                     {% endif %}
                     {{  room_price |round(2, 'floor') }} €</td>
-                <td class="align-middle">{% set room_price =  (((room.guarantee+room.catering+
+                <td class="align-middle col-1">{% set room_price =  (((room.guarantee+room.catering+
                         room.contribution+room.equipment_contribution)/30)*7) %}
                     {% if room.breakfast is not null and room.breakfast != 'inclus' %}
                         {% set room_price = room_price + room.breakfast %}
                     {% endif %}
                     {{  room_price |round(2, 'floor') }} €</td>
-                <td class="align-middle">{% set room_price = room.guarantee+room.catering+
+                <td class="align-middle col-1">{% set room_price = room.guarantee+room.catering+
                         room.contribution+room.equipment_contribution %}
                     {% if room.breakfast is not null and room.breakfast != 'inclus' %}
                         {% set room_price = room_price + room.breakfast %}
