@@ -5,10 +5,6 @@
     <link rel="stylesheet" href="/assets/css/navbarHome.css">
 {% endblock %}
 
-{% block loading %}
-    <div id="circle"></div>
-{% endblock %}
-
 {% block header %}
     <div class="home">
         <div class="leftHome">
@@ -48,11 +44,6 @@
 {% endblock %}
 
 {% block javascript %}
-{% if noanim==false %}
-<script src="/assets/scripts/loadingHome.js"></script>
-{% else %}
-<script src="/assets/scripts/fastLoadingHome.js"></script>
-{% endif %}
-<script src="/assets/scripts/navBgOnScroll.js"></script>
+    <script src="/assets/scripts/navBgOnScroll.js"></script>
     <script src="/assets/scripts/contentInputHome.js"></script>
 {% endblock %}

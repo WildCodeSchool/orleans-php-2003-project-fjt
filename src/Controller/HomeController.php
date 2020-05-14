@@ -37,20 +37,21 @@ class HomeController extends AbstractController
                 $contactManager = new ContactManager();
                 $contactManager->insert($data);
                 header('Location:/home/index/' .
-                    '?success=Votre message a bien été envoyé, nous vous recontacterons dans les plus brefs délais.');
+                    '?success=Votre message a bien été envoyé, nous vous recontacterons dans les plus brefs délais.
+                    &noanim=1');
             }
         }
 
         return $this->twig->render(
             'Home/index.html.twig',
             [
+                'noanim'=>$_GET['noanim'] ?? false,
                 'post'=> $_POST,
                 'errors'=> $errors,
                 'success' => $_GET
             ]
         );
     }
-
 
     private function secureName($data, $errors)
     {
