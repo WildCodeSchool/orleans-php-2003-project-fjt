@@ -9,28 +9,26 @@
             <div class="d-flex justify-content-around flex-column flex-md-row">
 
                 <a role="button" class="btn btn-outline-primary btn-lg offset-md-0 col-md-3 offset-2 col-8 my-3 my-md-0 " href="/AdminRoom/addRoom">Ajouter un logement</a>
-
-                <a role="button" class="btn btn-outline-primary btn-lg offset-md-0 col-md-3 offset-2 col-8 my-3 my-md-0 d-flex justify-content-center align-items-center" href="/Admin/index">Retour</a>
-
                 <a role="button" class="btn btn-outline-primary btn-lg offset-md-0 col-md-3 offset-2 col-8 my-3 my-md-0 " href="/AdminAddress/addAddress">Ajouter une adresse</a>
 
             </div>
 
             {% for addressName,rooms in roomByAddresses %}
-            <table class="table table-bordered">
+            <table class="table table-bordered ">
                 <thead>
-                <tr>
-                    <th scope="col" colspan="3">{{ addressName }}</th>
+                <tr class="text-wrap">
+                    <th scope="col" colspan="4">{{ addressName }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for room in rooms %}
-                        <tr>
-                            <td class="align-middle col-4">{{ room.type }}</td>
-                            <td class="align-middle col-4">
+                        <tr class="text-wrap" >
+                            <td class="align-middle col-2 ">{{ room.type }}</td>
+                            <td class="align-middle col-2 ">{{ room.area }}</td>
+                            <td class="align-middle col-4 ">
                                 <a class="btn btn-outline-primary col-12 col-lg-6 maj" href="/AdminRoom/editRoom/{{ room.id }}" value="">Mettre à jour</a>
                             </td>
-                            <td class="col-4">
+                            <td class="col-4 align-middle">
                                 <form action="/AdminRoom/deleteRoom" method="post">
                                     <input type="hidden" value="{{ room.id }}" name="id">
                                     <button class="btn btn-outline-danger" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer ce logement ?')">Supprimer ce logement</button>
@@ -43,18 +41,18 @@
             </table>
             <table class="table table-bordered mt-5">
                 <thead>
-                <tr>
+                <tr class="text-wrap">
                     <th scope="col" colspan="3">Adresses disponibles</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for address in addresses %}
-                    <tr>
+                    <tr class="text-wrap">
                         <td class="align-middle col-4">{{ address.address }}</td>
                         <td class="align-middle col-4">
                           <a class="btn btn-outline-primary col-12 col-lg-6 maj" href="/AdminAddress/editAddress/{{ address.id }}" value="">Mettre à jour</a>
                         </td>
-                        <td class="col-4">
+                        <td class="col-4 align-middle">
                             <form action="/AdminAddress/deleteAddress" method="post">
                                 <input type="hidden" value="{{ address.id }}" name="id">
                                 <button class="btn btn-outline-danger" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer cette adresse ?')">Supprimer cette adresse</button>
@@ -64,6 +62,10 @@
                 {% endfor %}
                 </tbody>
             </table>
+        </div>
+
+        <div class="text-center">
+            <a role="button" class="btn btn-outline-primary btn-lg col-md-3 col-8 my-3 my-md-0" href="/Admin/index">Retour</a>
         </div>
     </section>
 {% endblock %}

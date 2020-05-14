@@ -12,15 +12,13 @@
             </tr>
             </thead>
             <tbody>
-            {% for folder in folders %}
-                {%  if folder.status is same as('En attente') %}
+            {% for folder in folders if folder.status is same as('En attente') %}
                     <tr>
                         <td>{{ folder.lastname ~ ' ' ~ folder.firstname}}</td>
                         <td>
                             <a class="btn btn-outline-primary" href="/AdminAdmission/show/{{ folder.id }}" >Consulter</a>
                         </td>
                     </tr>
-                {% endif %}
             {% endfor %}
             </tbody>
             <tfoot>
@@ -38,15 +36,13 @@
             </tr>
             </thead>
             <tbody>
-            {% for folder in folders %}
-                {%  if folder.status is same as('Validé') %}
+            {% for folder in folders if folder.status is same as('Validé') %}
                     <tr>
                         <td>{{ folder.lastname ~ ' ' ~ folder.firstname}}</td>
                         <td>
                             <a class="btn btn-outline-primary" href="/AdminAdmission/show/{{ folder.id }}" >Consulter</a>
                         </td>
                     </tr>
-                {% endif %}
             {% endfor %}
             </tbody>
             <tfoot>
@@ -55,8 +51,8 @@
             </tr>
             </tfoot>
         </table>
-        <div class="container-fluid">
-            <a class="btn btn-outline-primary offset-3 col-6" href="/Admin/index" >Retour</a>
+        <div class="text-center">
+            <a role="button" class="btn btn-outline-primary btn-lg col-md-3 col-8 my-3 my-md-0" href="/Admin/index">Retour</a>
         </div>
 
     </section>

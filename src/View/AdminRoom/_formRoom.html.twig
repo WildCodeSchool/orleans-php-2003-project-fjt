@@ -1,9 +1,10 @@
 <form class="d-flex row col-md-10 mx-auto flex-column align-items-center border border-primary rounded p-4" method="post" enctype="multipart/form-data">
     <div class="form-group col-lg-5 my-3">
         <label for="address_id">Adresse: </label>
-        <select class="form-control" id="address_id" name="address_id" value="{% if not empty %}{{ room.address_id }}{% endif %}" required>
+        <select class="form-control" id="address_id" name="address_id" required>
             {% for address in addresses %}
-                <option value="{{ address.id }}">{{ address.name }}</option>
+
+                <option value="{{ address.id }}" {% if data %}{{ address.id == data.address_id ? 'selected' }}{% else %}{{ address.id == room.address_id ? 'selected' }}{% endif%} >{{ address.address }}</option>
             {% endfor %}
         </select>
         {% if errors.address_id %}
@@ -12,7 +13,7 @@
     </div>
     <div class="form-group col-lg-5 my-3">
         <label for="type">Type: </label>
-        <input class="form-control" id="type" name="type" type="text" value="{% if not empty %}{{ room.type }}{% endif %}" required >
+        <input class="form-control" id="type" name="type" type="text" value="{% if data %}{{ data.type }}{% else %}{{ room.type }}{% endif %}" required >
         {% if errors.type %}
             <div class="text-danger">{{ errors.type }}</div>
         {% endif %}
@@ -20,7 +21,7 @@
 
     <div class="form-group col-lg-5 my-3">
         <label for="area">Surface: </label>
-        <input class="form-control" id="area" name="area" type="number" value="{% if not empty %}{{ room.area }}{% endif %}" min="0" max="100">
+        <input class="form-control" id="area" name="area" type="number" value="{% if data %}{{ data.area }}{% else %}{{ room.area }}{% endif %}" min="0" max="100">
         {% if errors.area %}
             <div class="text-danger">{{ errors.area }}</div>
         {% endif %}
@@ -28,7 +29,7 @@
 
     <div class="form-group col-lg-5 my-3">
         <label for="guarantee">Dépot de garantie: </label>
-        <input class="form-control" id="guarantee" name="guarantee" type="number" step="0.01" value="{% if not empty %}{{ room.guarantee }}{% endif %}" required min="0" max="1000">
+        <input class="form-control" id="guarantee" name="guarantee" type="number" step="0.01" value="{% if data %}{{ data.guarantee }}{% else %}{{ room.guarantee }}{% endif %}" required min="0" max="1000">
         {% if errors.guarantee %}
             <div class="text-danger">{{ errors.guarantee }}</div>
         {% endif %}
@@ -36,7 +37,7 @@
 
     <div class="form-group col-lg-5 my-3">
         <label for="equipment">Équipement: </label>
-        <input class="form-control" id="equipment" name="equipment" type="text" value="{% if not empty %}{{ room.equipment }}{% endif %}">
+        <input class="form-control" id="equipment" name="equipment" type="text" value="{% if data %}{{ data.equipment }}{% else %}{{ room.equipment }}{% endif %}">
         {% if errors.equipment %}
             <div class="text-danger">{{ errors.equipment }}</div>
         {% endif %}
@@ -44,7 +45,7 @@
 
     <div class="form-group col-lg-5 my-3">
         <label for="catering">Crédit restauration : </label>
-        <input class="form-control" id="catering" name="catering" type="number" step="0.01" value="{% if not empty %}{{ room.catering }}{% endif %}" min="0" max="150">
+        <input class="form-control" id="catering" name="catering" type="number" step="0.01" value="{% if data %}{{ data.catering }}{% else %}{{ room.catering }}{% endif %}" min="0" max="150">
         {% if errors.catering %}
             <div class="text-danger">{{ errors.catering }}</div>
         {% endif %}
@@ -52,7 +53,7 @@
 
     <div class="form-group col-lg-5 my-3">
         <label for="contribution">Assurance et/ou contribution : </label>
-        <input class="form-control" id="contribution" name="contribution" type="number" step="0.01" value="{% if not empty %}{{ room.contribution }}{% endif %}" min="0" max="100">
+        <input class="form-control" id="contribution" name="contribution" type="number" step="0.01" value="{% if data %}{{ data.contribution }}{% else %}{{ room.contribution }}{% endif %}" min="0" max="100">
         {% if errors.contribution %}
             <div class="text-danger">{{ errors.contribution }}</div>
         {% endif %}
@@ -60,7 +61,7 @@
 
     <div class="form-group col-lg-5 my-3">
         <label for="breakfast">Petit déjeuner : </label>
-        <input class="form-control" id="breakfast" name="breakfast" type="text" value="{% if not empty %}{{ room.breakfast }}{% endif %}">
+        <input class="form-control" id="breakfast" name="breakfast" type="text" value="{% if data %}{{ data.breakfast }}{% else %}{{ room.breakfast }}{% endif %}">
         {% if errors.breakfast %}
             <div class="text-danger">{{ errors.breakfast }}</div>
         {% endif %}
@@ -68,7 +69,7 @@
 
     <div class="form-group col-lg-5 my-3">
         <label for="equipment_contribution">Frais d'équipement : </label>
-        <input class="form-control" id="equipment_contribution" name="equipment_contribution" type="number" step="0.01" value="{% if not empty %}{{ room.equipment_contribution }}{% endif %}" min="0" max="100">
+        <input class="form-control" id="equipment_contribution" name="equipment_contribution" type="number" step="0.01" value="{% if data %}{{ data.equipment_contribution }}{% else %}{{ room.equipment_contribution }}{% endif %}" min="0" max="100">
         {% if errors.equipment_contribution %}
             <div class="text-danger">{{ errors.equipment_contribution }}</div>
         {% endif %}

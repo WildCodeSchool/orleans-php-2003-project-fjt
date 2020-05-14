@@ -29,7 +29,7 @@
 }
 
 .card-description {
-    height: 200px;
+    height: 225px;
 }
 
 .card-order:nth-child(odd) .card-color,
@@ -95,5 +95,9 @@
     }
     .card-order:nth-of-type(3) {
         order: 0;
+    }
+    .service-card img,
+    .main-card .card img {
+        height: 200px;
     }
 }
